@@ -27,6 +27,8 @@ module.exports = {
       },
       width: {
         'card': '550px',
+        '500': '500px',
+        '220': '240px',
       },
       borderRadius: {
         'layout': '60px',
