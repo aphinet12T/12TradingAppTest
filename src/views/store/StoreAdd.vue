@@ -12,7 +12,7 @@
       </div>
       <div class="flex flex-row items-center justify-between mt-3">
         <div class="mt-2 ml-8 flex items-center">
-          <!-- <Icon icon="tdesign:store" width="20"/> -->
+          <Icon icon="tdesign:store" width="20"/>
           <span class="ml-2">ข้อมูลร้านค้า</span>
         </div>
         <div class="mt-2 mr-8">
@@ -23,13 +23,13 @@
         <div class="bg-white h-96 w-card shadow-md rounded-lg mt-2">
           <div class=" flex flex-col items-center mt-5">
             <div class="mb-1">
-              <label for="storeName"
+              <!-- <label for="storeName"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">ชื่อร้านค้า</label>
               <input type="text" id="storeName" v-model="vStoreName"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required>
-              <!-- <InputForm :text="'ชื่อร้านค้า'" :size="'w-500 p-2.5'">
-                    </InputForm> -->
+                required> -->
+              <InputForm :label="'ชื่อร้านค้า'" :class="'w-500 p-2.5'" :type="'text'" v-model="vStoreName">
+              </InputForm>
               <div class="flex justify-end">
                 <label for="storeName" class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36
                   ตัวอักษร</label>
@@ -74,7 +74,7 @@
       </div>
       <div class="flex flex-row items-center justify-between mt-3">
         <div class="mt-2 ml-8 flex items-center">
-          <!-- <Icon icon="tdesign:store" width="20"/> -->
+          <Icon icon="tdesign:store" width="20"/>
           <span class="ml-2">ที่อยู่</span>
         </div>
       </div>
@@ -123,9 +123,9 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-row items-center justify-between mt-3">
+      <!-- <div class="flex flex-row items-center justify-between mt-3">
         <div class="mt-2 ml-8 flex items-center">
-          <!-- <Icon icon="tdesign:store" width="20"/> -->
+          <Icon icon="tdesign:store" width="20"/>
           <span class="ml-2">ถ่ายภาพ</span>
         </div>
       </div>
@@ -157,7 +157,7 @@
    <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Get access <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
   </svg></a>
-</div>
+</div> -->
     </template>
   </LayoutSub>
 </template>

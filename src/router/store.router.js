@@ -22,7 +22,7 @@ const storeRoutes = [
       },
       {
         path: 'add',
-        component: () => import('../views/store/StoreAdd.vue'),
+        component: () => import('../views/store/StoreAdd2.vue'),
       },
     ],
   },
