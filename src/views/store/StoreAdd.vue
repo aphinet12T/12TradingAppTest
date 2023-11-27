@@ -23,7 +23,7 @@
         <div class="bg-white h-96 w-card shadow-md rounded-lg mt-2">
           <div class=" flex flex-col items-center mt-5">
             <div class="mb-1">
-              <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :class="'w-500 p-2.5'" :type="'text'"
+              <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :inputClass="'w-500 p-2.5'" :type="'text'"
                 v-model="vStoreName" :isRequired="true">
               </InputFeild>
               <div class="flex justify-end">
@@ -32,7 +32,7 @@
               </div>
             </div>
             <div class="mb-1">
-              <InputFeild :id="'storeTax'" :label="'เลขที่ผู้เสียภาษี'" :class="'w-500 p-2.5'" :type="'text'"
+              <InputFeild :id="'storeTax'" :label="'เลขที่ผู้เสียภาษี'" :inputClass="'w-500 p-2.5'" :type="'text'"
                 v-model="vStoreTax" :maxlength="13">
               </InputFeild>
               <div class="flex justify-end">
@@ -43,16 +43,16 @@
             </div>
             <div class="flex flex-row">
               <div class="mb-1">
-                <InputFeild :id="'storeTel'" :label="'โทรศัพท์'" :class="'w-220 p-2.5'" :type="'number'">
+                <InputFeild :id="'storeTel'" :label="'โทรศัพท์'" :inputClass="'w-220 p-2.5'" :type="'number'">
                 </InputFeild>
               </div>
               <div class="mb-1 ml-5">
-                <InputFeild :id="'storeRoute'" :label="'เส้นทาง'" :class="'w-220 p-2.5'" :type="'text'">
+                <InputFeild :id="'storeRoute'" :label="'เส้นทาง'" :inputClass="'w-220 p-2.5'" :type="'text'">
                 </InputFeild>
               </div>
             </div>
             <div class="mb-1">
-              <InputFeild :id="'storetype'" :label="'ประเภทร้านค้า'" :class="'w-500 p-2.5'" :type="'text'">
+              <InputFeild :id="'storetype'" :label="'ประเภทร้านค้า'" :inputClass="'w-500 p-2.5'" :type="'text'">
               </InputFeild>
             </div>
           </div>
@@ -68,7 +68,7 @@
         <div class="bg-white h-72 w-card shadow-md rounded-lg mt-2">
           <div class=" flex flex-col items-center mt-5">
             <div class="mb-1">
-              <InputFeild :id="'storeAddress'" :label="'ที่อยู่'" :class="'w-500 p-2.5'" :type="'text'">
+              <InputFeild :id="'storeAddress'" :label="'ที่อยู่'" :inputClass="'w-500 p-2.5'" :type="'text'">
               </InputFeild>
               <div class="flex justify-end">
                 <label for="storeName" class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36
@@ -77,28 +77,28 @@
             </div>
             <div class="flex flex-row">
               <div class="mb-1">
-                <InputFeild :id="'storeTb'" :label="'ตำบล'" :class="'w-220 p-2.5'" :type="'text'">
+                <InputFeild :id="'storeTb'" :label="'ตำบล'" :inputClass="'w-220 p-2.5'" :type="'text'">
                 </InputFeild>
               </div>
               <div class="mb-1 ml-5">
-                <InputFeild :id="'storeAp'" :label="'อำเภอ'" :class="'w-220 p-2.5'" :type="'text'">
+                <InputFeild :id="'storeAp'" :label="'อำเภอ'" :inputClass="'w-220 p-2.5'" :type="'text'">
                 </InputFeild>
               </div>
             </div>
             <div class="flex flex-row">
               <div class="mb-1">
-                <InputFeild :id="'storePv'" :label="'จังหวัด'" :class="'w-220 p-2.5'" :type="'text'">
+                <InputFeild :id="'storePv'" :label="'จังหวัด'" :inputClass="'w-220 p-2.5'" :type="'text'">
                 </InputFeild>
               </div>
               <div class="mb-1 ml-5">
-                <InputFeild :id="'storePc'" :label="'รหัสไปรษณีย์'" :class="'w-220 p-2.5'" :type="'text'">
+                <InputFeild :id="'storePc'" :label="'รหัสไปรษณีย์'" :inputClass="'w-220 p-2.5'" :type="'text'">
                 </InputFeild>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <button @click="sendData" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Submit</button>
+      <button @click="sendData" type="button" class="text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Submit</button>
     </template>
   </LayoutSub>
 </template>
