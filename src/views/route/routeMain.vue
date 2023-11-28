@@ -13,18 +13,20 @@
     </template>
     <template v-slot:body>
       <div class="absolute top-48 left-5">
-        <Table :columns="tableColumns" :data="dataRoute" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'">
+        <Table :columns="tableColumns" :data="routeMain" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
+          @row-click="handleClick">
+          <router-link to="/cms/route/detail"></router-link>
         </Table>
       </div>
     </template>
   </LayoutMain>
   <ButtonNav />
 </template>
-  
+
 <script>
 import { Icon } from '@iconify/vue';
-import { 
-  computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { useRouteStore } from '../../stores';
 import LayoutMain from '../LayoutMain.vue';
 import ButtonNav from '../../components/ButtonNav.vue';
@@ -50,18 +52,26 @@ export default {
       return store.routeMain;
     });
 
-    const dataRoute = computed(() => {
-      return store.routeMain.map(item => ({
-        ...item,
-        status: item.status.number,
-      }));
-    });
+    // const dataRoute = computed(() => {
+    //   return store.routeMain.map(item => ({
+    //     ...item,
+    //     status: item.status.number,
+    //   }));
+    // });
+
+    const router = useRouter();
+    const handleClick = (row) => {
+      const routeId = row.id;
+      console.log(routeId);
+      localStorage.setItem('routeId', routeId);
+      router.push('/cms/route/detail')
+    };
 
     const tableColumns = computed(() => {
       return [
         { id: 'day', title: 'วันที่' },
         { id: 'route', title: 'เส้นทาง' },
-        { id: 'status', title: 'สถานะ'},
+        { id: 'statusNumber', title: 'สถานะ' },
       ];
     });
 
@@ -72,10 +82,9 @@ export default {
     return {
       tableColumns,
       routeMain,
-      dataRoute,
+      handleClick
     }
 
   }
 };
 </script>
-  

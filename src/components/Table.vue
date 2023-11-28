@@ -11,7 +11,7 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in data" :key="index" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'"
-            class="border-b dark:bg-gray-900 dark:border-gray-700">
+            class="border-b dark:bg-gray-900 dark:border-gray-700" @click="handleClick(item)">
             <td v-for="col in columns" :key="col.id" :class="tdClass">
               {{ item[col.id] }}
             </td>
@@ -23,12 +23,17 @@
 </template>
     
 <script setup>
-defineProps({
+const props = defineProps({
   columns: Array,
   data: Array,
   thClass: String,
   tdClass: String
 });
+
+const emit = defineEmits(['row-click']);
+const handleClick = (item) => {
+  emit('row-click', item);
+};
 
 </script>
   

@@ -8,21 +8,17 @@ const routeRoutes = [
     children: [
       {
         path: 'route',
-        component: () => import('../views/route/routeMain.vue'),
+        component: () => import('../views/route/RouteMain.vue'),
       },
     ],
   },
   {
-    path: '/cms/store',
+    path: '/cms/route',
     component: LayoutSub,
     children: [
       {
         path: 'detail',
-        component: () => import('../views/store/StoreDetail.vue'),
-      },
-      {
-        path: 'add',
-        component: () => import('../views/store/StoreAdd.vue'),
+        component: () => import('../views/route/RouteDetail.vue'),
       },
     ],
   },
