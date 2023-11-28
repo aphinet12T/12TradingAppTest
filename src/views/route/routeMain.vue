@@ -61,7 +61,7 @@ export default {
       return [
         { id: 'day', title: 'วันที่' },
         { id: 'route', title: 'เส้นทาง' },
-        { id: 'status', title: 'สถานะ' },
+        { id: 'status', title: 'สถานะ'},
       ];
     });
 
