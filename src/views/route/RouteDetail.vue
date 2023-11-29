@@ -1,27 +1,65 @@
 <template>
   <LayoutSub>
     <template v-slot>
-      <div class="flex flex-row items-center">
-        <div class="mt-2">
-          <ButtonBack />
+      <div class="flex flex-col h-full">
+        <div class="flex flex-row items-center">
+          <div class="mt-2">
+            <ButtonBack />
+          </div>
+          <div class="mt-2 ml-2 flex items-center">
+            <Icon icon="tdesign:store" width="40" />
+            <span class="ml-2">การเข้าเยี่ยม</span>
+          </div>
         </div>
-        <div class="mt-2 ml-2 flex items-center">
-          <Icon icon="tdesign:store" width="40" />
-          <span class="ml-2">การเข้าเยี่ยม</span>
+        <div class="flex flex-row justify-between">
+          <div class="mt-4 ml-12">
+            Day 07
+          </div>
+          <div class="mt-4 mr-12">
+            Route
+          </div>
         </div>
-      </div>
-      <div class="flex flex-row justify-between">
-        <div class="mt-4 ml-12">
-          Day 07
+        <div class="flex justify-center">
+          <Table :columns="tableColumns" :data="routeDetailList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
+            @row-click="handleClick">
+          </Table>
         </div>
-        <div class="mt-4 mr-12">
-          Route
+        <div class="flex-grow">
+          <div class="bg-white h-full">
+            <div class="flex justify-between">
+              <div class="ml-5">
+                ร้านค้าเป้าหมาย
+              </div>
+              <div class="mr-5">
+                {{ routeDetail.targetGroup }}
+              </div>
+            </div>
+            <div class="flex justify-between">
+              <div class="ml-5">
+                ร้านค้าที่เปิดบิล
+              </div>
+              <div class="mr-5">
+                {{ routeDetail.buy }}
+              </div>
+            </div>
+            <div class="flex justify-between">
+              <div class="ml-5">
+                ร้านค้าที่เข้าเยี่ยม
+              </div>
+              <div class="mr-5">
+                {{ routeDetail.checkin }}
+              </div>
+            </div>
+            <div class="flex justify-between">
+              <div class="ml-5">
+                ร้านค้ารอเข้าเยี่ยม
+              </div>
+              <div class="mr-5">
+                {{ routeDetail.progress }}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="absolute left-12">
-        <Table :columns="tableColumns" :data="routeDetail" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
-          @row-click="handleClick">
-        </Table>
       </div>
     </template>
   </LayoutSub>
@@ -50,21 +88,16 @@ export default {
       return store.routeDetail;
     });
 
+    const routeDetailList = computed(() => {
+      return store.routeDetailList;
+    });
+
     const router = useRouter();
     const handleClick = (row) => {
       const routeStore = row.id;
       localStorage.setItem('routeStoreId', routeStore);
       router.push('/cms/route/store')
     };
-
-    const dataRouteDetail = computed(() => {
-      return store.routeDetail.map(item => ({
-        ...item,
-        id: item.list.id,
-        name: item.list.name,
-        statusText: item.list.statusText,
-      }))
-    })
 
     const tableColumns = computed(() => {
       return [
@@ -80,7 +113,7 @@ export default {
 
     return {
       routeDetail,
-      dataRouteDetail,
+      routeDetailList,
       tableColumns,
       handleClick
     }

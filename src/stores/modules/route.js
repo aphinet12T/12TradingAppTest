@@ -5,6 +5,7 @@ export const useRouteStore = defineStore("routes", {
     state: () => ({
       routeMain: [],
       routeDetail: [],
+      routeDetailList: [],
       routeStore: [],
       routeStoreList: [],
     }),
@@ -12,7 +13,6 @@ export const useRouteStore = defineStore("routes", {
         getRouteMain: (state) => state.routeMain,
         getRouteDetail: (state) => state.routeDetail,
         getRouteStore: (state) => state.routeStore,
-        getRouteStoreOrder: (state) => state.routeStoreList,
     },
     actions: {
       async getRouteMain() {
@@ -49,8 +49,10 @@ export const useRouteStore = defineStore("routes", {
             //   headers: { Authorization: `Bearer ${token}` },
             // }
           );
-          const result = response.data.list;
+          const result = response.data;
+          const resultList = response.data.list;
           this.routeDetail = result;
+          this.routeDetailList = resultList;
           console.log("detail", this.routeDetail);
         } catch (error) {
           console.error(error);

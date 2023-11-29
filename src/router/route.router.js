@@ -24,6 +24,10 @@ const routeRoutes = [
         path: 'store',
         component: () => import('../views/route/RouteStore.vue'),
       },
+      {
+        path: 'drawer',
+        component: () => import('../components/Drawer.vue'),
+      },
     ],
   },
 ];

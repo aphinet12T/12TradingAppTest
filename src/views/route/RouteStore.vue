@@ -22,23 +22,34 @@
                         ที่อยู่ : {{ routeStore.address }}
                     </div>
                 </div>
-                <div class="left-16">
+                <div class="flex justify-center mt-5">
                     <Table :columns="tableColumns" :data="routeStoreList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'">
                     </Table>
                 </div>
-                <div class="flex flex-row justify-between">
-                <div>
-                    <button type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 5h12m0 0L9 1m4 4L9 9" />
-                        </svg>
-                        <span class="sr-only">Icon description</span>
-                    </button>
+                <div class="flex flex-row justify-center">
+                    <div class="mx-10 mt-14">
+                        <!-- <button type="button"
+                            class="text-white bg-blue-700 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center">
+                            <Icon class="icon" height="40" width="40" icon="gis:map-route" />
+                            <span class="">ไม่ขาย</span>
+                        </button> -->
+                        <Drawer></Drawer>
+                    </div>
+                    <div class="mx-10 mt-14">
+                        <button type="button"
+                            class="text-white bg-blue-700 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center">
+                            <Icon class="icon" height="40" width="40" icon="gis:map-route" />
+                            <span class="">ไม่ขาย</span>
+                        </button>
+                    </div>
+                    <div class="mx-10 mt-14">
+                        <button type="button"
+                            class="text-white bg-blue-700 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center">
+                            <Icon class="icon" height="40" width="40" icon="gis:map-route" />
+                            <span class="">ไม่ขาย</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
             </div>
         </template>
     </LayoutSub>
@@ -51,13 +62,15 @@ import { useRouteStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue';
 import ButtonBack from '../../components/IconBack.vue';
 import Table from '../../components/Table.vue';
+import Drawer from '../../components/Drawer.vue';
 
 export default {
     components: {
         Icon,
         LayoutSub,
         ButtonBack,
-        Table
+        Table,
+        Drawer,
     },
 
     setup() {
@@ -87,7 +100,7 @@ export default {
             routeStore,
             routeStoreList,
             tableColumns,
-            routeDay
+            routeDay,
         }
     }
 }

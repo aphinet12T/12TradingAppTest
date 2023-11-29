@@ -20,7 +20,7 @@
       </div>
     </template>
     <template v-slot:body>
-      <div class="absolute top-48 left-5">
+      <div class="flex justify-center">
         <div v-if="btSelected === 'all'">
           <CustomerAll />
           <router-link to="/cms/store/add">

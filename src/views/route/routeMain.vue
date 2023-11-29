@@ -12,7 +12,7 @@
       </div>
     </template>
     <template v-slot:body>
-      <div class="absolute top-48 left-5">
+      <div class="flex justify-center">
         <Table :columns="tableColumns" :data="routeMain" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
           @row-click="handleClick">
         </Table>
@@ -24,7 +24,7 @@
 
 <script>
 import { Icon } from '@iconify/vue';
-import { ref, computed, onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useRouteStore } from '../../stores';
 import LayoutMain from '../LayoutMain.vue';
