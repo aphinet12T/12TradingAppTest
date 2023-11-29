@@ -1,6 +1,6 @@
 <template>
-  <div class="relative overflow-x-auto">
-    <div class="bg-white h-card p-2 shadow-md sm:rounded-lg">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="bg-white h-card p-2">
       <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
           <tr>
@@ -11,7 +11,7 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in data" :key="index" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'"
-            class="border-b" @click="handleClick(item)">
+            class="border-b dark:bg-gray-900 dark:border-gray-700" @click="handleClick(item)">
             <td v-for="col in columns" :key="col.id" :class="tdClass">
               {{ item[col.id] }}
             </td>
