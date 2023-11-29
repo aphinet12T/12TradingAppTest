@@ -20,6 +20,10 @@ const routeRoutes = [
         path: 'detail',
         component: () => import('../views/route/RouteDetail.vue'),
       },
+      {
+        path: 'store',
+        component: () => import('../views/route/RouteStore.vue'),
+      },
     ],
   },
 ];

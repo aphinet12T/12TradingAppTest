@@ -15,7 +15,6 @@
       <div class="absolute top-48 left-5">
         <Table :columns="tableColumns" :data="routeMain" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
           @row-click="handleClick">
-          <router-link to="/cms/route/detail"></router-link>
         </Table>
       </div>
     </template>
@@ -62,8 +61,11 @@ export default {
     const router = useRouter();
     const handleClick = (row) => {
       const routeId = row.id;
-      console.log(routeId);
+      const routeDay = row.day;
+      const routeNo = row.route;
       localStorage.setItem('routeId', routeId);
+      localStorage.setItem('routeDay', routeDay);
+      localStorage.setItem('routeNo', routeNo);
       router.push('/cms/route/detail')
     };
 

@@ -8,7 +8,7 @@ const routeRoutes = [
     children: [
       {
         path: 'order',
-        component: () => import('../views/order/orderMain.vue'),
+        component: () => import('../views/order/OrderMain.vue'),
       },
     ],
   },

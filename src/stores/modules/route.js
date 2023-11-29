@@ -4,11 +4,15 @@ import axios from "axios";
 export const useRouteStore = defineStore("routes", {
     state: () => ({
       routeMain: [],
-      routeDetail: null,
+      routeDetail: [],
+      routeStore: [],
+      routeStoreList: [],
     }),
     getter: {
         getRouteMain: (state) => state.routeMain,
         getRouteDetail: (state) => state.routeDetail,
+        getRouteStore: (state) => state.routeStore,
+        getRouteStoreOrder: (state) => state.routeStoreList,
     },
     actions: {
       async getRouteMain() {
@@ -45,9 +49,34 @@ export const useRouteStore = defineStore("routes", {
             //   headers: { Authorization: `Bearer ${token}` },
             // }
           );
-          const result = response.data;
+          const result = response.data.list;
           this.routeDetail = result;
           console.log("detail", this.routeDetail);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      async getRouteStore() {
+        try {
+        //   const token = JSON.parse(localStorage.getItem("token"));
+        const routeId = localStorage.getItem('routeId')
+        const storeId = localStorage.getItem('routeStoreId')
+          const response = await axios.post(
+            import.meta.env.VITE_API_BASE_URL +
+              "/cms/route/getRoute/getStoreDetail",
+            {
+              "idRoute":routeId,
+              "storeId":storeId
+            }
+            // {
+            //   headers: { Authorization: `Bearer ${token}` },
+            // }
+          );
+          const result = response.data;
+          const resultList = response.data.list;
+          this.routeStore = result;
+          this.routeStoreList = resultList;
+          console.log("storeList", this.routeStore);
         } catch (error) {
           console.error(error);
         }
