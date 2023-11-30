@@ -8,7 +8,7 @@
           </div>
           <div class="mt-2 ml-2 flex items-center">
             <Icon icon="tdesign:store" width="40" />
-            <span class="ml-2">การเข้าเยี่ยม</span>
+            <span class="ml-2 text-3xl">การเข้าเยี่ยม</span>
           </div>
         </div>
         <div class="flex flex-row justify-between">
@@ -27,34 +27,34 @@
         <div class="flex-grow">
           <div class="bg-white h-full">
             <div class="flex justify-between">
-              <div class="ml-5">
+              <div class="mt-5 ml-5 text-2xl">
                 ร้านค้าเป้าหมาย
               </div>
-              <div class="mr-5">
+              <div class="mt-5 mr-5 text-2xl">
                 {{ routeDetail.targetGroup }}
               </div>
             </div>
             <div class="flex justify-between">
-              <div class="ml-5">
+              <div class="ml-5 text-2xl">
                 ร้านค้าที่เปิดบิล
               </div>
-              <div class="mr-5">
+              <div class="mr-5 text-2xl">
                 {{ routeDetail.buy }}
               </div>
             </div>
             <div class="flex justify-between">
-              <div class="ml-5">
+              <div class="ml-5 text-2xl">
                 ร้านค้าที่เข้าเยี่ยม
               </div>
-              <div class="mr-5">
+              <div class="mr-5 text-2xl">
                 {{ routeDetail.checkin }}
               </div>
             </div>
             <div class="flex justify-between">
-              <div class="ml-5">
+              <div class="ml-5 text-2xl">
                 ร้านค้ารอเข้าเยี่ยม
               </div>
-              <div class="mr-5">
+              <div class="mr-5 text-2xl">
                 {{ routeDetail.progress }}
               </div>
             </div>

@@ -28,26 +28,17 @@
                 </div>
                 <div class="flex flex-row justify-center">
                     <div class="mx-10 mt-14">
-                        <!-- <button type="button"
-                            class="text-white bg-blue-700 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center">
-                            <Icon class="icon" height="40" width="40" icon="gis:map-route" />
-                            <span class="">ไม่ขาย</span>
-                        </button> -->
-                        <Drawer></Drawer>
+                        <Drawer :storeID="routeStore.storeId" :storeName="routeStore.name" />
                     </div>
                     <div class="mx-10 mt-14">
                         <button type="button"
-                            class="text-white bg-blue-700 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center">
-                            <Icon class="icon" height="40" width="40" icon="gis:map-route" />
-                            <span class="">ไม่ขาย</span>
+                            class="text-white bg-green-500 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center">
+                            <Icon class="icon" height="40" width="40" icon="bi:bag-plus" />
+                            <span class="">ขาย</span>
                         </button>
                     </div>
                     <div class="mx-10 mt-14">
-                        <button type="button"
-                            class="text-white bg-blue-700 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center">
-                            <Icon class="icon" height="40" width="40" icon="gis:map-route" />
-                            <span class="">ไม่ขาย</span>
-                        </button>
+                        <DrawerPicture />
                     </div>
                 </div>
             </div>
@@ -62,7 +53,8 @@ import { useRouteStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue';
 import ButtonBack from '../../components/IconBack.vue';
 import Table from '../../components/Table.vue';
-import Drawer from '../../components/Drawer.vue';
+import Drawer from '../../components/DrawerReason.vue';
+import DrawerPicture from '../../components/DrawerPicture.vue';
 
 export default {
     components: {
@@ -71,6 +63,7 @@ export default {
         ButtonBack,
         Table,
         Drawer,
+        DrawerPicture,
     },
 
     setup() {

@@ -26,7 +26,7 @@ const routeRoutes = [
       },
       {
         path: 'drawer',
-        component: () => import('../components/Drawer.vue'),
+        component: () => import('../components/DrawerPicture.vue'),
       },
     ],
   },
