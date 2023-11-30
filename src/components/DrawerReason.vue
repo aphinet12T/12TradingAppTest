@@ -7,7 +7,7 @@
             <span class="">ไม่ขาย</span>
         </button>
     </div>
-
+    <div v-show="showBackdrop" @click="closeDrawer" class="fixed inset-0 bg-black bg-opacity-50"></div>
     <div v-if="showDrawer"
         class="fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform bg-white transform-none"
         :aria-labelledby="drawerId" :id="drawerId" tabindex="-1">
@@ -33,12 +33,12 @@
                 ชื่อร้านค้า {{ storeName }}
             </div>
             <div class="mt-5">
-                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                <!-- <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
                     class="w-full text-black bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center"
                     type="button">กดเพื่อเลือก
                     <Icon class="icon w-2.5 h-2.5 ms-3" icon="ep:arrow-down-bold" />
                 </button>
-                <!-- Dropdown menu -->
+
                 <div id="dropdown"
                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-xl text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
@@ -55,22 +55,26 @@
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100">Sign out</a>
                         </li>
                     </ul>
-                </div>
+                </div> -->
+                <Dropdown dropdownId="dropdown" :dropdownItems="dropdownItem" />
             </div>
             <div class="mt-5">
-                <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-gray-500 focus:border-gray-500" placeholder="ระบุสาเหตุ"></textarea>
+                <textarea id="message" rows="4"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-gray-500 focus:border-gray-500"
+                    placeholder="ระบุสาเหตุ"></textarea>
             </div>
             <div class="mt-5">
-                <button type="button" class="w-full focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2">บันทึก</button>
+                <button type="button"
+                    class="w-full focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2">บันทึก</button>
             </div>
         </div>
     </div>
 </template>
   
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { Icon } from '@iconify/vue';
-import { initDropdowns } from 'flowbite';
+import Dropdown from '../components/Dropdown.vue';
 
 export default {
     props: {
@@ -79,30 +83,43 @@ export default {
     },
     components: {
         Icon,
+        Dropdown,
     },
     setup() {
         const showDrawer = ref(false);
+        const showBackdrop = ref(false);
         const drawerId = 'drawer-bottom-example';
         const drawerLabelId = 'drawer-bottom-label';
 
+        const dropdownItem = computed(() => {
+            return [
+                { label: 'Dashboard', link: '#' },
+                { label: 'Settings', link: '#' },
+                { label: 'Earnings', link: '#' },
+                { label: 'Sign out', link: '#' }
+            ];
+        });
+
         const toggleBottomDrawer = () => {
             showDrawer.value = !showDrawer.value;
+            if (showDrawer.value) {
+                showBackdrop.value = true
+            }
         };
 
         const closeDrawer = () => {
             showDrawer.value = false;
+            showBackdrop.value = false;
         };
-
-        onMounted(() => {
-            initDropdowns();
-        })
 
         return {
             showDrawer,
+            showBackdrop,
             drawerId,
             drawerLabelId,
             toggleBottomDrawer,
             closeDrawer,
+            dropdownItem,
         };
     },
 };

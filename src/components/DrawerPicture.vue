@@ -7,8 +7,8 @@
             <span class="">ถ่ายรูป</span>
         </button>
     </div>
-
-    <!-- drawer component -->
+    <div v-show="showBackdrop" @click="closeDrawer" class="fixed inset-0 bg-black bg-opacity-50"></div>
+    
     <div v-if="showDrawer" :id="drawerId"
         class="fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform  bg-white transform-none"
         tabindex="-1" aria-labelledby="drawer-bottom-label">
@@ -57,14 +57,19 @@ export default {
     setup() {
 
         const showDrawer = ref(false);
+        const showBackdrop = ref(false);
         const drawerId = 'drawer-bottom-picture';
 
         const toggleBottomDrawer = () => {
             showDrawer.value = !showDrawer.value;
+            if (showDrawer.value) {
+                showBackdrop.value = true
+            }
         };
 
         const closeDrawer = () => {
             showDrawer.value = false;
+            showBackdrop.value = false;
         };
 
         // onMounted(() => {
@@ -73,6 +78,7 @@ export default {
 
         return {
             showDrawer,
+            showBackdrop,
             drawerId,
             toggleBottomDrawer,
             closeDrawer,
