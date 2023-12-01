@@ -25,8 +25,8 @@ const routeRoutes = [
         component: () => import('../views/route/RouteStore.vue'),
       },
       {
-        path: 'drawer',
-        component: () => import('../components/DrawerPicture.vue'),
+        path: 'test',
+        component: () => import('../components/Alert.vue'),
       },
     ],
   },

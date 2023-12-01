@@ -24,8 +24,8 @@
             @row-click="handleClick">
           </Table>
         </div>
-        <div class="flex-grow">
-          <div class="bg-white h-full">
+        <div class="flex-grow z-40">
+          <div class="bg-white h-full shadow-slate-800 shadow-md">
             <div class="flex justify-between">
               <div class="mt-5 ml-5 text-2xl">
                 ร้านค้าเป้าหมาย

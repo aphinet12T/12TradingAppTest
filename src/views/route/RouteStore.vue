@@ -32,7 +32,7 @@
                     </div>
                     <div class="mx-10 mt-14">
                         <button type="button"
-                            class="text-white bg-green-500 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center">
+                            class="text-white bg-green-500 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center shadow-slate-300 shadow-md">
                             <Icon class="icon" height="40" width="40" icon="bi:bag-plus" />
                             <span class="">ขาย</span>
                         </button>
