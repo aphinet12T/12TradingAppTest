@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-export const useRouteStore = defineStore("routes", {
+export const useRouteStore = defineStore('routes', {
     state: () => ({
       routeMain: [],
       routeDetail: [],
@@ -20,7 +20,7 @@ export const useRouteStore = defineStore("routes", {
         //   const token = JSON.parse(localStorage.getItem("token"));
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
-              "/cms/route/getRoute/getRouteMain",
+              "/cms/route/getRouteMain",
             {
               "area":"MBE1"
             }
@@ -41,7 +41,7 @@ export const useRouteStore = defineStore("routes", {
         const routeid = localStorage.getItem('routeId')
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
-              "/cms/route/getRoute/getRouteDetail",
+              "/cms/route/getRouteDetail",
             {
               "id":routeid
             }
@@ -65,7 +65,7 @@ export const useRouteStore = defineStore("routes", {
         const storeId = localStorage.getItem('routeStoreId')
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
-              "/cms/route/getRoute/getStoreDetail",
+              "/cms/route/getStoreDetail",
             {
               "idRoute":routeId,
               "storeId":storeId

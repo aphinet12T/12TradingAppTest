@@ -31,7 +31,7 @@
                         <Drawer :storeID="routeStore.storeId" :storeName="routeStore.name" />
                     </div>
                     <div class="mx-10 mt-14">
-                        <button type="button"
+                        <button type="button" @click="handleClick"
                             class="text-white bg-green-500 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center shadow-slate-300 shadow-md">
                             <Icon class="icon" height="40" width="40" icon="bi:bag-plus" />
                             <span class="">ขาย</span>
@@ -50,6 +50,7 @@
 import { Icon } from '@iconify/vue';
 import { computed, onMounted } from 'vue';
 import { useRouteStore } from '../../stores';
+import { useRouter } from 'vue-router';
 import LayoutSub from '../LayoutSub.vue';
 import ButtonBack from '../../components/IconBack.vue';
 import Table from '../../components/Table.vue';
@@ -83,6 +84,11 @@ export default {
             ];
         });
 
+        const router = useRouter();
+        const handleClick = () => {
+            router.push('/cms/order/add')
+        }
+
         const routeDay = localStorage.getItem('routeDay')
 
         onMounted(() => {
@@ -93,6 +99,7 @@ export default {
             routeStore,
             routeStoreList,
             tableColumns,
+            handleClick,
             routeDay,
         }
     }

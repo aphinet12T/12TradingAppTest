@@ -16,7 +16,7 @@ export const useStoresStore = defineStore("stores", {
         //   const token = JSON.parse(localStorage.getItem("token"));
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
-              "/cms/store/getStore/getStore",
+              "/cms/store/getStore",
             {
               "zone":"BE191"
             }
@@ -36,7 +36,7 @@ export const useStoresStore = defineStore("stores", {
         //   const token = JSON.parse(localStorage.getItem("token"));
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
-              "/cms/store/getStore/getStoreNew",
+              "/cms/store/getStoreNew",
             {
               "zone":"BE191"
             }

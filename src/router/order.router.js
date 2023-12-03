@@ -1,7 +1,7 @@
 import LayoutMain from '../views/LayoutMain.vue';
 import LayoutSub from '../views/LayoutSub.vue';
 
-const routeRoutes = [
+const orderRoutes = [
   {
     path: '/cms',
     component: LayoutMain,
@@ -12,6 +12,16 @@ const routeRoutes = [
       },
     ],
   },
+  {
+    path: '/cms/order',
+    component: LayoutSub,
+    children: [
+      {
+        path: 'add',
+        component: () => import('../views/order/OrderAdd.vue'),
+      }
+    ],
+  },
 ];
 
-export default routeRoutes;
+export default orderRoutes;

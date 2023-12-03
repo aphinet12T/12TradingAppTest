@@ -26,7 +26,7 @@ const routeRoutes = [
       },
       {
         path: 'test',
-        component: () => import('../components/Alert.vue'),
+        component: () => import('../components/InputCounter.vue'),
       },
     ],
   },

@@ -95,7 +95,9 @@ export default {
     const router = useRouter();
     const handleClick = (row) => {
       const routeStore = row.id;
+      const routeStoreName = row.name;
       localStorage.setItem('routeStoreId', routeStore);
+      localStorage.setItem('routeStoreName', routeStoreName);
       router.push('/cms/route/store')
     };
 
