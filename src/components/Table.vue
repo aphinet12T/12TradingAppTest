@@ -13,7 +13,14 @@
           <tr v-for="(item, index) in data" :key="index" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'"
             class="border-b" @click="handleClick(item)">
             <td v-for="col in columns" :key="col.id" :class="tdClass">
-              {{ item[col.id] }}
+              <!-- {{ item[col.id] }}
+              <slot name="button" :rowData="item" /> -->
+              <template v-if="col.id === ''">
+                <slot name="button" :rowData="item" />
+              </template>
+              <template v-else>
+                {{ item[col.id] }}
+              </template>
             </td>
           </tr>
         </tbody>

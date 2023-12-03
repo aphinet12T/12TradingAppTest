@@ -20,20 +20,30 @@
                     </div>
                 </div>
                 <div class="flex flex-row justify-center mt-3">
-                    <div class="mx-10">
-                        <Dropdown dropdownId="dropdown1" :dropdownItems="dropdownItem" />
+                    <div class="mx-4">
+                        <Dropdown dropdownId="dropdown1" :btClass="'w-60'" :dropdownItems="dropdownItem" />
                     </div>
-                    <div class="mx-10">
-                        <Dropdown dropdownId="dropdown2" :dropdownItems="dropdownItem" />
+                    <div class="mx-4">
+                        <Dropdown dropdownId="dropdown2" :btClass="'w-60'" :dropdownItems="dropdownItem" />
                     </div>
                 </div>
                 <div class="flex flex-row justify-center mt-3">
-                    <div class="mx-10">
-                        <Dropdown dropdownId="dropdown3" :dropdownItems="dropdownItem" />
+                    <div class="mx-4">
+                        <Dropdown dropdownId="dropdown3" :btClass="'w-60'" :dropdownItems="dropdownItem" />
                     </div>
-                    <div class="mx-10">
-                        <Dropdown dropdownId="dropdown4" :dropdownItems="dropdownItem" />
+                    <div class="mx-4">
+                        <Dropdown dropdownId="dropdown4" :btClass="'w-60'" :dropdownItems="dropdownItem" />
                     </div>
+                </div>
+                <div class="flex justify-center mt-5">
+                    <Table :columns="tableColumns" :data="products" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'">
+                        <template v-slot:button="{ rowData }">
+                            <button type="button" class="text-white bg-green-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
+                             @click="handleButtonClick(rowData.id)">
+                            <Icon class="icon w-4 h-4" icon="ph:plus-bold" />
+                            </button>
+                          </template>
+                    </Table>
                 </div>
             </div>
         </template>
@@ -42,18 +52,27 @@
 
 <script>
 import { Icon } from '@iconify/vue'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
+import { useOrderStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue'
 import ButtonBack from '../../components/IconBack.vue'
 import Dropdown from '../../components/Dropdown.vue'
+import Table from '../../components/Table.vue';
+
 export default {
     components: {
         Icon,
         LayoutSub,
         ButtonBack,
         Dropdown,
+        Table,
     },
     setup() {
+        const store = useOrderStore();
+        const products = computed(() => {
+            return store.productList;
+        });
+
         const storeId = localStorage.getItem('routeStoreId')
         const storeName = localStorage.getItem('routeStoreName')
 
@@ -66,10 +85,29 @@ export default {
             ];
         });
 
+        const tableColumns = computed(() => {
+            return [
+                { id: 'id', title: 'รหัสสินค้า' },
+                { id: 'name', title: 'ชื่อสินค้า' },
+                { id: '', title: '*' },
+            ];
+        });
+        const handleButtonClick = (id) => {
+            // ใส่โค้ดที่ต้องการทำเมื่อปุ่มถูกคลิก โดยใช้ id ที่รับเข้ามา
+            console.log(`Button clicked with ID: ${id}`);
+        };
+
+        onMounted(() => {
+            store.getSaleProduct();
+        });
+
         return {
             storeId,
             storeName,
-            dropdownItem
+            dropdownItem,
+            tableColumns,
+            products,
+            handleButtonClick,
         }
     }
 }
