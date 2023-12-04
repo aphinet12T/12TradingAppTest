@@ -8,17 +8,17 @@
                     </div>
                     <div class="mt-2 ml-2 flex items-center">
                         <Icon icon="tdesign:store" width="40" />
-                        <span class="ml-2">การเข้าเยี่ยม {{ routeDay }}</span>
+                        <span class="ml-2 text-3xl">การเข้าเยี่ยม {{ routeDay }}</span>
                     </div>
                 </div>
                 <div class="flex flex-col mt-4">
-                    <div class="ml-12">
+                    <div class="ml-12 text-xl">
                         รหัส : {{ routeStore.storeId }}
                     </div>
-                    <div class="ml-12">
+                    <div class="ml-12 text-xl">
                         ชื่อ : {{ routeStore.name }}
                     </div>
-                    <div class="ml-12">
+                    <div class="ml-12 text-xl">
                         ที่อยู่ : {{ routeStore.address }}
                     </div>
                 </div>

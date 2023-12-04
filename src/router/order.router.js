@@ -19,6 +19,14 @@ const orderRoutes = [
       {
         path: 'add',
         component: () => import('../views/order/OrderAdd.vue'),
+      },
+      {
+        path: 'product',
+        component: () => import('../views/order/OrderProduct.vue'),
+      },
+      {
+        path: 'cart',
+        component: () => import('../views/order/OrderCart.vue'),
       }
     ],
   },

@@ -33,30 +33,7 @@
                 ชื่อร้านค้า {{ storeName }}
             </div>
             <div class="mt-5">
-                <!-- <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                    class="w-full text-black bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center"
-                    type="button">กดเพื่อเลือก
-                    <Icon class="icon w-2.5 h-2.5 ms-3" icon="ep:arrow-down-bold" />
-                </button>
-
-                <div id="dropdown"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                    <ul class="py-2 text-xl text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                        <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Earnings</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Sign out</a>
-                        </li>
-                    </ul>
-                </div> -->
-                <Dropdown dropdownId="dropdown" :dropdownItems="dropdownItem" />
+                <Dropdown dropdownId="dropdownReason" :btClass="'w-full'" :dropdownItems="dropdownItem" />
             </div>
             <div class="mt-5">
                 <textarea id="message" rows="4"

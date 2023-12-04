@@ -2,15 +2,15 @@
     <form class="max-w-xs mx-auto">
         <div class="relative flex items-center">
             <button type="button" @click="decrementCounter"
-                class="flex-shrink-0 inline-flex items-center justify-center h-5 w-5">
-                <Icon class="icon w-3 h-3" icon="ph:minus-bold" />
+                class="flex-shrink-0 inline-flex items-center justify-center h-8 w-12">
+                <Icon class="icon w-8 h-8" icon="ph:minus-bold" />
             </button>
             <input :id="inputId" :value="counterValue" @input="updateCounter"
-                class="flex-shrink-0 text-gray-900 border border-gray-300 rounded-md bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center"
+                class="flex-shrink-0 text-gray-900 border border-gray-300 rounded-md bg-transparent text-2xl font-normal focus:outline-none focus:ring-0 h-10 w-20 text-center"
                 placeholder="" required />
             <button type="button" @click="incrementCounter"
-                class="flex-shrink-0 inline-flex items-center justify-center h-5 w-5">
-                <Icon class="icon w-3 h-3" icon="ph:plus-bold" />
+                class="flex-shrink-0 inline-flex items-center justify-center h-8 w-10">
+                <Icon class="icon w-8 h-8" icon="ph:plus-bold" />
             </button>
         </div>
     </form>

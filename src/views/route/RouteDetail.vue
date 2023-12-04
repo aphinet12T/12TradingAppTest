@@ -12,10 +12,10 @@
           </div>
         </div>
         <div class="flex flex-row justify-between">
-          <div class="mt-4 ml-12">
+          <div class="mt-4 ml-12 text-xl">
             Day 07
           </div>
-          <div class="mt-4 mr-12">
+          <div class="mt-4 mr-12 text-xl">
             Route
           </div>
         </div>

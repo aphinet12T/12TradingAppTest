@@ -25,7 +25,7 @@
           <CustomerAll />
           <router-link to="/cms/store/add">
             <div class="flex justify-end mt-3">
-              <ButtonAdd />
+              <ButtonAdd :icon="'ph:plus-light'" />
             </div>
           </router-link>
         </div>
