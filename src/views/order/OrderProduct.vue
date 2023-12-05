@@ -125,27 +125,8 @@ export default {
             // console.log('qty', counterValue);
         }
 
-        // const handleSubmit = () => {
-        //     if (selectedQty.value !== null && selectedQty.value !== 0) {
-        //         async store.addProductData({
-        //             area: 'MBE1',
-        //             storeId: localStorage.getItem('routeStoreId'),
-        //             list: {
-        //                 id: store.productId,
-        //                 name: productDetail.value.name,
-        //                 pricePerUnitSale: selectedPrice.value,
-        //                 qty: selectedQty.value,
-        //                 unitId: selectedUnitId.value
-        //             }
-        //         });
-        //         await router.push('/cms/route/store')
-        //     } else {
-        //         console.log('กรุณาเลือกจำนวนสินค้า');
-        //     }
-        // }
-
         const handleSubmit = async () => {
-            if (selectedQty.value !== null && selectedQty.value !== 0) {
+            if (selectedQty.value !== null && selectedQty.value !== 0 && selectedUnitId.value !== null) {
                 try {
                     await store.addProductData({
                         area: 'MBE1',
