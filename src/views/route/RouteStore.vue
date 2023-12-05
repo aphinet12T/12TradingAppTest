@@ -27,17 +27,17 @@
                     </Table>
                 </div>
                 <div class="flex flex-row justify-center">
-                    <div class="mx-10 mt-14">
+                    <div class="mx-10 mt-5">
                         <Drawer :storeID="routeStore.storeId" :storeName="routeStore.name" />
                     </div>
-                    <div class="mx-10 mt-14">
+                    <div class="mx-10 mt-5">
                         <button type="button" @click="handleClick"
                             class="text-white bg-green-500 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center shadow-slate-300 shadow-md">
                             <Icon class="icon" height="40" width="40" icon="bi:bag-plus" />
                             <span class="">ขาย</span>
                         </button>
                     </div>
-                    <div class="mx-10 mt-14">
+                    <div class="mx-10 mt-5">
                         <DrawerPicture />
                     </div>
                 </div>

@@ -1,22 +1,21 @@
 <template>
-    <div v-if="showAlert" :id="alertId" class="p-4 mb-4 fixed top-0 left-0 right-0 z-50 w-full overflow-x-hidden overflow-y-auto text-blue-800 border border-blue-300 rounded-lg bg-blue-50" role="alert">
+    <div v-if="showAlert" :id="alertId" class="p-4 mb-4 fixed top-0 left-0 right-0 z-50 w-full h-44 overflow-x-hidden overflow-y-auto rounded-lg" :class="color" role="alert">
         <div class="flex items-center">
-            <span class="sr-only">Info</span>
-            <h3 class="text-lg font-medium">{{ title }}</h3>
+            <h3 class="text-3xl font-medium">{{ title }}</h3>
         </div>
-        <div class="mt-2 mb-4 text-sm">
+        <div class="mt-2 mb-4 text-xl">
             {{ content }}
         </div>
         <div class="flex">
             <button type="button"
-                class="text-white bg-blue-800 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center"
+                class="text-white bg-green-500 font-medium rounded-lg text-lg px-7 py-3 me-2 text-center inline-flex items-center"
                 @click="confirm">
-                comfirm
+                ยืนยัน
             </button>
             <button type="button"
-                class="text-blue-800 bg-transparent border border-blue-800 font-medium rounded-lg text-xs px-3 py-1.5 text-center"
+                class="text-white bg-red-500 font-medium rounded-lg text-lg px-7 py-3 text-center"
                 @click="dismiss" aria-label="Close">
-                Dismiss
+                ยกเลิก
             </button>
         </div>
     </div>
@@ -37,10 +36,15 @@ export default {
         content: {
             type: String,
         },
+        color: {
+            type: String,
+        },
     },
     setup(props, { emit }) {
 
         const showAlert = ref(true)
+
+        const product = props.product
 
         function confirm() {
             emit('confirm');
@@ -55,6 +59,7 @@ export default {
             showAlert,
             confirm,
             dismiss,
+            product
         };
     },
 };

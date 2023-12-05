@@ -23,7 +23,8 @@ module.exports = {
       height: {
         'main': '270px',
         'layout': '800px',
-        'card': '650px',
+        'card': '600px',
+        '700': '700px',
       },
       width: {
         'card': '550px',

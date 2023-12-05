@@ -28,6 +28,10 @@ const routeRoutes = [
         path: 'test',
         component: () => import('../components/Alert.vue'),
       },
+      {
+        path: 'location',
+        component: () => import('../views/route/RouteLocation.vue'),
+      },
     ],
   },
 ];

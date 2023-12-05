@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="bg-white h-card w-card px-2 sha shadow-slate-300 shadow-md sm:rounded-lg overflow-auto">
+    <div class="bg-white h-card w-card px-2 sha shadow-slate-300 shadow-md sm:rounded-lg overflow-auto" :class="hTable">
       <table class="w-full text-md text-left text-gray-500">
         <thead class="text-lg text-gray-700 uppercase bg-gray-50 sticky top-0">
           <tr>
@@ -37,7 +37,8 @@ const props = defineProps({
   columns: Array,
   data: Array,
   thClass: String,
-  tdClass: String
+  tdClass: String,
+  hTable: String,
 });
 
 const emit = defineEmits(['row-click']);
