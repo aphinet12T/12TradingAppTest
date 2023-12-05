@@ -24,7 +24,7 @@
                                 ชื่อ : {{ productDetail.name }}
                             </p>
                             <p class="mb-2 text-2xl">
-                                ราคา :
+                                {{ selectedPrice ? 'ราคา : ' + selectedPrice : 'ราคา : เลือกหน่วยสินค้า' }}
                             </p>
                         </div>
                     </div>
@@ -32,7 +32,8 @@
                 <div class="relative rounded-t-xl overflow-auto p-8">
                     <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
                         <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg"
-                            v-for="item in productUnit" :key="item.id">
+                            v-for="item in productUnit" :key="item.id"
+                            @click="() => { updatePrice(item.pricePerUnitSale); handleClick(item.id); }">
                             {{ item.nameThai }}
                         </button>
                     </div>
@@ -46,15 +47,16 @@
                 </div>
                 <div class="flex flex-row justify-between">
                     <div class="flex justify-start text-2xl ml-7 mt-3">
-                        รวมราคา : 100000 บาท
+                        รวมราคา : {{ productDetail.sumPrice }} บาท
                     </div>
                     <div class="flex justify-end mr-7 mt-2">
-                        <InputCounter></InputCounter>
+                        <InputCounter @increment="handleQty" @decrement="handleQty"></InputCounter>
                     </div>
                 </div>
                 <div class="relative rounded-t-xl overflow-auto p-8">
                     <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl leading-6 rounded-lg">
-                        <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg">
+                        <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg"
+                            @click="handleSubmit">
                             บันทึก
                         </button>
                     </div>
@@ -65,12 +67,14 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useOrderStore } from '../../stores'
 import LayoutSub from '../LayoutSub.vue'
 import ButtonBack from '../../components/IconBack.vue'
 import InputCounter from '../../components/InputCounter.vue'
+
 export default {
     components: {
         Icon,
@@ -79,24 +83,103 @@ export default {
         InputCounter,
     },
     setup() {
-
+        const router = useRouter();
         const store = useOrderStore();
-        const productDetail = computed(() => {
-            return store.productDetail;
-        });
-        const productUnit = computed(() => {
-            return store.productUnit;
-        });
+        const productDetail = computed(() => store.productDetail)
+        const productUnit = computed(() => store.productUnit)
+
         onMounted(() => {
-            store.getSaleProductDetail();
+            store.getSaleProductDetailUnit();
+            const localProductId = localStorage.getItem('productId');
+            if (localProductId) {
+                store.productId = localProductId;
+                console.log('product', store.productId);
+            }
         });
 
-        const productId = localStorage.getItem('orderProductId')
+        const selectedPrice = ref('')
+        const selectedUnitId = ref(null)
+        const selectedQty = ref(1)
+
+        const updatePrice = (price) => {
+            selectedPrice.value = price
+        }
+
+        const handleClick = (id) => {
+            selectedUnitId.value = id
+            store.updateProductData({
+                id: store.productId,
+                unitId: selectedUnitId.value,
+                qty: 1
+            })
+            // console.log('unitId', id);
+        }
+
+        const handleQty = (counterValue) => {
+            selectedQty.value = counterValue
+            store.updateProductData({
+                id: store.productId,
+                unitId: selectedUnitId.value,
+                qty: selectedQty.value
+            })
+            // console.log('qty', counterValue);
+        }
+
+        // const handleSubmit = () => {
+        //     if (selectedQty.value !== null && selectedQty.value !== 0) {
+        //         async store.addProductData({
+        //             area: 'MBE1',
+        //             storeId: localStorage.getItem('routeStoreId'),
+        //             list: {
+        //                 id: store.productId,
+        //                 name: productDetail.value.name,
+        //                 pricePerUnitSale: selectedPrice.value,
+        //                 qty: selectedQty.value,
+        //                 unitId: selectedUnitId.value
+        //             }
+        //         });
+        //         await router.push('/cms/route/store')
+        //     } else {
+        //         console.log('กรุณาเลือกจำนวนสินค้า');
+        //     }
+        // }
+
+        const handleSubmit = async () => {
+            if (selectedQty.value !== null && selectedQty.value !== 0) {
+                try {
+                    await store.addProductData({
+                        area: 'MBE1',
+                        storeId: localStorage.getItem('routeStoreId'),
+                        list: {
+                            id: store.productId,
+                            name: productDetail.value.name,
+                            pricePerUnitSale: selectedPrice.value,
+                            qty: selectedQty.value,
+                            unitId: selectedUnitId.value
+                        }
+                    });
+                    await router.push('/cms/order/cart');
+                } catch (error) {
+                    console.error(error);
+                }
+            } else {
+                console.log('กรุณาเลือกจำนวนสินค้า');
+            }
+        }
+
+        router.beforeEach((to, from, next) => {
+            store.resetProduct();
+            next();
+        });
 
         return {
-            productId,
             productDetail,
             productUnit,
+            updatePrice,
+            selectedPrice,
+            handleClick,
+            handleQty,
+            handleSubmit
         }
     }
 }

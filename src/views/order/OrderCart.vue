@@ -38,7 +38,9 @@
                 </div>
                 <div class="relative rounded-t-xl overflow-auto p-4">
                     <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
-                        <button class="p-4 w-full rounded-lg flex items-center justify-center bg-blue-800 shadow-lg">
+                        <button class="p-4 w-full rounded-lg flex items-center justify-center bg-blue-800 shadow-lg"
+                        @click="handleAdd"
+                        >
                             เลือกสินค้าเพิ่ม
                         </button>
                         <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg">
@@ -73,6 +75,7 @@
 
 <script>
 import { computed, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useOrderStore } from '../../stores'
 import LayoutSub from '../LayoutSub.vue'
@@ -89,7 +92,7 @@ export default {
         Alert,
     },
     setup() {
-
+        const router = useRouter();
         const storeId = localStorage.getItem('routeStoreId')
         const storeName = localStorage.getItem('routeStoreName')
 
@@ -154,6 +157,10 @@ export default {
             console.log(showAlert.value);
         };
 
+        const handleAdd = () => {
+            router.push('/cms/order/add')
+        };
+
         const productId = localStorage.getItem('orderProductId')
 
         return {
@@ -172,6 +179,7 @@ export default {
             handleClick,
             dismissAlert,
             selectedName,
+            handleAdd
         }
     }
 }

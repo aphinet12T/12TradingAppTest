@@ -104,10 +104,9 @@ export default {
 
         const router = useRouter();
         const handleClick = (id) => {
-            console.log(`item: ${id}`);
-            localStorage.setItem('orderProductId', id);
+            store.setProduct(id);
             router.push('/cms/order/product')
-            // store.getSaleProductDetail(id);
+            // console.log(`item: ${id}`);
         };
 
         onMounted(() => {

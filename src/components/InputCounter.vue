@@ -24,7 +24,7 @@ export default {
     props: {
         initialValue: {
             type: Number,
-            default: 0
+            default: 1
         },
         inputId: {
             type: String,
