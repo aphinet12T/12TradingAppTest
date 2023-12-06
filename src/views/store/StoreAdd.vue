@@ -10,7 +10,7 @@
           <span class="ml-2">เพิ่มร้านค้า</span>
         </div>
       </div>
-      <div class="flex flex-row items-center justify-between mt-3">
+      <div class="flex flex-row items-center justify-between mt-1">
         <div class="mt-2 ml-8 flex items-center">
           <Icon icon="tdesign:store" width="20" />
           <span class="ml-2">ข้อมูลร้านค้า</span>
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="flex justify-center">
-        <div class="bg-white h-96 w-card shadow-md rounded-lg mt-2">
+        <div class="bg-white h-96 w-card shadow-md rounded-lg mt-1">
           <div class=" flex flex-col items-center mt-5">
             <div class="mb-1">
               <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :inputClass="'w-500 p-2.5'" :type="'text'"
@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-row items-center justify-between mt-3">
+      <div class="flex flex-row items-center justify-between mt-1">
         <div class="mt-2 ml-8 flex items-center">
           <Icon icon="tdesign:store" width="20" />
           <span class="ml-2">ที่อยู่</span>
@@ -66,7 +66,7 @@
       </div>
       <div class="flex justify-center">
         <div class="bg-white h-72 w-card shadow-md rounded-lg mt-2">
-          <div class=" flex flex-col items-center mt-5">
+          <div class=" flex flex-col items-center mt-3">
             <div class="mb-1">
               <InputFeild :id="'storeAddress'" :label="'ที่อยู่'" :inputClass="'w-500 p-2.5'" :type="'text'">
               </InputFeild>
@@ -98,7 +98,31 @@
           </div>
         </div>
       </div>
-      <button @click="sendData" type="button" class="text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Submit</button>
+      <div class="flex flex-row items-center justify-between mt-1">
+        <div class="mt-2 ml-8 flex items-center">
+          <Icon icon="heroicons:camera-20-solid" width="20" />
+          <span class="ml-2">ถ่ายภาพ</span>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <div class="bg-white w-card shadow-md rounded-lg mt-2">
+          <div class=" flex flex-col items-center mt-1">
+            <div class="mb-2">
+              <InputFeild :id="'storeAddress'" :inputClass="'w-500 p-2.5'" :type="'text'">
+              </InputFeild>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="relative rounded-t-xl overflow-auto p-4">
+        <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
+            <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg"
+            @click="sendData"
+            >
+                ถัดไป
+            </button>
+        </div>
+    </div>
     </template>
   </LayoutSub>
 </template>
