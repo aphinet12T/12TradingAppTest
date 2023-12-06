@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="flex justify-center mt-5">
-                    <Table :columns="tableColumns" :data="routeStoreList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'">
+                    <Table :columns="tableColumns" :data="routeStoreList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[650px]'">
                     </Table>
                 </div>
                 <div class="flex flex-row justify-center">

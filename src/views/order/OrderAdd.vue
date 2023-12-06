@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="flex justify-center mt-5">
-                    <Table :columns="tableColumns" :data="products" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'">
+                    <Table :columns="tableColumns" :data="products" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[600px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-green-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"

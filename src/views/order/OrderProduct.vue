@@ -57,7 +57,7 @@
                     <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl leading-6 rounded-lg">
                         <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg"
                             @click="handleSubmit">
-                            บันทึก
+                            เพิ่มสินค้า
                         </button>
                     </div>
                 </div>
@@ -139,7 +139,7 @@ export default {
                             unitId: selectedUnitId.value
                         }
                     });
-                    await router.push('/cms/order/cart');
+                    await router.push('/cms/order/add');
                 } catch (error) {
                     console.error(error);
                 }

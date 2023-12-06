@@ -13,7 +13,7 @@
     </template>
     <template v-slot:body>
       <div class="flex justify-center">
-        <Table :columns="tableColumns" :data="routeMain" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
+        <Table :columns="tableColumns" :data="routeMain" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-700'"
           @row-click="handleClick">
         </Table>
       </div>

@@ -31,7 +31,11 @@ const orderRoutes = [
       {
         path: 'promotion',
         component: () => import('../views/order/OrderPromotion.vue'),
-      }
+      },
+      {
+        path: 'checkout',
+        component: () => import('../views/order/OrderCheckout.vue'),
+      },
     ],
   },
 ];

@@ -34,7 +34,6 @@ export function useGeolocation() {
     store.getLocation()
   })
 
-  // ถ้าต้องการตรวจสอบค่า latitude, longitude หรือ error โดยตรง
   const latitude = ref(store.latitude)
   const longitude = ref(store.longitude)
   const error = ref(store.error)

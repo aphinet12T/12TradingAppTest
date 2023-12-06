@@ -9,6 +9,8 @@ export const useOrderStore = defineStore('orders', {
       productUnit: [],
       orderCart: [],
       orderCartList: [],
+      orderCheckout: [],
+      orderCheckoutList: [],
       productUnitDetail: {
         id: '',
         unitId: '',
@@ -24,7 +26,19 @@ export const useOrderStore = defineStore('orders', {
             qty: 1,
             unitId: ''
         }
-      }
+      },
+      cartCheckout: {
+        area: 'MBE1',
+        storeId: 'MBE2300001',
+        saleCode: '64190'
+      },
+      addOrder: {
+        area: '',
+        storeId: '',
+        idRoute: '',
+        latitude: '',
+        longitude: '',
+      },
     }),
     getter: {
         getProduct: (state) => state.productList,
@@ -35,7 +49,6 @@ export const useOrderStore = defineStore('orders', {
       resetProduct() {
         this.productUnitDetail.unitId = '',
         this.productUnitDetail.qty = 1
-        console.log('555',this.productUnitDetail);
     },
       setProduct(id) {
         localStorage.setItem('productId', id)
@@ -49,8 +62,13 @@ export const useOrderStore = defineStore('orders', {
       },
       async addProductData(data) {
         this.productData = data;
-        console.log('add',this.productData);
+        // console.log('add',this.productData);
         await this.addProductToCart();
+      },
+      async addOrderData(data) {
+        this.addOrder = data;
+        console.log('add',this.addOrder);
+        await this.addNewOrder();
       },
       async getSaleProduct() {
         try {
@@ -111,6 +129,24 @@ export const useOrderStore = defineStore('orders', {
           console.error(error);
         }
       },
+      async addNewOrder() {
+        try {
+        //   const token = JSON.parse(localStorage.getItem("token"));
+          const response = await axios.post(
+            import.meta.env.VITE_API_BASE_URL +
+              "/cms/order/newOrder",
+              this.addOrder
+         
+            // {
+            //   headers: { Authorization: `Bearer ${token}` },
+            // }
+          );
+          const result = response.data;
+          console.log("createOrder", result);
+        } catch (error) {
+          console.error(error);
+        }
+      },
       async getOrderCart() {
         try {
         //   const token = JSON.parse(localStorage.getItem("token"));
@@ -131,6 +167,26 @@ export const useOrderStore = defineStore('orders', {
           this.orderCart = result;
           this.orderCartList = resultList;
           console.log("orderCart", this.orderCart);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      async getOrderCheckout() {
+        try {
+        //   const token = JSON.parse(localStorage.getItem("token"));
+          const response = await axios.post(
+            import.meta.env.VITE_API_BASE_URL +
+              "/cms/saleProduct/getPreOrder",
+              this.cartCheckout
+            // {
+            //   headers: { Authorization: `Bearer ${token}` },
+            // }
+          );
+          const result = response.data;
+          const resultList = response.data.list;
+          this.orderCheckout = result;
+          this.orderCheckoutList = resultList;
+          console.log("orderCheckout", this.orderCheckout);
         } catch (error) {
           console.error(error);
         }

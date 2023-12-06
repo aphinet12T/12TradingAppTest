@@ -15,7 +15,21 @@
                     <div>
                         ของแถม
                     </div>
-                    <Table :columns="tableColumns" :data="dataCart" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'">
+                    <Table :columns="tableColumns" :data="dataCart" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[350px]'">
+                        <template v-slot:button="{ rowData }">
+                            <button type="button"
+                                class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
+                                @click="handleClick(rowData.id, rowData.unitId)">
+                                <Icon class="icon w-4 h-4" icon="ph:x-bold" />
+                            </button>
+                        </template>
+                    </Table>
+                </div>
+                <div class="flex flex-col items-center mt-5">
+                    <div>
+                        ของแถม
+                    </div>
+                    <Table :columns="tableColumns" :data="dataCart" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[350px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
@@ -27,7 +41,9 @@
                 </div>
                 <div class="relative rounded-t-xl overflow-auto p-4">
                     <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
-                        <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg">
+                        <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg"
+                        @click="handleCheckout"
+                        >
                             ถัดไป
                         </button>
                     </div>
@@ -39,6 +55,7 @@
 
 <script>
 import { computed, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useOrderStore } from '../../stores'
 import LayoutSub from '../LayoutSub.vue'
@@ -55,7 +72,7 @@ export default {
         Alert,
     },
     setup() {
-
+        const router = useRouter()
         const storeId = localStorage.getItem('routeStoreId')
         const storeName = localStorage.getItem('routeStoreName')
 
@@ -117,6 +134,10 @@ export default {
             console.log(showAlert.value);
         };
 
+        const handleCheckout = () => {
+            router.push('/cms/order/checkout')
+        };
+
         const productId = localStorage.getItem('orderProductId')
 
         return {
@@ -134,6 +155,7 @@ export default {
             deleteItem,
             handleClick,
             dismissAlert,
+            handleCheckout,
         }
     }
 }

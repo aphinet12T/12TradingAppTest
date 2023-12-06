@@ -26,7 +26,7 @@
                     <div>
                         รายการสินค้าที่เลือก
                     </div>
-                    <Table :columns="tableColumns" :data="dataCart" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'">
+                    <Table :columns="tableColumns" :data="dataCart" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[600px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
@@ -43,7 +43,9 @@
                         >
                             เลือกสินค้าเพิ่ม
                         </button>
-                        <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg">
+                        <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg"
+                        @click="handleCreate"
+                        >
                             สร้างรายการ
                         </button>
                     </div>
@@ -92,7 +94,7 @@ export default {
         Alert,
     },
     setup() {
-        const router = useRouter();
+        const router = useRouter()
         const storeId = localStorage.getItem('routeStoreId')
         const storeName = localStorage.getItem('routeStoreName')
 
@@ -132,9 +134,9 @@ export default {
         const selectedName = ref(null);
 
         const handleClick = (id, unitId, name) => {
-            console.log(`item: ${id}`);
-            console.log(`unit: ${unitId}`);
-            console.log(`unit: ${name}`);
+            // console.log(`item: ${id}`);
+            // console.log(`unit: ${unitId}`);
+            // console.log(`unit: ${name}`);
             selectedId.value = id;
             selectedUnitId.value = unitId;
             selectedName.value = name;
@@ -160,6 +162,9 @@ export default {
         const handleAdd = () => {
             router.push('/cms/order/add')
         };
+        const handleCreate = () => {
+            router.push('/cms/order/promotion')
+        };
 
         const productId = localStorage.getItem('orderProductId')
 
@@ -179,7 +184,8 @@ export default {
             handleClick,
             dismissAlert,
             selectedName,
-            handleAdd
+            handleAdd,
+            handleCreate
         }
     }
 }

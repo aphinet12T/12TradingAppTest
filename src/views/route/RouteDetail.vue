@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="flex justify-center">
-          <Table :columns="tableColumns" :data="routeDetailList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
+          <Table :columns="tableColumns" :data="routeDetailList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[690px]'"
             @row-click="handleClick">
           </Table>
         </div>

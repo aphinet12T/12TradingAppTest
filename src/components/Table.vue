@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="bg-white h-card w-card px-2 sha shadow-slate-300 shadow-md sm:rounded-lg overflow-auto" :class="hTable">
+    <div class="bg-white w-card px-2 sha shadow-slate-300 shadow-md sm:rounded-lg overflow-auto" :class="hTable">
       <table class="w-full text-md text-left text-gray-500">
         <thead class="text-lg text-gray-700 uppercase bg-gray-50 sticky top-0">
           <tr>
@@ -23,6 +23,7 @@
               </template>
               <template v-else>
                 {{ item[col.id] }}
+                <!-- <slot :name="col.id" :row="row"> {{ item[col.id] }} </slot> -->
               </template>
             </td>
           </tr>

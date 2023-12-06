@@ -14,11 +14,12 @@ export const useStoresStore = defineStore("stores", {
       async getCustomerAll() {
         try {
         //   const token = JSON.parse(localStorage.getItem("token"));
+          const area = JSON.parse(localStorage.getItem("area"))
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
               "/cms/store/getStore",
             {
-              "zone":"BE191"
+              "area": area
             }
             // {
             //   headers: { Authorization: `Bearer ${token}` },
