@@ -115,14 +115,9 @@
         </div>
       </div>
       <div class="relative rounded-t-xl overflow-auto p-4">
-        <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
-            <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg"
-            @click="sendData"
-            >
-                ถัดไป
-            </button>
-        </div>
+          <DrawerPolicy/>
     </div>
+
     </template>
   </LayoutSub>
 </template>
@@ -133,13 +128,15 @@ import { ref, computed, reactive } from 'vue';
 import LayoutSub from '../LayoutSub.vue';
 import InputFeild from '../../components/InputFeild.vue';
 import ButtonBack from '../../components/IconBack.vue';
+import DrawerPolicy from '../../components/DrawerPolicy.vue'
 
 export default {
   components: {
     Icon,
     LayoutSub,
     ButtonBack,
-    InputFeild
+    InputFeild,
+    DrawerPolicy
   },
 
   setup() {

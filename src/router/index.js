@@ -5,6 +5,7 @@ import OrderRouter from './order.router'
 
 const routes = [
   { path: '/cms/login', component: () => import('../views/authentication/login.vue') },
+  { path: '/cms/test', component: () => import('../components/DrawerPolicy.vue') },
   ...StoreRouter,
   ...RouteRouter,
   ...OrderRouter,

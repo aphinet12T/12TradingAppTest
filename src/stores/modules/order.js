@@ -29,7 +29,7 @@ export const useOrderStore = defineStore('orders', {
       },
       cartCheckout: {
         area: 'MBE1',
-        storeId: 'MBE2300001',
+        storeId: 'VE22800229',
         saleCode: '64190'
       },
       addOrder: {

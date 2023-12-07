@@ -45,7 +45,6 @@
 <script>
 import { Icon } from '@iconify/vue';
 import { ref, onMounted } from 'vue'
-// import { initCarousels } from 'flowbite'
 export default {
     props: {
         storeID: String,
@@ -71,10 +70,6 @@ export default {
             showDrawer.value = false;
             showBackdrop.value = false;
         };
-
-        // onMounted(() => {
-        //     initCarousels();
-        // })
 
         return {
             showDrawer,
