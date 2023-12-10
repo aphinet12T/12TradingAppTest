@@ -28,9 +28,9 @@ export const useOrderStore = defineStore('orders', {
         }
       },
       cartCheckout: {
-        area: 'MBE1',
-        storeId: 'VE22800229',
-        saleCode: '64190'
+        area: '',
+        storeId: '',
+        saleCode: ''
       },
       addOrder: {
         area: '',
@@ -150,12 +150,13 @@ export const useOrderStore = defineStore('orders', {
       async getOrderCart() {
         try {
         //   const token = JSON.parse(localStorage.getItem("token"));
+          const area = JSON.parse(localStorage.getItem("area"))
           const storeId = localStorage.getItem("routeStoreId")
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
               "/cms/saleProduct/getCartToShow",
             {
-              "area":"MBE1",
+              "area":area,
               "storeId":storeId
             }
             // {
@@ -194,12 +195,13 @@ export const useOrderStore = defineStore('orders', {
       async deleteItemCart(id,unitId) {
         try {
         //   const token = JSON.parse(localStorage.getItem("token"));
+          const area = JSON.parse(localStorage.getItem("area"))
           const storeId = localStorage.getItem("routeStoreId")
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
               "/cms/saleProduct/deleteItemCart",
             {
-              "area":"MBE1",
+              "area":area,
               "storeId":storeId,
               "idProduct":id,
               "unitId":unitId

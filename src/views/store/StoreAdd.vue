@@ -106,10 +106,10 @@
       </div>
       <div class="flex justify-center">
         <div class="bg-white w-card shadow-md rounded-lg mt-2">
-          <div class=" flex flex-col items-center mt-1">
-            <div class="mb-2">
-              <InputFeild :id="'storeAddress'" :inputClass="'w-500 p-2.5'" :type="'text'">
-              </InputFeild>
+          <div class="flex flex-row items-center justify-center mt-1">
+            <div class="mb-2 flex items-center"> 
+              <DrawerPicture :btClass="'px-5 py-2.5 me-2 mb-2 mt-2'" />
+              <InputFeild :id="'storePicture'" :inputClass="'w-[430px] p-2.5'" :type="'text'"></InputFeild>
             </div>
           </div>
         </div>
@@ -123,12 +123,13 @@
 </template>
 
 <script>
-import { Icon } from '@iconify/vue';
-import { ref, computed, reactive } from 'vue';
-import LayoutSub from '../LayoutSub.vue';
-import InputFeild from '../../components/InputFeild.vue';
-import ButtonBack from '../../components/IconBack.vue';
+import { Icon } from '@iconify/vue'
+import { ref, computed, reactive } from 'vue'
+import LayoutSub from '../LayoutSub.vue'
+import InputFeild from '../../components/InputFeild.vue'
+import ButtonBack from '../../components/IconBack.vue'
 import DrawerPolicy from '../../components/DrawerPolicy.vue'
+import DrawerPicture from '../../components/DrawerPicture.vue'
 
 export default {
   components: {
@@ -136,7 +137,8 @@ export default {
     LayoutSub,
     ButtonBack,
     InputFeild,
-    DrawerPolicy
+    DrawerPolicy,
+    DrawerPicture
   },
 
   setup() {
@@ -159,7 +161,7 @@ export default {
         vStoreName.value = validateInput(vStoreName.value);
         return;
       }
-      // store.sendDataToAPI();
+      
       console.log('vStoreName :', vStoreName.value);
       console.log('vStoreTax :', vStoreTax.value);
     };

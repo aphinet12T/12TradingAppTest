@@ -38,7 +38,11 @@
                         </button>
                     </div>
                     <div class="mx-10 mt-5">
-                        <DrawerPicture />
+                        <DrawerPicture :btClass="'px-5 py-3'">
+                            <template v-slot:icon>
+                                <Icon class="icon" :height="'40'" :width="'40'" :icon="'bi:camera'"/>
+                            </template>
+                        </DrawerPicture>
                     </div>
                 </div>
             </div>

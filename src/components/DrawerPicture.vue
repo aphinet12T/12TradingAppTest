@@ -1,14 +1,14 @@
 <template>
     <div class="text-center">
         <button type="button" :data-drawer-target="drawerId" :data-drawer-show="drawerId" @click="toggleBottomDrawer"
-            data-drawer-placement="bottom" :aria-controls="drawerId"
-            class="text-white bg-blue-700 font-medium rounded-lg text-md px-5 py-3 inline-flex flex-col items-center justify-center">
-            <Icon class="icon" height="40" width="40" icon="bi:camera" />
-            <span class="">ถ่ายรูป</span>
+            :aria-controls="drawerId" data-drawer-placement="bottom" :class="btClass"
+            class="text-white bg-blue-700 font-medium rounded-lg text-md inline-flex flex-col items-center justify-center">
+            <slot name="icon"></slot>
+            <span>ถ่ายรูป</span>
         </button>
     </div>
     <div v-show="showBackdrop" @click="closeDrawer" class="fixed inset-0 bg-black bg-opacity-50"></div>
-    
+
     <div v-if="showDrawer" :id="drawerId"
         class="fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform  bg-white transform-none"
         tabindex="-1" aria-labelledby="drawer-bottom-label">
@@ -26,16 +26,18 @@
                 <div id="controls-carousel" class="relative w-full">
                     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                         <div data-carousel-item="active">
-                            <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg"
-                                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                            <img v-if="imageUrl" :src="imageUrl"
+                                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />
+                            <img v-else src="../../public/imgUser.svg"
+                                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="mt-5">
-                <button type="button"
-                    class="w-full focus:outline-none text-white bg-slate-400 hover:bg-slate-500 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2">ถ่ายรูป</button>
-                <button type="button"
+            <div class="mt-3">
+                <input type="file" @change="handleImage"
+                    class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none mb-3">
+                <button type="button" @click="uploadImage"
                     class="w-full focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2">บันทึก</button>
             </div>
         </div>
@@ -44,11 +46,16 @@
 
 <script>
 import { Icon } from '@iconify/vue';
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
+import { useUploadStore } from '../stores';
 export default {
     props: {
         storeID: String,
         storeName: String,
+        btClass: String,
+        icHeight: String,
+        icWidth: String,
+        icName: String,
     },
     components: {
         Icon,
@@ -71,16 +78,37 @@ export default {
             showBackdrop.value = false;
         };
 
+        const uploadStore = useUploadStore()
+        const imageUrl = ref(null);
+        const handleImage = (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    imageUrl.value = reader.result;
+                }
+                reader.readAsDataURL(file);
+                uploadStore.setSelectedImage(file);
+            } else {
+                imageUrl.value = null;
+            }
+        }
+
+        const uploadImage = () => {
+            uploadStore.uploadResizedImage();
+        };
+
         return {
             showDrawer,
             showBackdrop,
             drawerId,
             toggleBottomDrawer,
             closeDrawer,
+            imageUrl,
+            handleImage,
+            uploadImage
         }
     }
 
 }
 </script>
-
-<style></style>

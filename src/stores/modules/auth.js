@@ -17,18 +17,19 @@ export const useAuthStore = defineStore("auth", {
           import.meta.env.VITE_API_BASE_URL + 
           "/cms/authen/login",
           { userName: userLogin, passWord: passwordLogin },
-        //   {
-        //     headers: { "Content-Type": "application/json" },
-        //   }
         );
         const user = response.data
         if (user) {
           this.user = user.data.fullName
           this.token = user.data.token
           this.area = user.data.area
+          this.saleCode = user.data.saleCode
+          this.salePayer = user.data.saleCode
           localStorage.setItem("name", JSON.stringify(this.user))
           localStorage.setItem("token", JSON.stringify(this.token))
           localStorage.setItem("area", JSON.stringify(this.area))
+          localStorage.setItem("saleCode", JSON.stringify(this.saleCode))
+          localStorage.setItem("salePayer", JSON.stringify(this.salePayer))
         } else {
           this.logout()
         }
@@ -41,6 +42,8 @@ export const useAuthStore = defineStore("auth", {
       this.user = null;
       this.token = null;
       this.area = null;
+      this.saleCode = null;
+      this.salePayer = null;
       localStorage.clear()
     },
   },
