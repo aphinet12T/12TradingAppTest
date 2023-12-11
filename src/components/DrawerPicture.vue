@@ -46,7 +46,7 @@
 
 <script>
 import { Icon } from '@iconify/vue';
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useUploadStore } from '../stores';
 export default {
     props: {
@@ -97,6 +97,14 @@ export default {
         const uploadImage = () => {
             uploadStore.uploadResizedImage();
         };
+
+        const UploadFinished = ref(false);
+        watch(() => uploadStore.imageName, (newVal) => {
+            if (newVal !== null) {
+                UploadFinished.value = true;
+                closeDrawer(); 
+            }
+        });
 
         return {
             showDrawer,

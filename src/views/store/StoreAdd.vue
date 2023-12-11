@@ -27,7 +27,8 @@
                 v-model="vStoreName" :isRequired="true">
               </InputFeild>
               <div class="flex justify-end">
-                <span v-if="validation.vStoreName" class="text-sm font-light text-red-500">{{ validation.vStoreName }}</span>
+                <span v-if="validation.vStoreName" class="text-sm font-light text-red-500">{{ validation.vStoreName
+                }}</span>
                 <span v-else class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36 ตัวอักษร</span>
               </div>
             </div>
@@ -107,16 +108,17 @@
       <div class="flex justify-center">
         <div class="bg-white w-card shadow-md rounded-lg mt-2">
           <div class="flex flex-row items-center justify-center mt-1">
-            <div class="mb-2 flex items-center"> 
+            <div class="mb-2 flex items-center">
               <DrawerPicture :btClass="'px-5 py-2.5 me-2 mb-2 mt-2'" />
-              <InputFeild :id="'storePicture'" :inputClass="'w-[430px] p-2.5'" :type="'text'"></InputFeild>
+              <InputFeild :id="'storePicture'" :inputClass="'w-[430px] p-2.5'" :type="'text'" :isDisabled="true" v-model="imageName">
+              </InputFeild>
             </div>
           </div>
         </div>
       </div>
       <div class="relative rounded-t-xl overflow-auto p-4">
-          <DrawerPolicy/>
-    </div>
+        <DrawerPolicy />
+      </div>
 
     </template>
   </LayoutSub>
@@ -124,7 +126,8 @@
 
 <script>
 import { Icon } from '@iconify/vue'
-import { ref, computed, reactive } from 'vue'
+import { ref, computed, reactive, watch } from 'vue'
+import { useUploadStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue'
 import InputFeild from '../../components/InputFeild.vue'
 import ButtonBack from '../../components/IconBack.vue'
@@ -143,6 +146,14 @@ export default {
 
   setup() {
 
+    const imageName = ref('');
+    const uploadStore = useUploadStore();
+    watch(() => uploadStore.imageName, (newVal) => {
+      if (newVal !== null) {
+        imageName.value = uploadStore.imageName;
+      }
+    });
+
     const vStoreName = ref(null);
     const vStoreTax = ref(null);
 
@@ -154,19 +165,20 @@ export default {
       vStoreName: computed(() => validateInput(vStoreName.value)),
       vStoreTax: computed(() => validateInput(vStoreTax.value))
     });
-    
+
     const sendData = () => {
-      
+
       if (!vStoreName.value) {
         vStoreName.value = validateInput(vStoreName.value);
         return;
       }
-      
+
       console.log('vStoreName :', vStoreName.value);
       console.log('vStoreTax :', vStoreTax.value);
     };
 
     return {
+      imageName,
       vStoreName,
       vStoreTax,
       sendData,

@@ -8,7 +8,7 @@
   </div>
 
   <input :id="id" :type="type" :class="inputClass" :maxlength="maxlength" :required="isRequired" :value="modelValue" @input="handleInput"
-    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
+    :disabled="isDisabled" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
 </template>
 
 <script setup>
@@ -20,6 +20,7 @@ const props = defineProps({
   maxlength: Number,
   isRequired: Boolean,
   modelValue: String,
+  isDisabled: Boolean,
 });
 const emit = defineEmits(['update:modelValue'])
 const handleInput = (event) => {
