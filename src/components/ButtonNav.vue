@@ -41,7 +41,8 @@ export default {
       },
       {
         label: "จัดการ",
-        icon: "fluent-mdl2:product-release",
+        icon: "fluent:drawer-add-24-regular",
+        route: "manage"
       },
       {
         label: "ตั้งค่า",

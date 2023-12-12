@@ -24,7 +24,7 @@ export const useAuthStore = defineStore("auth", {
           this.token = user.data.token
           this.area = user.data.area
           this.saleCode = user.data.saleCode
-          this.salePayer = user.data.saleCode
+          this.salePayer = user.data.salePayer
           localStorage.setItem("name", JSON.stringify(this.user))
           localStorage.setItem("token", JSON.stringify(this.token))
           localStorage.setItem("area", JSON.stringify(this.area))

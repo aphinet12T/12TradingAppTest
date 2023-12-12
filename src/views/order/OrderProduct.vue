@@ -113,6 +113,7 @@ export default {
                 qty: 1
             })
             // console.log('unitId', id);
+            console.log(JSON.parse(localStorage.getItem("area")));
         }
 
         const handleQty = (counterValue) => {
@@ -129,7 +130,7 @@ export default {
             if (selectedQty.value !== null && selectedQty.value !== 0 && selectedUnitId.value !== null) {
                 try {
                     await store.addProductData({
-                        area: 'MBE1',
+                        area: JSON.parse(localStorage.getItem("area")),
                         storeId: localStorage.getItem('routeStoreId'),
                         list: {
                             id: store.productId,
