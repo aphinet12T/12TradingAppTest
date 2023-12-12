@@ -23,7 +23,6 @@
               </template>
               <template v-else>
                 {{ item[col.id] }}
-                <!-- <slot :name="col.id" :row="row"> {{ item[col.id] }} </slot> -->
               </template>
             </td>
           </tr>

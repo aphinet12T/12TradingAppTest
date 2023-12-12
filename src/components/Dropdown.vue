@@ -3,16 +3,14 @@
     :class="btClass"
     class="text-black bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center inline-flex items-center"
     type="button">
-    {{ buttonText }}
+    {{ dropdownItems.buttonText }}
     <Icon class="icon w-2.5 h-2.5 ms-3" icon="ep:arrow-down-bold" />
   </button>
 
   <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" :aria-labelledby="dropdownId">
       <li v-for="(item, index) in dropdownItems" :key="index">
-        <a :href="item.link" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">
-          {{ item.label }}
-        </a>
+          {{ item }}
       </li>
     </ul>
   </div>
@@ -34,19 +32,22 @@ export default {
       default: "กดเพื่อเลือก"
     },
     dropdownItems: {
-      type: Array,
-      default: () => [],
+      type: Object,
     },
     btClass: {
       type: String,
     },
+    data: {
+      type: Array,
+    }
   },
   components: {
     Icon,
   },
-  setup() {
+  setup(props) {
     onMounted(() => {
       initDropdowns();
+      console.log('1234',props.dropdownItems.items);
     })
   },
 };
