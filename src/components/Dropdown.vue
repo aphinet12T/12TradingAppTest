@@ -10,7 +10,10 @@
   <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" :aria-labelledby="dropdownId">
       <li v-for="(item, index) in dropdownItems" :key="index">
-          {{ item }}
+          {{ item.label }}
+          <!-- <li v-for="(value, index) in item" :key="index">
+            {{ value }}
+          </li> -->
       </li>
     </ul>
   </div>
@@ -27,19 +30,12 @@ export default {
       type: String,
       required: true,
     },
-    buttonText: {
-      type: String,
-      default: "กดเพื่อเลือก"
-    },
     dropdownItems: {
-      type: Object,
+      type: Array,
     },
     btClass: {
       type: String,
     },
-    data: {
-      type: Array,
-    }
   },
   components: {
     Icon,
@@ -47,7 +43,7 @@ export default {
   setup(props) {
     onMounted(() => {
       initDropdowns();
-      console.log('1234',props.dropdownItems.items);
+      // console.log('test',props.dropdownItems)
     })
   },
 };

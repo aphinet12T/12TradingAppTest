@@ -1,7 +1,19 @@
 <template>
-    <div class="mx-4">
-        <Dropdown v-for="option in optionData" :key="option.id" :dropdownId="option.id" btClass="w-60"
-            :dropdownItems="option" :data="option.option" />
+    <div class="flex flex-row justify-center mt-3">
+        <div class="mx-4">
+            <Dropdown :dropdownId="'brand'" :btClass="'w-60'" :dropdownItems="optionData" />
+        </div>
+        <div class="mx-4">
+            <Dropdown :dropdownId="'brand'" :btClass="'w-60'" :dropdownItems="optionData" />
+        </div>
+    </div>
+    <div class="flex flex-row justify-center mt-3">
+        <div class="mx-4">
+            <Dropdown :dropdownId="'brand'" :btClass="'w-60'" :dropdownItems="optionData" />
+        </div>
+        <div class="mx-4">
+            <Dropdown :dropdownId="'brand'" :btClass="'w-60'" :dropdownItems="optionData" />
+        </div>
     </div>
     <div class="flex justify-center mt-5">
         <Table :columns="tableColumns" :data="products" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
@@ -23,15 +35,17 @@ import { useOrderStore, useProductStore } from '../stores'
 import { Icon } from '@iconify/vue'
 import Table from '../components/Table.vue'
 import Dropdown from '../components/Dropdown.vue'
+// import Dropdown2 from '../components/Dropdown.vue'
 export default {
     components: {
         Icon,
         Table,
         Dropdown,
+        // Dropdown2,
     },
     setup() {
 
-        const option = useProductStore()
+        // const option = useProductStore()
         const store = useOrderStore()
         const products = computed(() => {
             return store.productList
@@ -51,32 +65,33 @@ export default {
         };
 
         // const optionData = computed(() => ({
-        //     group: option.productOption.group,
-        //     brand: option.productOption.brand,
-        //     size: option.productOption.size,
-        //     flavour: option.productOption.flavour,
+        //     // return [
+        //         group: { label: 'group', op: store.option, buttonText: 'กลุ่ม' },
+        //         brand: { label: 'brand', op: store.productOption.brand, buttonText: 'ยี่ห้อ' },
+        //         size: { label: 'size', op: store.productOption.size, buttonText: 'ขนาด' },
+        //         flavour: { label: 'flavour', op: store.productOption.flavour, buttonText: 'รสชาติ' }
+        //     // ];
         // }));
 
         const optionData = computed(() => {
             return [
-                { id: 'group', buttonText: 'กลุ่ม' },
-                { id: 'brand', buttonText: 'ยี่ห้อ' },
-                { id: 'size', buttonText: 'ขนาด' },
-                { id: 'flavour', buttonText: 'รสชาติ' },
+                { label: 'Dashboard', buttonText: 'กลุ่ม' },
+                { label: 'Settings',  buttonText: 'ยี่ห้อ' },
+                { label: 'Earnings',  buttonText: 'ขนาด' },
+                { label: 'Sign out',  buttonText: 'รสชาติ' }
             ];
         });
 
         onMounted(() => {
             store.getSaleProduct()
-            option.getDataOpion(),
-            console.log(option.option);
+            store.getDataOpion();
         });
 
         return {
             products,
             tableColumns,
             handleClick,
-            optionData,
+            optionData
         }
     }
 }

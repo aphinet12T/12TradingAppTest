@@ -23,7 +23,7 @@
         <div class="flex justify-center">
           <div v-if="btSelected === 'refund'">
             <CustomerAll />
-            <router-link to="/cms/store/add">
+            <router-link to="/cms/manage/refund">
               <div class="flex justify-end mt-3">
                 <ButtonAdd :icon="'ph:plus-light'" />
               </div>

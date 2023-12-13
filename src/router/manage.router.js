@@ -13,16 +13,20 @@ const manageRoutes = [
     ],
   },
   {
-    path: '/cms/store',
+    path: '/cms/manage',
     component: LayoutSub,
     children: [
       {
-        path: 'detail',
-        component: () => import('../views/store/StoreDetail.vue'),
+        path: 'refund',
+        component: () => import('../views/manage/refund/RefundMain.vue'),
       },
       {
-        path: 'add',
-        component: () => import('../views/store/StoreAdd.vue'),
+        path: 'refund/add',
+        component: () => import('../views/manage/refund/RefundAdd.vue'),
+      },
+      {
+        path: 'change/add',
+        component: () => import('../views/manage/refund/ChangeAdd.vue'),
       },
     ],
   },

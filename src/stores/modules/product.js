@@ -9,7 +9,6 @@ export const useProductStore = defineStore('products', {
             size: [],
             flavour: [],
           },
-          option: '',
     }),
     getter: {
 
@@ -25,7 +24,6 @@ export const useProductStore = defineStore('products', {
                 this.productOption.brand = result.brand
                 this.productOption.size = result.size
                 this.productOption.flavour = result.flavour
-                this.option = result
                 // console.log('option', this.productOption);
             } catch (error) {
                 console.error(error)

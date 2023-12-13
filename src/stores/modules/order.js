@@ -27,6 +27,13 @@ export const useOrderStore = defineStore('orders', {
         unitId: '',
       },
     },
+    productOption: {
+      group: [],
+      brand: [],
+      size: [],
+      flavour: [],
+    },
+    option:[],
     cartCheckout: {
       area: '',
       storeId: '',
@@ -46,6 +53,22 @@ export const useOrderStore = defineStore('orders', {
     getProductUnitDetail: (state) => state.productUnitDetail,
   },
   actions: {
+      async getDataOpion() {
+        try {
+            const response = await axios.get(
+                import.meta.env.VITE_API_BASE_URL + '/cms/saleProduct/getDataOption'
+            );
+            const result = response.data;
+            this.productOption.group = result.group
+            this.productOption.brand = result.brand
+            this.productOption.size = result.size
+            this.productOption.flavour = result.flavour
+            this.option = result
+            // console.log('option', this.productOption);
+        } catch (error) {
+            console.error(error)
+        }
+    },
     resetProduct() {
       (this.productUnitDetail.unitId = ''), (this.productUnitDetail.qty = 1);
     },
