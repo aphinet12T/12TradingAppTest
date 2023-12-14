@@ -19,14 +19,6 @@
             </button>
         </div>
     </div>
-      <!-- <div class="flex items-center justify-between">
-        <div class="flex justify-start">
-          <ButtonTab :buttonText="btStoreAll" class="absolute top-28 left-5" @click="dataStore('all')"></ButtonTab>
-        </div>
-        <div class="flex justify-end">
-          <ButtonTab :buttonText="btStoreNew" class="absolute top-28 left-80" @click="dataStore('new')"></ButtonTab>
-        </div>
-      </div> -->
     </template>
     <template v-slot:body>
       <div class="flex justify-center">

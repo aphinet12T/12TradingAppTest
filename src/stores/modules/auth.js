@@ -3,12 +3,14 @@ import axios from "axios";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
+    validateLogin: null,
     user: JSON.parse(localStorage.getItem("user")),
     token: JSON.parse(localStorage.getItem("token")),
     area: JSON.parse(localStorage.getItem("area")),
   }),
   getters: {
     isLoggedIn: (state) => state.user,
+    getValidate: (state) => state.validateLogin,
   },
   actions: {
     async login(userLogin, passwordLogin) {
@@ -18,22 +20,23 @@ export const useAuthStore = defineStore("auth", {
           "/cms/authen/login",
           { userName: userLogin, passWord: passwordLogin },
         );
-        const user = response.data
-        if (user) {
-          this.user = user.data.fullName
-          this.token = user.data.token
-          this.area = user.data.area
-          this.saleCode = user.data.saleCode
-          this.salePayer = user.data.salePayer
+        const result = response.data
+        if (result) {
+          this.user = result.data.fullName
+          this.token = result.data.token
+          this.area = result.data.area
+          this.saleCode = result.data.saleCode
+          this.salePayer = result.data.salePayer
           localStorage.setItem("name", JSON.stringify(this.user))
           localStorage.setItem("token", JSON.stringify(this.token))
           localStorage.setItem("area", JSON.stringify(this.area))
           localStorage.setItem("saleCode", JSON.stringify(this.saleCode))
           localStorage.setItem("salePayer", JSON.stringify(this.salePayer))
         } else {
+          this.validateLogin = user.message 
           this.logout()
         }
-        console.log("login", user.data)
+        console.log("login", result.data)
       } catch (error) {
         console.error(error)
       }
