@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="flex justify-center">
-        <div class="bg-white h-96 w-card shadow-md rounded-lg mt-1">
+        <div class="bg-white h-64 w-card shadow-md rounded-lg mt-1 overflow-auto">
           <div class=" flex flex-col items-center mt-5">
             <div class="mb-1">
               <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :inputClass="'w-500 p-2.5'" :type="'text'"
@@ -36,11 +36,6 @@
               <InputFeild :id="'storeTax'" :label="'เลขที่ผู้เสียภาษี'" :inputClass="'w-500 p-2.5'" :type="'text'"
                 v-model="vStoreTax" :maxlength="13">
               </InputFeild>
-              <div class="flex justify-end">
-                <label for="storeTax" class="block text-sm font-light text-gray-900 dark:text-white">
-                  ไม่เกิน 13 ตัวอักษร
-                </label>
-              </div>
             </div>
             <div class="flex flex-row">
               <div class="mb-1">
@@ -66,15 +61,11 @@
         </div>
       </div>
       <div class="flex justify-center">
-        <div class="bg-white h-72 w-card shadow-md rounded-lg mt-2">
+        <div class="bg-white h-64 w-card shadow-md rounded-lg mt-2 overflow-auto">
           <div class=" flex flex-col items-center mt-3">
             <div class="mb-1">
               <InputFeild :id="'storeAddress'" :label="'ที่อยู่'" :inputClass="'w-500 p-2.5'" :type="'text'">
               </InputFeild>
-              <div class="flex justify-end">
-                <label for="storeName" class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36
-                  ตัวอักษร</label>
-              </div>
             </div>
             <div class="flex flex-row">
               <div class="mb-1">

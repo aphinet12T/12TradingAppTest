@@ -12,23 +12,22 @@
       </div>
       <div class="relative rounded-t-xl overflow-auto p-8">
         <div class="flex flex-nowrap gap-4 font-mono text-black text-2xl rounded-lg">
-            <button class="p-4 w-full rounded-lg flex items-center justify-center bg-white shadow-lg"
-                v-for="item in btStore" :key="item.id"
-                @click="handleClick(item.id)">
-                {{ item.title }}
-            </button>
+          <button class="p-4 w-full rounded-lg flex items-center justify-center bg-white shadow-lg"
+            v-for="item in btStore" :key="item.id" @click="handleClick(item.id)">
+            {{ item.title }}
+          </button>
         </div>
-    </div>
+      </div>
     </template>
     <template v-slot:body>
       <div class="flex justify-center">
         <div v-if="btSelected === 'all'">
           <CustomerAll />
-          <router-link to="/cms/store/add">
-            <div class="flex justify-end mt-3">
+          <div class="flex justify-end mt-3">
+            <router-link to="/cms/store/add">
               <ButtonAdd :icon="'ph:plus-light'" />
-            </div>
-          </router-link>
+            </router-link>
+          </div>
         </div>
         <div v-else-if="btSelected === 'new'">
           <CustomerNew />
@@ -68,11 +67,11 @@ export default {
     const btSelected = ref('all');
 
     const btStore = computed(() => {
-        return [
-          { id: 'all', title: 'ร้านค้าทั้งหมด' },
-          { id: 'new', title: 'ร้านค้าใหม่' },
-        ];
-      });
+      return [
+        { id: 'all', title: 'ร้านค้าทั้งหมด' },
+        { id: 'new', title: 'ร้านค้าใหม่' },
+      ];
+    });
     const handleClick = (type) => {
       if (type === 'all') {
         btSelected.value = 'all'
