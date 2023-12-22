@@ -27,9 +27,8 @@
                 v-model="vStoreName" :isRequired="true">
               </InputFeild>
               <div class="flex justify-end">
-                <span v-if="validation.vStoreName" class="text-sm font-light text-red-500">{{ validation.vStoreName
-                }}</span>
-                <span v-else class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36 ตัวอักษร</span>
+                <span v-if="validation.vStoreName" class="text-sm font-light text-red-500">{{ validation.vStoreName }}</span>
+                <!-- <span v-else class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36 ตัวอักษร</span> -->
               </div>
             </div>
             <div class="mb-1">
@@ -47,8 +46,18 @@
                 </InputFeild>
               </div>
             </div>
-            <div class="mb-1">
-              <InputFeild :id="'storetype'" :label="'ประเภทร้านค้า'" :inputClass="'w-500 p-2.5'" :type="'text'">
+            <div class="flex flex-row">
+              <div class="mb-1">
+                <InputFeild :id="'storeType'" :label="'ประเภทร้านค้า'" :inputClass="'w-220 p-2.5'" :type="'number'">
+                </InputFeild>
+              </div>
+              <div class="mb-1 ml-5">
+                <InputFeild :id="'lineId'" :label="'Line ID'" :inputClass="'w-220 p-2.5'" :type="'text'">
+                </InputFeild>
+              </div>
+            </div>
+            <div class="mb-5">
+              <InputFeild :id="'storeNote'" :label="'หมายเหตุ'" :inputClass="'w-500 p-2.5'" :type="'text'">
               </InputFeild>
             </div>
           </div>
