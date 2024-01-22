@@ -34,7 +34,7 @@
 </template>
   
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../stores'
 
@@ -55,7 +55,7 @@ export default {
         router.push('store')
       } else {
         console.log('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง')
-        loginValidation()
+        loginValidation.value
       }
     }
     onMounted(() => {
