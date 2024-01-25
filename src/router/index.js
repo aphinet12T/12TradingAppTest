@@ -6,7 +6,8 @@ import ManageRouter from './manage.router'
 
 const routes = [
   { path: '/cms/login', component: () => import('../views/authentication/Login.vue') },
-  { path: '/cms/test', component: () => import('../components/TableProduct.vue') },
+  { path: '/cms/test', component: () => import('../components/TableProduct.vue') }, 
+  { path: '/cms/promotion', component: () => import('../views/order/testPromotion.vue') }, 
   ...StoreRouter,
   ...RouteRouter,
   ...OrderRouter,

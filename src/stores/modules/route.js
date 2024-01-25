@@ -18,7 +18,7 @@ export const useRouteStore = defineStore('routes', {
       async getRouteMain() {
         try {
         //   const token = JSON.parse(localStorage.getItem("token"));
-          const area = JSON.parse(localStorage.getItem("area"))
+          const area = localStorage.getItem("area")
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
               "/cms/route/getRouteMain",

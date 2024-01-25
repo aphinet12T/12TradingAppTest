@@ -154,7 +154,7 @@ export default {
                     var lat = latitude.value.toString()
                     var long = longitude.value.toString()
                     await store.addOrderData({
-                        area: 'MBE1',
+                        area: localStorage.getItem('area'),
                         storeId: localStorage.getItem('routeStoreId'),
                         idRoute: localStorage.getItem('routeId'),
                         latitude: lat,

@@ -14,7 +14,7 @@ export const useStoresStore = defineStore("stores", {
       async getCustomerAll() {
         try {
         //   const token = JSON.parse(localStorage.getItem("token"));
-          const area = JSON.parse(localStorage.getItem("area"))
+          const area = localStorage.getItem("area")
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
               "/cms/store/getStore",
@@ -35,7 +35,7 @@ export const useStoresStore = defineStore("stores", {
       async getCustomerNew() {
         try {
         //   const token = JSON.parse(localStorage.getItem("token"));
-          const area = JSON.parse(localStorage.getItem("area"))
+          const area = localStorage.getItem("area")
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
               "/cms/store/getStoreNew",

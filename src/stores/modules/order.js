@@ -34,11 +34,11 @@ export const useOrderStore = defineStore('orders', {
       flavour: [],
     },
     option:[],
-    cartCheckout: {
-      area: '',
-      storeId: '',
-      saleCode: '',
-    },
+    // cartCheckout: {
+    //   area: '',
+    //   storeId: '',
+    //   saleCode: '',
+    // },
     addOrder: {
       area: '',
       storeId: '',
@@ -170,7 +170,7 @@ export const useOrderStore = defineStore('orders', {
     async getOrderCart() {
       try {
         //   const token = JSON.parse(localStorage.getItem('token'));
-        const area = JSON.parse(localStorage.getItem('area'));
+        const area = localStorage.getItem('area');
         const storeId = localStorage.getItem('routeStoreId');
         const response = await axios.post(
           import.meta.env.VITE_API_BASE_URL + '/cms/saleProduct/getCartToShow',
@@ -194,9 +194,13 @@ export const useOrderStore = defineStore('orders', {
     async getOrderCheckout() {
       try {
         //   const token = JSON.parse(localStorage.getItem('token'));
+        const area = localStorage.getItem('area');
+        const storeId = localStorage.getItem('routeStoreId');
+        const sale = localStorage.getItem('saleCode');
         const response = await axios.post(
           import.meta.env.VITE_API_BASE_URL + '/cms/saleProduct/getPreOrder',
-          this.cartCheckout
+
+          // this.cartCheckout
           // {
           //   headers: { Authorization: `Bearer ${token}` },
           // }
@@ -213,7 +217,7 @@ export const useOrderStore = defineStore('orders', {
     async deleteItemCart(id, unitId) {
       try {
         //   const token = JSON.parse(localStorage.getItem('token'));
-        const area = JSON.parse(localStorage.getItem('area'));
+        const area = localStorage.getItem('area');
         const storeId = localStorage.getItem('routeStoreId');
         const response = await axios.post(
           import.meta.env.VITE_API_BASE_URL + '/cms/saleProduct/deleteItemCart',

@@ -15,7 +15,7 @@
                     <div>
                         ของแถม
                     </div>
-                    <Table :columns="tableColumns" :data="dataReward" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[350px]'">
+                    <!-- <Table :columns="tableColumns" :data="dataCart" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[350px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
@@ -23,13 +23,13 @@
                                 <Icon class="icon w-4 h-4" icon="ph:x-bold" />
                             </button>
                         </template>
-                    </Table>
+                    </Table> -->
                 </div>
                 <div class="flex flex-col items-center mt-5">
                     <div>
                         ส่วนลด
                     </div>
-                    <Table :columns="tableColumns" :data="dataReward" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[350px]'">
+                    <!-- <Table :columns="tableColumns" :data="dataCart" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[350px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
@@ -37,7 +37,7 @@
                                 <Icon class="icon w-4 h-4" icon="ph:x-bold" />
                             </button>
                         </template>
-                    </Table>
+                    </Table> -->
                 </div>
                 <div class="relative rounded-t-xl overflow-auto p-4">
                     <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
@@ -84,11 +84,8 @@ export default {
         const orderCartList = computed(() => {
             return store.orderCartList;
         });
-        const listFree = computed(() => {
-            return reward.freeList;
-        });
-        const listDiscount = computed(() => {
-            return reward.freeList;
+        const rewardList = computed(() => {
+            return reward.rewardList;
         });
         onMounted(() => {
             store.getOrderCart();
@@ -97,19 +94,12 @@ export default {
             reward.getPromotionReward();
         });
 
-        const dataReward = computed(() => {
-            return store.orderCartList.map(item => ({
-                ...item,
-                qty: `${item.qty} ${item.unitQty}`
-            }));
-        });
-
-        const dataDiscount = computed(() => {
-            return store.orderCartList.map(item => ({
-                ...item,
-                qty: `${item.qty} ${item.unitTypeThai}`
-            }));
-        });
+        // const dataCart = computed(() => {
+        //     return store.orderCartList.map(item => ({
+        //         ...item,
+        //         qty: `${item.qty} ${item.unitTypeThai}`
+        //     }));
+        // });
 
         const tableColumns = computed(() => {
             return [
@@ -137,6 +127,15 @@ export default {
             // store.deleteItemCart(id, unitId);
         };
 
+        const deleteItem = () => {
+            const id = selectedId.value;
+            const unitId = selectedUnitId.value;
+
+            store.deleteItemCart(id, unitId);
+            store.getOrderCart();
+            dismissAlert();
+        };
+
         const dismissAlert = () => {
             showAlert.value = false;
             console.log(showAlert.value);
@@ -156,16 +155,15 @@ export default {
             orderCartList,
             tableColumns,
             handleClick,
+            // dataCart,
             showAlert,
             alertTitle,
             alertContent,
+            deleteItem,
             handleClick,
             dismissAlert,
             handleCheckout,
-            dataReward,
-            dataDiscount,
-            listDiscount,
-            listFree,
+            rewardList,
         }
     }
 }
