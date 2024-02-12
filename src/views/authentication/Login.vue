@@ -34,33 +34,30 @@
 </template>
   
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../stores'
 
 export default {
   setup() {
     const store = useAuthStore()
-    const loginValidation = computed(() => {
-        return store.getValidate
-      });
     const userLogin = ref('')
     const passwordLogin = ref('')
+    const loginValidation = ref('')
     const router = useRouter()
 
     const SignIn = async () => {
-      const checkLogin = await store.login(userLogin.value, passwordLogin.value);
-      if (checkLogin) {
+      await store.login(userLogin.value, passwordLogin.value);
+      if (store.isLoggedIn) {
+        loginValidation.value = false
         console.log('เข้าสู่ระบบสำเร็จ')
         router.push('store')
       } else {
         console.log('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง')
-        loginValidation.value
+        loginValidation.value = true
       }
     }
-    onMounted(() => {
-        store.login();
-      });
+
 
     return {
       userLogin,

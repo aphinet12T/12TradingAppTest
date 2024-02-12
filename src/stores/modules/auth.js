@@ -10,7 +10,6 @@ export const useAuthStore = defineStore("auth", {
   }),
   getters: {
     isLoggedIn: (state) => state.user,
-    getValidate: (state) => state.validateLogin,
   },
   actions: {
     async login(userLogin, passwordLogin) {
@@ -22,6 +21,7 @@ export const useAuthStore = defineStore("auth", {
         );
         const result = response.data
         if (result) {
+          this.userName = result.data.userName
           this.user = result.data.fullName
           this.token = result.data.token
           this.area = result.data.area
