@@ -67,7 +67,7 @@
   
 <script>
 import { Icon } from '@iconify/vue';
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, onBeforeMount } from 'vue';
 import { useRouter } from 'vue-router';
 import { useRouteStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue';
@@ -81,8 +81,10 @@ export default {
     ButtonBack,
     Table
   },
+  
 
   setup() {
+
     const store = useRouteStore();
     const routeDetail = computed(() => {
       return store.routeDetail;
@@ -109,9 +111,13 @@ export default {
       ]
     })
 
-    onMounted(() => {
+    // onMounted(() => {
+    //   store.getRouteDetail();
+    // })
+
+    onBeforeMount(() => {
       store.getRouteDetail();
-    })
+    });
 
     return {
       routeDetail,

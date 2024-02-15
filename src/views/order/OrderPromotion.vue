@@ -1,5 +1,5 @@
 <template>
-      <LayoutSub>
+    <LayoutSub>
         <template v-slot>
             <div class="flex flex-col h-full">
                 <div class="flex flex-row items-center">
@@ -15,7 +15,12 @@
                     <div>
                         ของแถม
                     </div>
-                    <Table :columns="tableColumns" :data="dataReward" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[350px]'">
+                    <Table :columns="tableReward" :data="dataReward.listFree" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[350px]'">
+                        <!-- <template v-slot:body="{ row }">
+                            <div v-for="(product, index) in row.listProduct" :key="index">
+                                {{ product.productName }}
+                            </div>
+                        </template> -->
                         <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
@@ -29,7 +34,8 @@
                     <div>
                         ส่วนลด
                     </div>
-                    <Table :columns="tableColumns" :data="dataReward" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[350px]'">
+                    <Table :columns="tableFree" :data="dataDiscount" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
+                        :hTable="'h-[350px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
@@ -42,8 +48,7 @@
                 <div class="relative rounded-t-xl overflow-auto p-4">
                     <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
                         <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg"
-                        @click="handleCheckout"
-                        >
+                            @click="handleCheckout">
                             ถัดไป
                         </button>
                     </div>
@@ -88,7 +93,7 @@ export default {
             return reward.freeList;
         });
         const listDiscount = computed(() => {
-            return reward.freeList;
+            return reward.discountList;
         });
         onMounted(() => {
             store.getOrderCart();
@@ -98,10 +103,17 @@ export default {
         });
 
         const dataReward = computed(() => {
-            return store.orderCartList.map(item => ({
-                ...item,
-                qty: `${item.qty} ${item.unitQty}`
-            }));
+            return {
+                listFree: reward.freeList.map(item => ({
+                    proId: item.proId,
+                    summaryQty: item.summaryQty,
+                    listProduct: item.listProduct.map(product => ({
+                        productId: product.productId,
+                        productName: product.productName,
+                        qty: `${product.qty} ${product.unitQty}`,
+                    })),
+                })),
+            }
         });
 
         const dataDiscount = computed(() => {
@@ -111,9 +123,18 @@ export default {
             }));
         });
 
-        const tableColumns = computed(() => {
+        const tableReward = computed(() => {
             return [
-                { id: 'name', title: 'ชื่อสินค้า' },
+                { id: 'proId', title: 'โปร' },
+                { id: 'productName', title: 'สินค้า' },
+                { id: 'qty', title: 'จำนวน' },
+                { id: '', title: '*' },
+            ];
+        });
+
+        const tableFree = computed(() => {
+            return [
+                { id: 'proId', title: 'ชื่อสินค้า' },
                 { id: 'qty', title: 'จำนวน' },
                 { id: 'summaryPrice', title: 'รวม' },
                 { id: '', title: '*' },
@@ -154,7 +175,8 @@ export default {
             productId,
             orderCart,
             orderCartList,
-            tableColumns,
+            tableReward,
+            tableFree,
             handleClick,
             showAlert,
             alertTitle,
