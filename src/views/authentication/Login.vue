@@ -10,13 +10,13 @@
         <div class="p-6 space-y-4 md:space-y-6 sm:p-6" style="padding-top: 0%">
           <form class="space-y-4 md:space-y-6" @submit.prevent="SignIn" method="post">
             <div>
-              <label for="text" class="block mb-2 text-sm font-medium text-gray-900">ชื่อผู้ใช้งาน</label>
+              <label for="userLogin" class="block mb-2 text-sm font-medium text-gray-900">ชื่อผู้ใช้งาน</label>
               <input type="text" v-model="userLogin" id="userLogin"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="user.sur" required />
             </div>
             <div>
-              <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รหัสผ่าน</label>
+              <label for="passwordLogin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">รหัสผ่าน</label>
               <input type="password" v-model="passwordLogin" id="passwordLogin" placeholder="••••••••"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 required />

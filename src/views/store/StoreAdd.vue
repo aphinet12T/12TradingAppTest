@@ -116,9 +116,25 @@
           </div>
         </div>
       </div>
-      <div class="relative rounded-t-xl overflow-auto p-4">
-        <DrawerPolicy />
+      <div class="flex items-center">
+          <input id="link-checkbox" type="checkbox" v-model="isChecked" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+          <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline">terms and conditions</a>.</label>
       </div>
+      <div class="relative rounded-t-xl overflow-auto p-4">
+        <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
+            <button class="p-4 w-full rounded-lg flex items-center justify-center shadow-lg" 
+              :class="{ 'bg-green-500': isChecked, 'bg-gray-400': !isChecked }"
+              type="button"
+              :disabled="!isChecked"
+              @click="sendData"
+            >
+                ถัดไป
+            </button>
+        </div>
+    </div>
+      <!-- <div class="relative rounded-t-xl overflow-auto p-4">
+        <DrawerPolicy />
+      </div> -->
 
     </template>
   </LayoutSub>
@@ -131,7 +147,7 @@ import { useUploadStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue'
 import InputFeild from '../../components/InputFeild.vue'
 import ButtonBack from '../../components/IconBack.vue'
-import DrawerPolicy from '../../components/DrawerPolicy.vue'
+// import DrawerPolicy from '../../components/DrawerPolicy.vue'
 import DrawerPicture from '../../components/DrawerPicture.vue'
 
 export default {
@@ -140,7 +156,7 @@ export default {
     LayoutSub,
     ButtonBack,
     InputFeild,
-    DrawerPolicy,
+    // DrawerPolicy,
     DrawerPicture
   },
 
@@ -166,6 +182,8 @@ export default {
       vStoreTax: computed(() => validateInput(vStoreTax.value))
     });
 
+    const isChecked = ref(false)
+
     const sendData = () => {
 
       if (!vStoreName.value) {
@@ -182,7 +200,8 @@ export default {
       vStoreName,
       vStoreTax,
       sendData,
-      validation
+      validation,
+      isChecked
     };
 
   }

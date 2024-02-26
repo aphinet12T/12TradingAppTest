@@ -35,7 +35,13 @@
 <script setup>
 const props = defineProps({
   columns: Array,
-  data: Array,
+  data: {
+    type: [Array, Object],
+    validator: (value) => {
+      return Array.isArray(value) || (typeof value === 'object' && value !== null);
+    },
+    required: true,
+  },
   thClass: String,
   tdClass: String,
   hTable: String,
