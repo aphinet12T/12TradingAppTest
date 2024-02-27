@@ -116,10 +116,16 @@
           </div>
         </div>
       </div>
-      <div class="flex items-center">
+      <div class="flex justify-start">
+        <div class="mt-2 ml-6 flex items-center">
           <input id="link-checkbox" type="checkbox" v-model="isChecked" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-          <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline">terms and conditions</a>.</label>
+          <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the 
+            <a class="text-blue-600 hover:underline" @click="showPolicy = !showPolicy">terms and conditions</a>
+          </label>
+        </div>
       </div>
+      <!-- <DrawerPolicy v-if="showPolicy" /> -->
+      <DrawerPolicy @policyCheckboxChanged="toggleDrawer" />
       <div class="relative rounded-t-xl overflow-auto p-4">
         <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
             <button class="p-4 w-full rounded-lg flex items-center justify-center shadow-lg" 
@@ -132,9 +138,6 @@
             </button>
         </div>
     </div>
-      <!-- <div class="relative rounded-t-xl overflow-auto p-4">
-        <DrawerPolicy />
-      </div> -->
 
     </template>
   </LayoutSub>
@@ -147,7 +150,7 @@ import { useUploadStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue'
 import InputFeild from '../../components/InputFeild.vue'
 import ButtonBack from '../../components/IconBack.vue'
-// import DrawerPolicy from '../../components/DrawerPolicy.vue'
+import DrawerPolicy from '../../components/DrawerPolicy.vue'
 import DrawerPicture from '../../components/DrawerPicture.vue'
 
 export default {
@@ -156,7 +159,7 @@ export default {
     LayoutSub,
     ButtonBack,
     InputFeild,
-    // DrawerPolicy,
+    DrawerPolicy,
     DrawerPicture
   },
 
@@ -183,7 +186,17 @@ export default {
     });
 
     const isChecked = ref(false)
+    const toggleDrawer = (checked) => {
+      isChecked.value = checked;
 
+      // เพิ่มตรรกะของคุณที่นี่เพื่อเปิด-ปิด drawer
+      // ตัวอย่างเช่น คุณสามารถเรียกเมทอด toggleBottomDrawer ได้ที่นี่
+      this.toggleBottomDrawer();
+    };
+    // const showPolicy = ref(false)
+    // const showPolicy = () => {
+    //   provide('showPolicyDrawer', true);
+    // };
     const sendData = () => {
 
       if (!vStoreName.value) {
@@ -201,8 +214,9 @@ export default {
       vStoreTax,
       sendData,
       validation,
-      isChecked
-    };
+      isChecked,
+      toggleDrawer,
+    }
 
   }
 }

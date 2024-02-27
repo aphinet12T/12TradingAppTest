@@ -1,16 +1,7 @@
 <template>
-    <div class="relative rounded-t-xl overflow-auto p-4">
-        <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
-            <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg" type="button"
-                :data-drawer-target="drawerId" :data-drawer-show="drawerId" @click="toggleBottomDrawer"
-                data-drawer-placement="bottom" :aria-controls="drawerId"
-                >
-                ถัดไป
-            </button>
-        </div>
-    </div>
+
     <div v-show="showBackdrop" @click="closeDrawer" class="fixed inset-0 bg-black bg-opacity-50"></div>
-    <!-- drawer component -->
+
     <div v-if="showDrawer" :id="drawerId"
         class="fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform bg-white transform-none"
         tabindex="-1" aria-labelledby="drawer-bottom-label">
@@ -64,37 +55,57 @@
 
 <script>
 import { Icon } from '@iconify/vue';
-import { ref } from 'vue'
+import { ref, inject, onMounted, watch } from 'vue'
 export default {
     components: {
         Icon,
     },
-    setup() {
-        const showDrawer = ref(false);
-        const showBackdrop = ref(false);
-        const drawerId = 'drawer-bottom-policy';
+    // setup() {
+    //     const showDrawer = ref(false)
+    //     const showBackdrop = ref(false)
+    //     const drawerId = 'drawer-bottom-policy'
 
-        const toggleBottomDrawer = () => {
-            showDrawer.value = !showDrawer.value;
-            if (showDrawer.value) {
-                showBackdrop.value = true
-            }
-        };
+    //     const toggleBottomDrawer = () => {
+    //         showDrawer.value = !showDrawer.value
+    //         if (showDrawer.value) {
+    //             showBackdrop.value = true
+    //         }
+    //     }
 
-        const closeDrawer = () => {
-            showDrawer.value = false;
-            showBackdrop.value = false;
+    //     const closeDrawer = () => {
+    //         showDrawer.value = false
+    //         showBackdrop.value = false
+    //     }
+
+    //     const provideShowPolicy = inject('showPolicyDrawer')
+    //     onMounted(() => {
+    //         watch(() => provideShowPolicy, (newVal) => {
+    //             showDrawer.value = newVal
+    //         })
+    //     })
+
+    //     return {
+    //         showDrawer,
+    //         showBackdrop,
+    //         drawerId,
+    //         toggleBottomDrawer,
+    //         closeDrawer,
+    //     }
+    // }
+    emits: ['policyCheckboxChanged'],
+    setup(_, { emit }) {
+        const showDrawer = ref(false)
+        const showBackdrop = ref(false)
+        const handleCheckboxChange = (event) => {
+            emit('policyCheckboxChanged', event.target.checked);
         };
 
         return {
+            handleCheckboxChange,
             showDrawer,
             showBackdrop,
-            drawerId,
-            toggleBottomDrawer,
-            closeDrawer,
         }
-    }
-
+    },
 }
 </script>
 
