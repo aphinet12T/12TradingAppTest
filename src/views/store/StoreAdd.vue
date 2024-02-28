@@ -188,9 +188,7 @@ export default {
     const isChecked = ref(false)
     const toggleDrawer = (checked) => {
       isChecked.value = checked;
-
-      // เพิ่มตรรกะของคุณที่นี่เพื่อเปิด-ปิด drawer
-      // ตัวอย่างเช่น คุณสามารถเรียกเมทอด toggleBottomDrawer ได้ที่นี่
+      
       this.toggleBottomDrawer();
     };
     // const showPolicy = ref(false)
