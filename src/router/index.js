@@ -18,7 +18,7 @@ const routes = [
       },
     ],
   },
-  { path: '/cms/test', component: () => import('../components/TableProduct.vue') },
+  { path: '/cms/test', component: () => import('../components/OptionAddress.vue') },
   ...StoreRouter,
   ...RouteRouter,
   ...OrderRouter,
