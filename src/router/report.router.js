@@ -6,6 +6,10 @@ const reportRoutes = [
     component: LayoutSub,
     children: [
       {
+        path: 'main',
+        component: () => import('../views/report/ReportMain.vue'),
+      },
+      {
         path: 'month',
         component: () => import('../views/report/ReportMonth.vue'),
       },
