@@ -1,10 +1,14 @@
-import { defineStore } from "pinia";
-import axios from "axios";
+import { defineStore } from 'pinia';
+import axios from 'axios';
 
-export const useStoresStore = defineStore("stores", {
+export const useStoresStore = defineStore('stores', {
     state: () => ({
       storeAll: [],
       storeNew: [],
+      provice: [],
+      district: [],
+      subdistrict: [],
+      zipcode: [],
     }),
     getter: {
       getCustomerAll: (state) => state.storeAll,
@@ -13,13 +17,13 @@ export const useStoresStore = defineStore("stores", {
     actions: {
       async getCustomerAll() {
         try {
-        //   const token = JSON.parse(localStorage.getItem("token"));
-          const area = localStorage.getItem("area")
+        //   const token = JSON.parse(localStorage.getItem('token'));
+          const area = localStorage.getItem('area')
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
-              "/cms/store/getStore",
+              '/cms/store/getStore',
             {
-              "area": area
+              'area': area
             }
             // {
             //   headers: { Authorization: `Bearer ${token}` },
@@ -27,20 +31,20 @@ export const useStoresStore = defineStore("stores", {
           );
           const result = response.data;
           this.storeAll = result;
-          console.log("stores", this.storeAll);
+          console.log('stores', this.storeAll);
         } catch (error) {
           console.error(error);
         }
       },
       async getCustomerNew() {
         try {
-        //   const token = JSON.parse(localStorage.getItem("token"));
-          const area = localStorage.getItem("area")
+        //   const token = JSON.parse(localStorage.getItem('token'));
+          const area = localStorage.getItem('area')
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
-              "/cms/store/getStoreNew",
+              '/cms/store/getStoreNew',
             {
-              "area":area
+              'area':area
             }
             // {
             //   headers: { Authorization: `Bearer ${token}` },
@@ -48,7 +52,86 @@ export const useStoresStore = defineStore("stores", {
           );
           const result = response.data;
           this.storeNew = result;
-          console.log("storesNew", this.storeNew);
+          console.log('storesNew', this.storeNew);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      async getProvince() {
+        try {
+        //   const token = JSON.parse(localStorage.getItem('token'));
+          const response = await axios.post(
+            import.meta.env.VITE_API_BASE_URL +
+              '/cms/manage/Address/getProvince',
+            // {
+            //   headers: { Authorization: `Bearer ${token}` },
+            // }
+          );
+          const result = response.data;
+          this.provice = result;
+          console.log('province', this.provice);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      async getDistrict(selectedProvince) {
+        try {
+        //   const token = JSON.parse(localStorage.getItem('token'));
+          const response = await axios.post(
+            import.meta.env.VITE_API_BASE_URL +
+              '/cms/manage/Address/getAmphoe',
+              {
+                'province': selectedProvince
+              }
+            // {
+            //   headers: { Authorization: `Bearer ${token}` },
+            // }
+          );
+          const result = response.data;
+          this.district = result;
+          console.log('district', this.district);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      async getSubdistrict(selectedDistrict) {
+        try {
+        //   const token = JSON.parse(localStorage.getItem('token'));
+          const response = await axios.post(
+            import.meta.env.VITE_API_BASE_URL +
+              '/cms/manage/Address/getDistrict',
+              {
+                'amphoe': selectedDistrict
+              }
+            // {
+            //   headers: { Authorization: `Bearer ${token}` },
+            // }
+          );
+          const result = response.data;
+          this.subdistrict = result;
+          console.log('subdistrict', this.subdistrict);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      async getZipcode(selectedProvince,selectedDistrict,selectedSubdistrict) {
+        try {
+        //   const token = JSON.parse(localStorage.getItem('token'));
+          const response = await axios.post(
+            import.meta.env.VITE_API_BASE_URL +
+              '/cms/manage/Address/getZipcode',
+              {
+                'province': selectedProvince,
+                'amphoe': selectedDistrict,
+                'district': selectedSubdistrict
+              }
+            // {
+            //   headers: { Authorization: `Bearer ${token}` },
+            // }
+          );
+          const result = response.data;
+          this.zipcode = result;
+          console.log('zipcode', this.zipcode);
         } catch (error) {
           console.error(error);
         }
