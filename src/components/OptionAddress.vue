@@ -46,8 +46,6 @@
                         </form>
                     </div>
                     <div class="mb-1 ml-5">
-                        <!-- <InputFeild :id="'storePc'" :label="'รหัสไปรษณีย์'" :inputClass="'w-220 p-2.5'" :type="'text'">
-                        </InputFeild> -->
                         <form class="max-w-sm mx-auto" >
                             <label for="zipcode" class="block mb-2 text-sm font-medium text-gray-900">รหัสไปรษณีย์</label>
                             <select v-model="selectedZipcode" id="zipcode" @change="emitData"
@@ -112,7 +110,7 @@ const emitData = () => {
     selectedZipcode: selectedZipcode.value,
   };
 
-  emit('update:data', address);
+  emit('update:data', address)
 };
 
 </script>
