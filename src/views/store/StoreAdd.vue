@@ -27,8 +27,7 @@
                 v-model="vStoreName" :isRequired="true">
               </InputFeild>
               <div class="flex justify-end">
-                <span v-if="validation.vStoreName" class="text-sm font-light text-red-500">{{ validation.vStoreName
-                }}</span>
+                <span v-if="validation.vStoreName" class="text-sm font-light text-red-500">{{ validation.vStoreName }}</span>
                 <!-- <span v-else class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36 ตัวอักษร</span> -->
               </div>
             </div>
@@ -100,12 +99,11 @@
           <input id="link-checkbox" type="checkbox" v-model="isChecked"
             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
           <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the
-            <a class="text-blue-600 hover:underline" @click="showPolicy = !showPolicy">terms and conditions</a>
+            <a class="text-blue-600 hover:underline" @click="openDrawer" >terms and conditions</a>
           </label>
         </div>
       </div>
-      <!-- <DrawerPolicy v-if="showPolicy" /> -->
-      <DrawerPolicy @policyCheckboxChanged="toggleDrawer" />
+      <DrawerPolicy :showDrawer="isDrawerOpen" @close-drawer="closeDrawer" />
       <div class="relative rounded-t-xl overflow-auto p-4">
         <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
           <button class="p-4 w-full rounded-lg flex items-center justify-center shadow-lg"
@@ -115,7 +113,6 @@
           </button>
         </div>
       </div>
-
     </template>
   </LayoutSub>
 </template>
@@ -176,19 +173,18 @@ export default {
     });
 
     const isChecked = ref(false)
-    const toggleDrawer = (checked) => {
-      isChecked.value = checked;
+    const isDrawerOpen = ref(false)
+    const openDrawer = () => {
+      isDrawerOpen.value = true
+    }
+    const closeDrawer = () => {
+      isDrawerOpen.value = false
+    }
 
-      this.toggleBottomDrawer();
-    };
-    // const showPolicy = ref(false)
-    // const showPolicy = () => {
-    //   provide('showPolicyDrawer', true);
-    // };
     const sendData = () => {
-
       if (!vStoreName.value) {
-        vStoreName.value = validateInput(vStoreName.value);
+        // vStoreName.value = validateInput(vStoreName.value);
+        validation.vStoreName = 'กรอกข้อมูล';
         return;
       }
 
@@ -208,8 +204,10 @@ export default {
       sendData,
       validation,
       isChecked,
-      toggleDrawer,
       updateAddress,
+      isDrawerOpen,
+      openDrawer,
+      closeDrawer,
     }
 
   }

@@ -1,6 +1,5 @@
 <template>
-
-    <div v-show="showBackdrop" @click="closeDrawer" class="fixed inset-0 bg-black bg-opacity-50"></div>
+    <div v-show="isDrawerOpen" @click="closeDrawer" class="fixed inset-0 bg-black bg-opacity-50"></div>
 
     <div v-if="showDrawer" :id="drawerId"
         class="fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform bg-white transform-none"
@@ -30,7 +29,7 @@
                     รายละเอียดราคาและผลิตภัณฑ์
                 </div>
             </div>
-            <div class="flex flex-row mt-2">
+            <!-- <div class="flex flex-row mt-2">
                 <div class="flex items-center">
                     <input id="link-checkbox" type="checkbox" value=""
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -38,8 +37,8 @@
                         รับทราบและให้ความยินยอม
                     </label>
                 </div>
-            </div>
-            <div class="relative rounded-t-xl overflow-auto p-4">
+            </div> -->
+            <!-- <div class="relative rounded-t-xl overflow-auto p-4">
                 <div class="flex flex-nowrap gap-4 font-mono text-white text-xl rounded-lg">
                     <button class="p-4 w-full rounded-lg flex items-center justify-center bg-blue-800 shadow-lg">
                         กลับ
@@ -48,65 +47,31 @@
                         ถัดไป
                     </button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
 
-<script>
+<script setup>
 import { Icon } from '@iconify/vue';
-import { ref, inject, onMounted, watch } from 'vue'
-export default {
-    components: {
-        Icon,
-    },
-    // setup() {
-    //     const showDrawer = ref(false)
-    //     const showBackdrop = ref(false)
-    //     const drawerId = 'drawer-bottom-policy'
+import { ref, watch } from 'vue'
+const props = defineProps({
+    showDrawer: Boolean,
+    showBackdrop: Boolean,
+    drawerId: Boolean,
+})
+const isDrawerOpen = ref(props.showDrawer)
+const emit = defineEmits(['close-drawer'])
+const closeDrawer = () => {
+    emit('close-drawer')
+};
 
-    //     const toggleBottomDrawer = () => {
-    //         showDrawer.value = !showDrawer.value
-    //         if (showDrawer.value) {
-    //             showBackdrop.value = true
-    //         }
-    //     }
+watch(() => props.showDrawer, (newVal) => {
+    if (!newVal) {
+        isDrawerOpen.value = false;
+        closeDrawer()
+    }
+})
 
-    //     const closeDrawer = () => {
-    //         showDrawer.value = false
-    //         showBackdrop.value = false
-    //     }
 
-    //     const provideShowPolicy = inject('showPolicyDrawer')
-    //     onMounted(() => {
-    //         watch(() => provideShowPolicy, (newVal) => {
-    //             showDrawer.value = newVal
-    //         })
-    //     })
-
-    //     return {
-    //         showDrawer,
-    //         showBackdrop,
-    //         drawerId,
-    //         toggleBottomDrawer,
-    //         closeDrawer,
-    //     }
-    // }
-    emits: ['policyCheckboxChanged'],
-    setup(_, { emit }) {
-        const showDrawer = ref(false)
-        const showBackdrop = ref(false)
-        const handleCheckboxChange = (event) => {
-            emit('policyCheckboxChanged', event.target.checked);
-        };
-
-        return {
-            handleCheckboxChange,
-            showDrawer,
-            showBackdrop,
-        }
-    },
-}
 </script>
-
-<style></style>
