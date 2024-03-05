@@ -27,7 +27,8 @@
                 v-model="vStoreName" :isRequired="true">
               </InputFeild>
               <div class="flex justify-end">
-                <span v-if="validation.vStoreName" class="text-sm font-light text-red-500">{{ validation.vStoreName }}</span>
+                <span class="text-sm font-light text-red-500">{{ validate.errorMessage }}</span>
+                <!-- <span v-if="vStoreName" class="text-sm font-light text-red-500">{{ vStoreName }}</span> -->
                 <!-- <span v-else class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36 ตัวอักษร</span> -->
               </div>
             </div>
@@ -120,7 +121,7 @@
 <script>
 import { Icon } from '@iconify/vue'
 import { ref, computed, reactive, watch } from 'vue'
-import { useUploadStore } from '../../stores';
+import { useUploadStore, useUtilityStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue'
 import InputFeild from '../../components/InputFeild.vue'
 import ButtonBack from '../../components/IconBack.vue'
@@ -141,36 +142,41 @@ export default {
 
   setup() {
 
-    const imageName = ref('');
-    const uploadStore = useUploadStore();
+    const uploadStore = useUploadStore()
+    const utility = useUtilityStore()
+    const validate = computed(() => {
+      return utility.validateInput
+    })
+
     watch(() => uploadStore.imageName, (newVal) => {
       if (newVal !== null) {
-        imageName.value = uploadStore.imageName;
+        imageName.value = uploadStore.imageName
       }
-    });
+    })
 
-    const vStoreName = ref(null);
-    const vStoreTax = ref(null);
-    const vProvince = ref('');
-    const vDistrict = ref('');
-    const vSubdistrict = ref('');
-    const vZipcode = ref('');
+    const imageName = ref('')
+    const vStoreName = ref('')
+    const vStoreTax = ref('')
+    const vProvince = ref('')
+    const vDistrict = ref('')
+    const vSubdistrict = ref('')
+    const vZipcode = ref('')
 
     const updateAddress = (address) => {
-      vProvince.value = address.selectedProvince;
-      vDistrict.value = address.selectedDistrict;
-      vSubdistrict.value = address.selectedSubdistrict;
-      vZipcode.value = address.selectedZipcode;
-    };
-
-    function validateInput(value) {
-      return value === '' ? 'กรอกข้อมูล' : '';
+      vProvince.value = address.selectedProvince
+      vDistrict.value = address.selectedDistrict
+      vSubdistrict.value = address.selectedSubdistrict
+      vZipcode.value = address.selectedZipcode
     }
 
-    const validation = reactive({
-      vStoreName: computed(() => validateInput(vStoreName.value)),
-      vStoreTax: computed(() => validateInput(vStoreTax.value))
-    });
+    // function validateInput(value) {
+    //   return value === '' ? 'กรอกข้อมูล' : '';
+    // }
+
+    // const validation = reactive({
+    //   vStoreName: computed(() => validateInput(vStoreName.value)),
+    //   vStoreTax: computed(() => validateInput(vStoreTax.value))
+    // });
 
     const isChecked = ref(false)
     const isDrawerOpen = ref(false)
@@ -182,10 +188,8 @@ export default {
     }
 
     const sendData = () => {
-      if (!vStoreName.value) {
-        // vStoreName.value = validateInput(vStoreName.value);
-        validation.vStoreName = 'กรอกข้อมูล';
-        return;
+      if (utility.validateInput(vStoreName.value)) {
+        console.log('555555555555')
       }
 
       console.log('vStoreName :', vStoreName.value);
@@ -202,12 +206,12 @@ export default {
       vSubdistrict,
       vZipcode,
       sendData,
-      validation,
       isChecked,
       updateAddress,
       isDrawerOpen,
       openDrawer,
       closeDrawer,
+      validate,
     }
 
   }
