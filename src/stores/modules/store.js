@@ -94,13 +94,14 @@ export const useStoresStore = defineStore('stores', {
           console.error(error);
         }
       },
-      async getSubdistrict(selectedDistrict) {
+      async getSubdistrict(selectedProvince,selectedDistrict) {
         try {
         //   const token = JSON.parse(localStorage.getItem('token'));
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
               '/cms/manage/Address/getDistrict',
               {
+                'province' : selectedProvince,
                 'amphoe': selectedDistrict
               }
             // {

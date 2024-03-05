@@ -94,8 +94,8 @@ watchEffect( () => {
     if (selectedProvince.value) {
         store.getDistrict(selectedProvince.value)
     }
-    if (selectedDistrict.value) {
-        store.getSubdistrict(selectedDistrict.value)
+    if (selectedProvince.value && selectedDistrict.value) {
+        store.getSubdistrict(selectedProvince.value, selectedDistrict.value)
     }
     if (selectedProvince.value && selectedDistrict.value && selectedSubdistrict.value) {
         store.getZipcode(selectedProvince.value,selectedDistrict.value,selectedSubdistrict.value)
