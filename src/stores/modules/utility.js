@@ -6,13 +6,17 @@ export const useUtilityStore = defineStore('utility', {
   }),
   actions: {
     validateInput(value) {
-      if (!value) {
-        this.errorMessage = 'กรอกข้อมูล';
-        return false;
-      } else {
-        this.errorMessage = '';
-        return true;
-      }
+      const isValid = !!value; 
+
+      this.errorMessage = isValid ? '' : 'กรุณากรอกข้อมูล'
+
+      return isValid
+    },
+    getValidate() {
+      return this.errorMessage
+    },
+    clearValidate() {
+      this.errorMessage = ''
     },
   },
 });

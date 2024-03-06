@@ -27,8 +27,7 @@
                 v-model="vStoreName" :isRequired="true">
               </InputFeild>
               <div class="flex justify-end">
-                <span class="text-sm font-light text-red-500">{{ validate.errorMessage }}</span>
-                <!-- <span v-if="vStoreName" class="text-sm font-light text-red-500">{{ vStoreName }}</span> -->
+                <span v-if="!vStoreName.trim()" class="text-sm font-light text-red-500">{{ utility.errorMessage }}</span>
                 <!-- <span v-else class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36 ตัวอักษร</span> -->
               </div>
             </div>
@@ -70,13 +69,8 @@
           <span class="ml-2">ที่อยู่</span>
         </div>
       </div>
-      <Address 
-        v-model:selectedProvince="vProvince" 
-        v-model:selectedDistrict="vDistrict" 
-        v-model:selectedSubdistrict="vSubdistrict" 
-        v-model:selectedZipcode="vZipcode" 
-        @update:data="updateAddress" 
-      />
+      <Address v-model:selectedProvince="vProvince" v-model:selectedDistrict="vDistrict"
+        v-model:selectedSubdistrict="vSubdistrict" v-model:selectedZipcode="vZipcode" @update:data="updateAddress" />
       <div class="flex flex-row items-center justify-between mt-1">
         <div class="mt-2 ml-8 flex items-center">
           <Icon icon="heroicons:camera-20-solid" width="20" />
@@ -100,7 +94,7 @@
           <input id="link-checkbox" type="checkbox" v-model="isChecked"
             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
           <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the
-            <a class="text-blue-600 hover:underline" @click="openDrawer" >terms and conditions</a>
+            <a class="text-blue-600 hover:underline" @click="openDrawer">terms and conditions</a>
           </label>
         </div>
       </div>
@@ -120,7 +114,7 @@
 
 <script>
 import { Icon } from '@iconify/vue'
-import { ref, computed, reactive, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useUploadStore, useUtilityStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue'
 import InputFeild from '../../components/InputFeild.vue'
@@ -141,12 +135,8 @@ export default {
   },
 
   setup() {
-
     const uploadStore = useUploadStore()
     const utility = useUtilityStore()
-    const validate = computed(() => {
-      return utility.validateInput
-    })
 
     watch(() => uploadStore.imageName, (newVal) => {
       if (newVal !== null) {
@@ -169,15 +159,6 @@ export default {
       vZipcode.value = address.selectedZipcode
     }
 
-    // function validateInput(value) {
-    //   return value === '' ? 'กรอกข้อมูล' : '';
-    // }
-
-    // const validation = reactive({
-    //   vStoreName: computed(() => validateInput(vStoreName.value)),
-    //   vStoreTax: computed(() => validateInput(vStoreTax.value))
-    // });
-
     const isChecked = ref(false)
     const isDrawerOpen = ref(false)
     const openDrawer = () => {
@@ -188,13 +169,17 @@ export default {
     }
 
     const sendData = () => {
-      if (utility.validateInput(vStoreName.value)) {
-        console.log('555555555555')
-      }
+      const isValid = utility.validateInput(vStoreName.value);
 
-      console.log('vStoreName :', vStoreName.value);
-      console.log('vStoreTax :', vStoreTax.value);
-      console.log('vProvince :', vProvince.value);
+      if (!isValid) {
+        const errorMessage = utility.getValidate();
+        console.log('Invalid input. Error message:', errorMessage);
+      } else {
+        console.log('Input is valid.');
+        //   console.log('vStoreName :', vStoreName.value)
+        //   console.log('vStoreTax :', vStoreTax.value)
+        //   console.log('vProvince :', vProvince.value)
+      }
     };
 
     return {
@@ -211,7 +196,7 @@ export default {
       isDrawerOpen,
       openDrawer,
       closeDrawer,
-      validate,
+      utility
     }
 
   }
