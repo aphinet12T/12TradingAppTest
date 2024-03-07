@@ -29,28 +29,76 @@ const chartSeries = ref([]);
 
 const updateChartData = () => {
     chartOptions.value = {
+        series: [{
+          name: 'Sale',
+          data: chartSales.value.dataSalePercentNumber,
+        }],
         chart: {
-            type: 'bar',
-            background: '#ffffff',
-            toolbar: { 
-                show: false,
-            },
+          height: 350,
+          type: 'bar',
         },
+        plotOptions: {
+          bar: {
+            borderRadius: 10,
+            dataLabels: {
+              position: 'top', 
+            },
+          }
+        },
+
+        dataLabels: {
+          enabled: true,
+          formatter: function (val) {
+            return val + "%";
+          },
+          offsetY: -20,
+          style: {
+            fontSize: '12px',
+            colors: ["#304758"]
+          }
+        },
+        
         xaxis: {
-            categories: chartSales.value.month,
+          categories: chartSales.value.month,
+          position: 'top',
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: false
+          },
+          crosshairs: {
+            fill: {
+              type: 'gradient',
+              gradient: {
+                colorFrom: '#D8E3F0',
+                colorTo: '#BED1E6',
+                stops: [0, 100],
+                opacityFrom: 0.4,
+                opacityTo: 0.5,
+              }
+            }
+          },
+          tooltip: {
+            enabled: true,
+          }
+        },
+        yaxis: {
+          axisBorder: {
+            show: false
+          },
+          axisTicks: {
+            show: false,
+          },
+          labels: {
+            show: false,
+            formatter: function (val) {
+              return val + "%";
+            }
+          }
+        
         },
     };
-
-    chartSeries.value = [
-        {
-            name: 'sale',
-            data: chartSales.value.dataSale,
-        },
-        {
-            name: 'cn',
-            data: chartSales.value.dataCn,
-        },
-    ];
 };
 const reportDetail = () => {
     console.log('55555');

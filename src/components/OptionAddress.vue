@@ -3,7 +3,7 @@
         <div class="bg-white h-64 w-card shadow-md rounded-lg mt-2 overflow-auto">
             <div class=" flex flex-col items-center mt-3">
                 <div class="mb-1">
-                    <InputFeild :id="'storeAddress'" :label="'ที่อยู่'" :inputClass="'w-500 p-2.5'" :type="'text'">
+                    <InputFeild :id="'storeAddress'" :label="'ที่อยู่'" :inputClass="'w-500 p-2.5'" :type="'text'" v-model="vAddress">
                     </InputFeild>
                 </div>
                 <div class="flex flex-row">
@@ -68,6 +68,7 @@ import { ref, computed, onMounted, watchEffect } from 'vue'
 import { useStoresStore } from '../stores';
 import InputFeild from '../components/InputFeild.vue'
 
+const vAddress = ref('')
 const selectedProvince = ref('')
 const selectedDistrict = ref('')
 const selectedSubdistrict = ref('')
@@ -104,6 +105,7 @@ watchEffect( () => {
 const emit = defineEmits(['update:data'])
 const emitData = () => {
   const address = {
+    storeAddress: vAddrress.value,
     selectedProvince: selectedProvince.value,
     selectedDistrict: selectedDistrict.value,
     selectedSubdistrict: selectedSubdistrict.value,

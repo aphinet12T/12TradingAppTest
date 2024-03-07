@@ -144,15 +144,21 @@ export default {
       }
     })
 
-    const imageName = ref('')
     const vStoreName = ref('')
     const vStoreTax = ref('')
+    const vStorePhone = ref('')
+    const vStoreRoute = ref('')
+    const vStoreLine = ref('')
+    const vStoreNote = ref('')
+    const vAddress = ref('')
     const vProvince = ref('')
     const vDistrict = ref('')
     const vSubdistrict = ref('')
     const vZipcode = ref('')
+    const imageName = ref('')
 
     const updateAddress = (address) => {
+      vAddress.value = address.storeAddress
       vProvince.value = address.selectedProvince
       vDistrict.value = address.selectedDistrict
       vSubdistrict.value = address.selectedSubdistrict
@@ -176,9 +182,13 @@ export default {
         console.log('Invalid input. Error message:', errorMessage);
       } else {
         console.log('Input is valid.');
-        //   console.log('vStoreName :', vStoreName.value)
-        //   console.log('vStoreTax :', vStoreTax.value)
-        //   console.log('vProvince :', vProvince.value)
+          console.log('vStoreName :', vStoreName.value)
+          console.log('vStoreTax :', vStoreTax.value)
+          console.log('vAddress :', vAddress.value)
+          console.log('vProvince :', vProvince.value)
+          console.log('vDistrict :', vDistrict.value)
+          console.log('vSubdistrict :', vSubdistrict.value)
+          console.log('vZipcode :', vZipcode.value)
       }
     };
 
@@ -186,6 +196,10 @@ export default {
       imageName,
       vStoreName,
       vStoreTax,
+      vStorePhone,
+      vStoreRoute,
+      vStoreLine,
+      vStoreNote,
       vProvince,
       vDistrict,
       vSubdistrict,
