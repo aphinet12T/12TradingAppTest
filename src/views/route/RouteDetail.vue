@@ -20,8 +20,8 @@
           </div>
         </div>
         <div class="flex justify-center">
-          <Table :columns="tableColumns" :data="routeDetailList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[690px]'"
-            @row-click="handleClick">
+          <Table :columns="tableColumns" :data="routeDetailList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
+            :isLoading="isLoading" :hTable="'h-[690px]'" @row-click="handleClick">
           </Table>
         </div>
         <div class="flex-grow z-40">
@@ -67,7 +67,7 @@
   
 <script>
 import { Icon } from '@iconify/vue';
-import { computed, onMounted, onBeforeMount } from 'vue';
+import { computed, onMounted, ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 import { useRouteStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue';
@@ -79,20 +79,22 @@ export default {
     Icon,
     LayoutSub,
     ButtonBack,
-    Table
+    Table,
   },
-  
+
 
   setup() {
 
     const store = useRouteStore();
-    const routeDetail = computed(() => {
-      return store.routeDetail;
-    });
+    // const routeDetail = computed(() => {
+    //   return store.routeDetail;
+    // });
 
-    const routeDetailList = computed(() => {
-      return store.routeDetailList;
-    });
+    // const routeDetailList = computed(() => {
+    //   return store.routeDetailList;
+    // });
+    const routeDetail = ref(store.routeDetail);
+    const routeDetailList = ref(store.routeDetailList);
 
     const router = useRouter();
     const handleClick = (row) => {
@@ -111,19 +113,29 @@ export default {
       ]
     })
 
-    // onMounted(() => {
-    //   store.getRouteDetail();
-    // })
+    const isLoading = ref(true)
+    onMounted(async () => {
+      try {
+        isLoading.value = true;
+        await store.getRouteDetail();
+        isLoading.value = false;
+      } catch (error) {
+        console.error('Error loading data:', error);
+        isLoading.value = false;
+      }
+    })
 
-    onBeforeMount(() => {
-      store.getRouteDetail();
+    watchEffect(() => {
+      routeDetail.value = store.routeDetail;
+      routeDetailList.value = store.routeDetailList;
     });
 
     return {
       routeDetail,
       routeDetailList,
       tableColumns,
-      handleClick
+      handleClick,
+      isLoading
     }
   }
 }
