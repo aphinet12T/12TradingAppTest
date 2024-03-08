@@ -3,7 +3,7 @@
         <template v-slot>
             <div class="flex flex-col h-full">
                 <Alert v-if="showAlert" :title="'ลบข้อมูล'+selectedName" :content="'ยืนยันการลบข้อมูล'" @confirm="deleteItem" @dismiss="dismissAlert" 
-                :color="'text-gray-600 border border-red-300 bg-red-100'" :product="dataCart.name"
+                :color="'text-gray-600 border border-red-300 bg-red-100'" :product="orderCartList.name"
                 />
                 <div class="flex flex-row items-center">
                     <div class="mt-2">
@@ -26,7 +26,7 @@
                     <div>
                         รายการสินค้าที่เลือก
                     </div>
-                    <Table :columns="tableColumns" :data="dataCart" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[600px]'">
+                    <Table :columns="tableColumns" :data="orderCartList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[600px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
@@ -109,17 +109,17 @@ export default {
             store.getOrderCart();
         });
 
-        const dataCart = computed(() => {
-            return store.orderCartList.map(item => ({
-                ...item,
-                qty: `${item.qty} ${item.unitTypeThai}`
-            }));
-        });
+        // const dataCart = computed(() => {
+        //     return store.orderCartList.map(item => ({
+        //         ...item,
+        //         qty: `${item.qty} ${item.unitTypeThai}`
+        //     }));
+        // });
 
         const tableColumns = computed(() => {
             return [
                 { id: 'name', title: 'ชื่อสินค้า' },
-                { id: 'qty', title: 'จำนวน' },
+                { id: 'qtyText', title: 'จำนวน' },
                 { id: 'summaryPrice', title: 'รวม' },
                 { id: '', title: '*' },
             ];
@@ -176,7 +176,7 @@ export default {
             orderCartList,
             tableColumns,
             handleClick,
-            dataCart,
+            // dataCart,
             showAlert,
             alertTitle,
             alertContent,

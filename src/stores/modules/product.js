@@ -24,7 +24,7 @@ export const useProductStore = defineStore('products', {
                 this.productOption.brand = result.brand
                 this.productOption.size = result.size
                 this.productOption.flavour = result.flavour
-                // console.log('option', this.productOption);
+                console.log('option', this.productOption);
             } catch (error) {
                 console.error(error)
             }

@@ -34,7 +34,7 @@
                     <div>
                         ส่วนลด
                     </div>
-                    <Table :columns="tableFree" :data="dataDiscount" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
+                    <Table :columns="tableFree" :data="listDiscount" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
                         :hTable="'h-[350px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"

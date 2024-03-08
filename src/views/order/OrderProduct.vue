@@ -140,7 +140,7 @@ export default {
                             unitId: selectedUnitId.value
                         }
                     });
-                    await router.push('/cms/order/add');
+                    // await router.push('/cms/order/add');
                 } catch (error) {
                     console.error(error);
                 }

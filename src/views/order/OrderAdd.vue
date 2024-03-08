@@ -19,7 +19,7 @@
                         ชื่อ : {{ storeName }}
                     </div>
                 </div>
-                <div class="flex flex-row justify-center mt-3">
+                <!-- <div class="flex flex-row justify-center mt-3">
                     <div class="mx-4">
                         <Dropdown dropdownId="dropdown1" :btClass="'w-60'" :dropdownItems="dropdownItem" />
                     </div>
@@ -34,6 +34,9 @@
                     <div class="mx-4">
                         <Dropdown dropdownId="dropdown4" :btClass="'w-60'" :dropdownItems="dropdownItem" />
                     </div>
+                </div> -->
+                <div>
+                    <OptionProduct/>
                 </div>
                 <div class="flex justify-center mt-5">
                     <Table :columns="tableColumns" :data="products" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
@@ -64,7 +67,7 @@ import { useOrderStore } from '../../stores'
 import { useRouter } from 'vue-router'
 import LayoutSub from '../LayoutSub.vue'
 import ButtonBack from '../../components/IconBack.vue'
-import Dropdown from '../../components/Dropdown.vue'
+import OptionProduct from '../../components/OptionProduct.vue'
 import Table from '../../components/Table.vue'
 import ButtonCart from '../../components/ButtonCircle.vue'
 
@@ -73,7 +76,7 @@ export default {
         Icon,
         LayoutSub,
         ButtonBack,
-        Dropdown,
+        OptionProduct,
         Table,
         ButtonCart,
     },
@@ -86,14 +89,14 @@ export default {
         const storeId = localStorage.getItem('routeStoreId')
         const storeName = localStorage.getItem('routeStoreName')
 
-        const dropdownItem = computed(() => {
-            return [
-                { label: 'Dashboard', link: '#' },
-                { label: 'Settings', link: '#' },
-                { label: 'Earnings', link: '#' },
-                { label: 'Sign out', link: '#' }
-            ];
-        });
+        // const dropdownItem = computed(() => {
+        //     return [
+        //         { label: 'Dashboard', link: '#' },
+        //         { label: 'Settings', link: '#' },
+        //         { label: 'Earnings', link: '#' },
+        //         { label: 'Sign out', link: '#' }
+        //     ];
+        // });
 
         const tableColumns = computed(() => {
             return [
@@ -117,7 +120,6 @@ export default {
         return {
             storeId,
             storeName,
-            dropdownItem,
             tableColumns,
             products,
             handleClick,

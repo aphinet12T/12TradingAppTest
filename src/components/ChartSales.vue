@@ -6,7 +6,11 @@
                     <dt class="text-gray-500 text-md font-normal me-1">รายงานยอดขาย</dt>
                 </dl>
                 <dl class="flex items-center justify-end">
-                    <dt class="text-gray-500 text-md font-normal me-1" @click="reportDetail">รายละเอียด</dt>
+                  <router-link to="/cms/report/main">
+                    <dt class="text-gray-500 text-md font-normal me-1" >
+                      รายละเอียด
+                    </dt>
+                  </router-link>
                 </dl>
             </div>
             <VueApexCharts type="bar" height="350" :options="chartOptions" :series="chartSeries" />
@@ -36,6 +40,9 @@ const updateChartData = () => {
         chart: {
           height: 350,
           type: 'bar',
+          toolbar: { 
+                show: false,
+            },
         },
         plotOptions: {
           bar: {

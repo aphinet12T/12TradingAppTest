@@ -18,7 +18,7 @@ const routes = [
       },
     ],
   },
-  { path: '/cms/test', component: () => import('../components/IconBack.vue') },
+  { path: '/cms/test', component: () => import('../components/OptionProduct.vue') },
   ...StoreRouter,
   ...RouteRouter,
   ...OrderRouter,
