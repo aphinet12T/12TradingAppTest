@@ -7,7 +7,7 @@
                         <form class="max-w-sm mx-auto" >
                         <select 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-220 p-2.5">
-                            <option disabled value="">ประเภท</option>
+                            <option value="" disabled selected>ประเภท</option>
                             <option v-for="group in dataProduct.group" :key="group" :value="group">
                                 {{ group }}
                             </option>
@@ -18,8 +18,8 @@
                         <form class="max-w-sm mx-auto" >
                         <select 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-220 p-2.5">
-                            <option disabled value="">แบรนด์</option>
-                            <option v-for="brand in dataBrand" :key="brand" :value="brand">
+                            <option value="" disabled selected>แบรนด์</option>
+                            <option v-for="brand in dataProduct.brand" :key="brand" :value="brand">
                                 {{ brand }}
                             </option>
                         </select>
@@ -31,7 +31,7 @@
                         <form class="max-w-sm mx-auto" >
                             <select 
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-220 p-2.5">
-                                <option disabled value="">ขนาด</option>
+                                <option value="" disabled selected>ขนาด</option>
                                 <option v-for="size in dataProduct.size" :key="size" :value="size">
                                     {{ size }}
                                 </option>
@@ -42,7 +42,7 @@
                         <form class="max-w-sm mx-auto" >
                             <select 
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-220 p-2.5">
-                                <option disabled value="">รสชาติ</option>
+                                <option value="" disabled selected>รสชาติ</option>
                                 <option v-for="flavour in dataProduct.flavour" :key="flavour" :value="flavour">
                                     {{ flavour }}
                                 </option>
@@ -63,19 +63,9 @@ const store = useProductStore();
 const dataProduct = computed(() => {
     return store.productOption
 })
-const dataBrand = computed(() => {
-    return store.productOption.brand
-})
-// const dataSize = computed(() => {
-//     return store.productOption.size
-// })
-// const dataFlavour = computed(() => {
-//     return store.productOption.flavour
-// })
 
 onMounted(() => {
     store.getDataOpion()
-    console.log('66666', dataProduct);
 });
 
 </script>
