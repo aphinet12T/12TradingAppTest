@@ -19,24 +19,8 @@
                         ชื่อ : {{ storeName }}
                     </div>
                 </div>
-                <!-- <div class="flex flex-row justify-center mt-3">
-                    <div class="mx-4">
-                        <Dropdown dropdownId="dropdown1" :btClass="'w-60'" :dropdownItems="dropdownItem" />
-                    </div>
-                    <div class="mx-4">
-                        <Dropdown dropdownId="dropdown2" :btClass="'w-60'" :dropdownItems="dropdownItem" />
-                    </div>
-                </div>
-                <div class="flex flex-row justify-center mt-3">
-                    <div class="mx-4">
-                        <Dropdown dropdownId="dropdown3" :btClass="'w-60'" :dropdownItems="dropdownItem" />
-                    </div>
-                    <div class="mx-4">
-                        <Dropdown dropdownId="dropdown4" :btClass="'w-60'" :dropdownItems="dropdownItem" />
-                    </div>
-                </div> -->
                 <div>
-                    <OptionProduct/>
+                    <OptionProduct @update:data="updateOption" />
                 </div>
                 <div class="flex justify-center mt-5">
                     <Table :columns="tableColumns" :data="products" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
@@ -62,7 +46,7 @@
 
 <script>
 import { Icon } from '@iconify/vue'
-import { computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useOrderStore } from '../../stores'
 import { useRouter } from 'vue-router'
 import LayoutSub from '../LayoutSub.vue'
@@ -84,38 +68,43 @@ export default {
         const store = useOrderStore();
         const products = computed(() => {
             return store.productList;
-        });
+        })
 
         const storeId = localStorage.getItem('routeStoreId')
         const storeName = localStorage.getItem('routeStoreName')
-
-        // const dropdownItem = computed(() => {
-        //     return [
-        //         { label: 'Dashboard', link: '#' },
-        //         { label: 'Settings', link: '#' },
-        //         { label: 'Earnings', link: '#' },
-        //         { label: 'Sign out', link: '#' }
-        //     ];
-        // });
 
         const tableColumns = computed(() => {
             return [
                 { id: 'id', title: 'รหัสสินค้า' },
                 { id: 'name', title: 'ชื่อสินค้า' },
                 { id: '', title: '*' },
-            ];
-        });
+            ]
+        })
+
+        const vGpoup = ref('')
+        const vBrand = ref('')
+        const vSize = ref('')
+        const vFlavour = ref('')
+
+        const updateOption = (optionProduct) => {
+            vGpoup.value = optionProduct.selectedGroup
+            vBrand.value = optionProduct.selectedBrand
+            vSize.value = optionProduct.selectedSize
+            vFlavour.value = optionProduct.selectedFlavour
+
+            console.log('group', vGpoup.value);
+        }
 
         const router = useRouter();
         const handleClick = (id) => {
             store.setProduct(id);
             router.push('/cms/order/product')
             // console.log(`item: ${id}`);
-        };
+        }
 
         onMounted(() => {
-            store.getSaleProduct();
-        });
+            store.getSaleProduct()
+        })
 
         return {
             storeId,
@@ -123,6 +112,7 @@ export default {
             tableColumns,
             products,
             handleClick,
+            updateOption,
         }
     }
 }

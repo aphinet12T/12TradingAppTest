@@ -9,7 +9,7 @@
             </th>
           </tr>
         </thead>
-        <tbody v-if="data.length === 0">
+        <tbody v-if="data.status === 204">
           <tr>
             <td :colspan="columns.length" class="text-center py-4 text-gray-500">
               <span> ไม่มีข้อมูล </span>
@@ -22,8 +22,7 @@
             <td v-for="col in columns" :key="col.id" :class="tdClass">
               <template v-if="isLoading">
                 <div role="status" class="max-w-sm animate-pulse">
-                  <div 
-                    class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                  <div class="h-2 bg-gray-200 rounded-full mb-2.5"></div>
                   <span class="sr-only">Loading...</span>
                 </div>
               </template>
@@ -31,8 +30,13 @@
                 <template v-if="col.id === ''">
                   <slot name="button" :rowData="item" />
                 </template>
-                <template v-else>
-                  {{ item[col.id] }}
+                  <!-- <template v-else>
+                    {{ item[col.id] }}
+                  </template> -->
+                  <template v-else>
+                  <slot :name="col.id" :rowData="item" :item="item">
+                    {{ item[col.id] }}
+                  </slot>
                 </template>
               </template>
             </td>

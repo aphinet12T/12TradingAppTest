@@ -96,7 +96,8 @@ export const useOrderStore = defineStore('orders', {
       try {
         //   const token = JSON.parse(localStorage.getItem('token'));
         const response = await axios.post(
-          import.meta.env.VITE_API_BASE_URL + '/cms/saleProduct/getProductAll'
+          import.meta.env.VITE_API_BASE_URL + 
+            '/cms/saleProduct/getProduct'
           // {
           //   headers: { Authorization: `Bearer ${token}` },
           // }

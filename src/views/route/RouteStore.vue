@@ -28,7 +28,7 @@
                 </div>
                 <div class="flex flex-row justify-center">
                     <div class="mx-10 mt-5">
-                        <Drawer :storeID="routeStore.storeId" :storeName="routeStore.name" />
+                        <DrawerReason :storeID="routeStore.storeId" :storeName="routeStore.name" />
                     </div>
                     <div class="mx-10 mt-5">
                         <button type="button" @click="handleClick"
@@ -58,7 +58,7 @@ import { useRouter } from 'vue-router';
 import LayoutSub from '../LayoutSub.vue';
 import ButtonBack from '../../components/IconBack.vue';
 import Table from '../../components/Table.vue';
-import Drawer from '../../components/DrawerReason.vue';
+import DrawerReason from '../../components/DrawerReason.vue';
 import DrawerPicture from '../../components/DrawerPicture.vue';
 
 export default {
@@ -67,7 +67,7 @@ export default {
         LayoutSub,
         ButtonBack,
         Table,
-        Drawer,
+        DrawerReason,
         DrawerPicture,
     },
 

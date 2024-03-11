@@ -11,9 +11,6 @@
     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" :aria-labelledby="dropdownId">
       <li v-for="(item, index) in dropdownItems" :key="index">
           {{ item.label }}
-          <!-- <li v-for="(value, index) in item" :key="index">
-            {{ value }}
-          </li> -->
       </li>
     </ul>
   </div>
@@ -43,7 +40,6 @@ export default {
   setup(props) {
     onMounted(() => {
       initDropdowns();
-      // console.log('test',props.dropdownItems)
     })
   },
 };
