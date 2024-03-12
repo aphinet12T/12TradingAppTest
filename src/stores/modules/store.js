@@ -57,6 +57,26 @@ export const useStoresStore = defineStore('stores', {
           console.error(error);
         }
       },
+      async addCustomerNew(dataStore) {
+        try {
+        //   const token = JSON.parse(localStorage.getItem('token'));
+        console.log('ter',dataStore);
+          const response = await axios.post(
+            import.meta.env.VITE_API_BASE_URL +
+              '/cms/store/addStore',
+            {
+              ...dataStore
+            }
+            // {
+            //   headers: { Authorization: `Bearer ${token}` },
+            // }
+          );
+          const result = response.data;
+          console.log('addStore', result);
+        } catch (error) {
+          console.error(error);
+        }
+      },
       async getProvince() {
         try {
         //   const token = JSON.parse(localStorage.getItem('token'));

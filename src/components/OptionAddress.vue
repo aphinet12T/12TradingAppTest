@@ -3,21 +3,21 @@
         <div class="bg-white h-64 w-card shadow-md rounded-lg mt-2 overflow-auto">
             <div class=" flex flex-col items-center mt-3">
                 <div class="mb-1">
-                    <InputFeild :id="'storeAddress'" :label="'ที่อยู่'" :inputClass="'w-500 p-2.5'" :type="'text'" v-model="vAddress">
+                    <InputFeild :id="'storeAddress'" :label="'ที่อยู่'" :inputClass="'w-500 p-2.5'" :type="'text'" v-model="storeAddress">
                     </InputFeild>
                 </div>
                 <div class="flex flex-row">
                     <div class="mb-1">
                         <form class="max-w-sm mx-auto" >
-                        <label for="subdistrics" class="block mb-2 text-sm font-medium text-gray-900">ตำบล</label>
-                        <select v-model="selectedSubdistrict" id="subdistrics" @change="emitData"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-220 p-2.5">
-                            <option disabled value="">เลือกตำบล</option>
-                            <option v-for="subdistrict in dataSubDistrict" :key="subdistrict.district" :value="subdistrict.district">
-                                {{subdistrict.district }}
-                            </option>
-                        </select>
-                    </form>
+                            <label for="provinces" class="block mb-2 text-sm font-medium text-gray-900">จังหวัด</label>
+                            <select v-model="selectedProvince" id="provinces" @change="emitData"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-220 p-2.5">
+                                <option disabled value="">เลือกจังหวัด</option>
+                                <option v-for="province in dataProvince" :key="province.province" :value="province.province">
+                                    {{province.province }}
+                                </option>
+                            </select>
+                        </form>
                     </div>
                     <div class="mb-1 ml-5">
                         <form class="max-w-sm mx-auto" >
@@ -35,15 +35,15 @@
                 <div class="flex flex-row">
                     <div class="mb-1">
                         <form class="max-w-sm mx-auto" >
-                            <label for="provinces" class="block mb-2 text-sm font-medium text-gray-900">จังหวัด</label>
-                            <select v-model="selectedProvince" id="provinces" @change="emitData"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-220 p-2.5">
-                                <option disabled value="">เลือกจังหวัด</option>
-                                <option v-for="province in dataProvince" :key="province.province" :value="province.province">
-                                    {{province.province }}
-                                </option>
-                            </select>
-                        </form>
+                        <label for="subdistrics" class="block mb-2 text-sm font-medium text-gray-900">ตำบล</label>
+                        <select v-model="selectedSubdistrict" id="subdistrics" @change="emitData"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-220 p-2.5">
+                            <option disabled value="">เลือกตำบล</option>
+                            <option v-for="subdistrict in dataSubDistrict" :key="subdistrict.district" :value="subdistrict.district">
+                                {{subdistrict.district }}
+                            </option>
+                        </select>
+                    </form>
                     </div>
                     <div class="mb-1 ml-5">
                         <form class="max-w-sm mx-auto" >
@@ -68,7 +68,7 @@ import { ref, computed, onMounted, watchEffect } from 'vue'
 import { useStoresStore } from '../stores';
 import InputFeild from '../components/InputFeild.vue'
 
-const vAddress = ref('')
+const storeAddress = ref('')
 const selectedProvince = ref('')
 const selectedDistrict = ref('')
 const selectedSubdistrict = ref('')
@@ -105,7 +105,7 @@ watchEffect( () => {
 const emit = defineEmits(['update:data'])
 const emitData = () => {
   const address = {
-    storeAddress: vAddrress.value,
+    storeAddress: storeAddress.value,
     selectedProvince: selectedProvince.value,
     selectedDistrict: selectedDistrict.value,
     selectedSubdistrict: selectedSubdistrict.value,

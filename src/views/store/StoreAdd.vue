@@ -23,8 +23,7 @@
         <div class="bg-white h-64 w-card shadow-md rounded-lg mt-1 overflow-auto">
           <div class=" flex flex-col items-center mt-5">
             <div class="mb-1">
-              <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :inputClass="'w-500 p-2.5'" :type="'text'"
-                v-model="vStoreName" :isRequired="true">
+              <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :inputClass="'w-500 p-2.5'" :type="'text'" v-model="vStoreName" :isRequired="true">
               </InputFeild>
               <div class="flex justify-end">
                 <span v-if="!vStoreName.trim()" class="text-sm font-light text-red-500">{{ utility.errorMessage }}</span>
@@ -32,32 +31,31 @@
               </div>
             </div>
             <div class="mb-1">
-              <InputFeild :id="'storeTax'" :label="'เลขที่ผู้เสียภาษี'" :inputClass="'w-500 p-2.5'" :type="'text'"
-                v-model="vStoreTax" :maxlength="13">
+              <InputFeild :id="'storeTax'" :label="'เลขที่ผู้เสียภาษี'" :inputClass="'w-500 p-2.5'" :type="'text'" v-model="vStoreTax" :maxlength="13">
               </InputFeild>
             </div>
             <div class="flex flex-row">
               <div class="mb-1">
-                <InputFeild :id="'storeTel'" :label="'โทรศัพท์'" :inputClass="'w-220 p-2.5'" :type="'number'">
+                <InputFeild :id="'storePhone'" :label="'โทรศัพท์'" :inputClass="'w-220 p-2.5'" :type="'number'" v-model="vStorePhone" :maxlength="10">
                 </InputFeild>
               </div>
               <div class="mb-1 ml-5">
-                <InputFeild :id="'storeRoute'" :label="'เส้นทาง'" :inputClass="'w-220 p-2.5'" :type="'text'">
+                <InputFeild :id="'storeRoute'" :label="'เส้นทาง'" :inputClass="'w-220 p-2.5'" :type="'text'" v-model="vStoreRoute">
                 </InputFeild>
               </div>
             </div>
             <div class="flex flex-row">
               <div class="mb-1">
-                <InputFeild :id="'storeType'" :label="'ประเภทร้านค้า'" :inputClass="'w-220 p-2.5'" :type="'number'">
+                <InputFeild :id="'storeType'" :label="'ประเภทร้านค้า'" :inputClass="'w-220 p-2.5'" :type="'text'" v-model="vStoreType">
                 </InputFeild>
               </div>
               <div class="mb-1 ml-5">
-                <InputFeild :id="'lineId'" :label="'Line ID'" :inputClass="'w-220 p-2.5'" :type="'text'">
+                <InputFeild :id="'lineId'" :label="'Line ID'" :inputClass="'w-220 p-2.5'" :type="'text'" v-model="vStoreLine">
                 </InputFeild>
               </div>
             </div>
             <div class="mb-5">
-              <InputFeild :id="'storeNote'" :label="'หมายเหตุ'" :inputClass="'w-500 p-2.5'" :type="'text'">
+              <InputFeild :id="'storeNote'" :label="'หมายเหตุ'" :inputClass="'w-500 p-2.5'" :type="'text'" v-model="vStoreNote">
               </InputFeild>
             </div>
           </div>
@@ -69,7 +67,7 @@
           <span class="ml-2">ที่อยู่</span>
         </div>
       </div>
-      <Address v-model:selectedProvince="vProvince" v-model:selectedDistrict="vDistrict"
+      <Address v-model:storeAddress="vAddress" v-model:selectedProvince="vProvince" v-model:selectedDistrict="vDistrict"
         v-model:selectedSubdistrict="vSubdistrict" v-model:selectedZipcode="vZipcode" @update:data="updateAddress" />
       <div class="flex flex-row items-center justify-between mt-1">
         <div class="mt-2 ml-8 flex items-center">
@@ -115,7 +113,7 @@
 <script>
 import { Icon } from '@iconify/vue'
 import { ref, computed, onMounted, watch } from 'vue'
-import { useUploadStore, useUtilityStore } from '../../stores';
+import { useUploadStore, useUtilityStore, useGeolocation, useStoresStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue'
 import InputFeild from '../../components/InputFeild.vue'
 import ButtonBack from '../../components/IconBack.vue'
@@ -137,6 +135,8 @@ export default {
   setup() {
     const uploadStore = useUploadStore()
     const utility = useUtilityStore()
+    const location = useGeolocation()
+    const store = useStoresStore()
 
     watch(() => uploadStore.imageName, (newVal) => {
       if (newVal !== null) {
@@ -148,6 +148,7 @@ export default {
     const vStoreTax = ref('')
     const vStorePhone = ref('')
     const vStoreRoute = ref('')
+    const vStoreType = ref('')
     const vStoreLine = ref('')
     const vStoreNote = ref('')
     const vAddress = ref('')
@@ -175,13 +176,13 @@ export default {
     }
 
     const sendData = () => {
-      const isValid = utility.validateInput(vStoreName.value);
+      const isValid = utility.validateInput(vStoreName.value)
 
       if (!isValid) {
         const errorMessage = utility.getValidate();
-        console.log('Invalid input. Error message:', errorMessage);
+        console.log('Invalid input. Error message:', errorMessage)
       } else {
-        console.log('Input is valid.');
+          console.log('Input is valid.');
           console.log('vStoreName :', vStoreName.value)
           console.log('vStoreTax :', vStoreTax.value)
           console.log('vAddress :', vAddress.value)
@@ -189,28 +190,70 @@ export default {
           console.log('vDistrict :', vDistrict.value)
           console.log('vSubdistrict :', vSubdistrict.value)
           console.log('vZipcode :', vZipcode.value)
-      }
-    };
 
+          const dataStore = {
+          taxId: vStoreTax.value,
+          name: vStoreName.value,
+          tel: vStorePhone.value,
+          route: vStoreRoute.value,
+          type: vStoreType.value,
+          address: vAddress.value,
+          distric: vDistrict.value,
+          subDistric: vSubdistrict.value,
+          province: vProvince.value,
+          provinceCode: '10',
+          postCode: vZipcode.value.toString(),
+          zone: "BE",
+          area: localStorage.getItem('area'),
+          latitude: location.latitude.value.toString(),
+          longitude: location.longitude.value.toString(),
+          lineId: vStoreLine.value,
+          policyConsent: isChecked.value ? 'Agree' : 'Disagree',
+          imageList: [
+            {
+              id: 1,
+              name: 'left.png',
+              path: 'to/path',
+              descript: ''
+            },
+            {
+              id: 2,
+              name: 'right.png',
+              path: 'to/path',
+              descript: ''
+            }
+          ],
+          note: vStoreNote.value,
+          numberSeries: {
+            type: 'customer',
+            zone: 'BE'
+          }
+        }
+        console.log('dataStore',dataStore)
+        store.addCustomerNew(dataStore)
+      }
+    }
     return {
-      imageName,
       vStoreName,
       vStoreTax,
       vStorePhone,
       vStoreRoute,
+      vStoreType,
       vStoreLine,
       vStoreNote,
+      vAddress,
       vProvince,
       vDistrict,
       vSubdistrict,
       vZipcode,
-      sendData,
+      imageName,
       isChecked,
+      sendData,
       updateAddress,
       isDrawerOpen,
       openDrawer,
       closeDrawer,
-      utility
+      utility,
     }
 
   }

@@ -16,7 +16,7 @@
             </td>
           </tr>
         </tbody>
-        <tbody v-if="data.length === 0">
+        <tbody v-else-if="data.length === 0">
           <tr>
             <td :colspan="columns.length" class="text-center py-4 text-gray-500">
               <span> ไม่มีข้อมูล </span>
