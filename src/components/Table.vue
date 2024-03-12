@@ -16,6 +16,13 @@
             </td>
           </tr>
         </tbody>
+        <tbody v-if="data.length === 0">
+          <tr>
+            <td :colspan="columns.length" class="text-center py-4 text-gray-500">
+              <span> ไม่มีข้อมูล </span>
+            </td>
+          </tr>
+        </tbody>
         <tbody v-else>
           <tr v-for="(item, index) in data" :key="index" :class="index % 2 === 0 ? 'bg-white' : 'bg-gray-50'"
             class="border-b" @click="handleClick(item)">

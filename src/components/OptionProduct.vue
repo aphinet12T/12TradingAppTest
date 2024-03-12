@@ -54,7 +54,7 @@
 </template>
       
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watchEffect } from 'vue'
 import { useProductStore } from '../stores';
 
 const store = useProductStore();
@@ -67,17 +67,23 @@ const selectedBrand = ref('')
 const selectedSize = ref('')
 const selectedFlavour = ref('')
 
+watchEffect( () => {
+    if (selectedGroup.value) {
+        store.getDataOpion(selectedGroup.value)
+    }
+});
+
 const emit = defineEmits(['update:data'])
 const emitData = () => {
   const optionProduct = {
-    selectedGroup: selectedGroup.value || '',
-    selectedBrand: selectedBrand.value || '',
-    selectedSize: selectedSize.value || '',
-    selectedFlavour: selectedFlavour.value || '',
+    selectedGroup: selectedGroup.value,
+    selectedBrand: selectedBrand.value,
+    selectedSize: selectedSize.value,
+    selectedFlavour: selectedFlavour.value,
   };
 
   emit('update:data', optionProduct)
-};
+}
 
 onMounted(() => {
     store.getDataOpion()

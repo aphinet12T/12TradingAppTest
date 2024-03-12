@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
-import axios from 'axios';
+import { defineStore } from 'pinia'
+import axios from 'axios'
 
 export const useProductStore = defineStore('products', {
     state: () => ({
@@ -8,17 +8,27 @@ export const useProductStore = defineStore('products', {
             brand: [],
             size: [],
             flavour: [],
-          },
+        },
+        productList: [],
     }),
     getter: {
-
     },
     actions: {
-        async getDataOpion() {
+        async getDataOpion(selectedGroup, selectedBrand, selectedSize, selectedFlavour) {
             try {
-                const response = await axios.get(
-                    import.meta.env.VITE_API_BASE_URL + '/cms/saleProduct/getDataOption'
-                );
+                //   const token = JSON.parse(localStorage.getItem('token'));
+                const response = await axios.post(
+                    import.meta.env.VITE_API_BASE_URL + '/cms/saleProduct/getDataOption',
+                    {
+                        group: selectedGroup,
+                        brand: selectedBrand,
+                        size: selectedSize,
+                        flavour: selectedFlavour
+                    }
+                    // {
+                    //   headers: { Authorization: `Bearer ${token}` },
+                    // }
+                )
                 const result = response.data;
                 this.productOption.group = result.group
                 this.productOption.brand = result.brand
@@ -29,6 +39,28 @@ export const useProductStore = defineStore('products', {
                 console.error(error)
             }
         },
+        async getSaleProduct() {
+            try {
+                //   const token = JSON.parse(localStorage.getItem('token'));
+                const response = await axios.post(
+                    import.meta.env.VITE_API_BASE_URL +
+                    '/cms/saleProduct/getProduct',
+                    {
+                        group: '',
+                        brand: '',
+                        size: '',
+                        flavour: ''
+                    }
+                    // {
+                    //   headers: { Authorization: `Bearer ${token}` },
+                    // }
+                );
+                const result = response.data;
+                this.productList = result;
+                console.log('product', this.productList);
+            } catch (error) {
+                console.error(error);
+            }
+        },
     },
-  });
-  
+});

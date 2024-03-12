@@ -1,10 +1,9 @@
-import { defineStore } from 'pinia';
-import axios from 'axios';
+import { defineStore } from 'pinia'
+import axios from 'axios'
 
 export const useOrderStore = defineStore('orders', {
   state: () => ({
     productId: '',
-    productList: [],
     productDetail: [],
     productUnit: [],
     orderCart: [],
@@ -33,7 +32,7 @@ export const useOrderStore = defineStore('orders', {
       size: [],
       flavour: [],
     },
-    option:[],
+    option: [],
     // cartCheckout: {
     //   area: '',
     //   storeId: '',
@@ -48,26 +47,25 @@ export const useOrderStore = defineStore('orders', {
     },
   }),
   getter: {
-    getProduct: (state) => state.productList,
     getProductDetail: (state) => state.productDetail,
     getProductUnitDetail: (state) => state.productUnitDetail,
   },
   actions: {
-      async getDataOpion() {
-        try {
-            const response = await axios.get(
-                import.meta.env.VITE_API_BASE_URL + '/cms/saleProduct/getDataOption'
-            );
-            const result = response.data;
-            this.productOption.group = result.group
-            this.productOption.brand = result.brand
-            this.productOption.size = result.size
-            this.productOption.flavour = result.flavour
-            this.option = result
-            // console.log('option', this.productOption);
-        } catch (error) {
-            console.error(error)
-        }
+    async getDataOpion() {
+      try {
+        const response = await axios.get(
+          import.meta.env.VITE_API_BASE_URL + '/cms/saleProduct/getDataOption'
+        );
+        const result = response.data;
+        this.productOption.group = result.group
+        this.productOption.brand = result.brand
+        this.productOption.size = result.size
+        this.productOption.flavour = result.flavour
+        this.option = result
+        // console.log('option', this.productOption);
+      } catch (error) {
+        console.error(error)
+      }
     },
     resetProduct() {
       (this.productUnitDetail.unitId = ''), (this.productUnitDetail.qty = 1);
@@ -92,23 +90,6 @@ export const useOrderStore = defineStore('orders', {
       console.log('add', this.addOrder);
       await this.addNewOrder();
     },
-    async getSaleProduct() {
-      try {
-        //   const token = JSON.parse(localStorage.getItem('token'));
-        const response = await axios.post(
-          import.meta.env.VITE_API_BASE_URL + 
-            '/cms/saleProduct/getProduct'
-          // {
-          //   headers: { Authorization: `Bearer ${token}` },
-          // }
-        );
-        const result = response.data;
-        this.productList = result;
-        console.log('product', this.productList);
-      } catch (error) {
-        console.error(error);
-      }
-    },
     async getSaleProductDetailUnit() {
       try {
         //   const token = JSON.parse(localStorage.getItem('token'));
@@ -117,7 +98,7 @@ export const useOrderStore = defineStore('orders', {
         this.productUnitDetail.id = localProductId;
         const response = await axios.post(
           import.meta.env.VITE_API_BASE_URL +
-            '/cms/saleProduct/getProductDetailUnit',
+          '/cms/saleProduct/getProductDetailUnit',
           this.productUnitDetail
 
           // {
@@ -138,7 +119,7 @@ export const useOrderStore = defineStore('orders', {
         //   const token = JSON.parse(localStorage.getItem('token'));
         const response = await axios.post(
           import.meta.env.VITE_API_BASE_URL +
-            '/cms/saleProduct/addProductToCart', this.productData,
+          '/cms/saleProduct/addProductToCart', this.productData,
 
           // {
           //   headers: { Authorization: `Bearer ${token}` },

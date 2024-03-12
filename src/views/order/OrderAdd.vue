@@ -23,7 +23,7 @@
                     <OptionProduct @update:data="updateOption" />
                 </div>
                 <div class="flex justify-center mt-5">
-                    <Table :columns="tableColumns" :data="products" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
+                    <Table :columns="tableColumns" :data="dataProducts" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
                         :hTable="'h-[600px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
@@ -47,7 +47,7 @@
 <script>
 import { Icon } from '@iconify/vue'
 import { ref, computed, onMounted, watch } from 'vue'
-import { useOrderStore } from '../../stores'
+import { useOrderStore, useProductStore } from '../../stores'
 import { useRouter } from 'vue-router'
 import LayoutSub from '../LayoutSub.vue'
 import ButtonBack from '../../components/IconBack.vue'
@@ -65,9 +65,10 @@ export default {
         ButtonCart,
     },
     setup() {
-        const store = useOrderStore();
-        const products = computed(() => {
-            return store.productList;
+        const store = useOrderStore()
+        const product = useProductStore()
+        const dataProducts = computed(() => {
+            return product.productList
         })
 
         const storeId = localStorage.getItem('routeStoreId')
@@ -103,14 +104,14 @@ export default {
         }
 
         onMounted(() => {
-            store.getSaleProduct()
+            product.getSaleProduct();
         })
 
         return {
             storeId,
             storeName,
             tableColumns,
-            products,
+            dataProducts,
             handleClick,
             updateOption,
         }
