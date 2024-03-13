@@ -9,6 +9,7 @@ export const useStoresStore = defineStore('stores', {
       district: [],
       subdistrict: [],
       zipcode: [],
+      storeType: [],
     }),
     getter: {
       getCustomerAll: (state) => state.storeAll,
@@ -152,6 +153,23 @@ export const useStoresStore = defineStore('stores', {
           const result = response.data;
           this.zipcode = result;
           console.log('zipcode', this.zipcode);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      async getStoreType() {
+        try {
+        //   const token = JSON.parse(localStorage.getItem('token'));
+          const response = await axios.post(
+            import.meta.env.VITE_API_BASE_URL +
+              '/cms/promotion/getTypeStore',
+            // {
+            //   headers: { Authorization: `Bearer ${token}` },
+            // }
+          );
+          const result = response.data;
+          this.storeType = result;
+          console.log('typeStore', this.storeType);
         } catch (error) {
           console.error(error);
         }

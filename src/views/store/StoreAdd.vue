@@ -28,7 +28,7 @@
               </InputFeild>
               <div class="flex justify-end">
                 <span v-if="!vStoreName.trim()" class="text-sm font-light text-red-500">{{ utility.errorMessage
-                  }}</span>
+                }}</span>
                 <!-- <span v-else class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36 ตัวอักษร</span> -->
               </div>
             </div>
@@ -51,9 +51,19 @@
             </div>
             <div class="flex flex-row">
               <div class="mb-1">
-                <InputFeild :id="'storeType'" :label="'ประเภทร้านค้า'" :inputClass="'w-220 p-2.5'" :type="'text'"
+                <!-- <InputFeild :id="'storeType'" :label="'ประเภทร้านค้า'" :inputClass="'w-220 p-2.5'" :type="'text'"
                   v-model="vStoreType">
-                </InputFeild>
+                </InputFeild> -->
+                <form class="max-w-sm mx-auto">
+                  <label for="storeType" class="block mb-2 text-sm font-medium text-gray-900">ประเภทร้านค้า</label>
+                  <select v-model="vStoreType" id="storeType"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-220 p-2.5">
+                    <option disabled value="">เลือกประเภทร้านค้า</option>
+                    <option v-for="type in dataStoreType" :key="type.id" :value="type.id">
+                      {{ type.name }}
+                    </option>
+                  </select>
+                </form>
               </div>
               <div class="mb-1 ml-5">
                 <InputFeild :id="'lineId'" :label="'Line ID'" :inputClass="'w-220 p-2.5'" :type="'text'"
@@ -107,17 +117,16 @@
       <DrawerPolicy :showDrawer="isDrawerOpen" @close-drawer="closeDrawer" />
       <div class="relative rounded-t-xl overflow-auto p-4">
         <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
-          <span v-if="isLoading">
-            5555
-          </span>
           <button class="p-4 w-full rounded-lg flex items-center justify-center shadow-lg"
             :class="{ 'bg-green-500': isChecked, 'bg-gray-400': !isChecked }" type="button" :disabled="!isChecked"
-            @click="sendData"> เพิ่ม
-            <!-- <span v-else>
-              <button type="button" disabled class="p-4 w-full rounded-lg flex items-center justify-center shadow-lg">
-                เสร็จสิ้น
-              </button>
-            </span> -->
+            @click="sendData">
+            <span v-if="isLoading" class="inline-flex items-center">
+              กำลังเพิ่ม
+              <Icon icon="svg-spinners:3-dots-scale" />
+            </span>
+            <span v-else>
+              เพิ่ม
+            </span>
           </button>
         </div>
       </div>
@@ -166,6 +175,10 @@ export default {
       }
     })
 
+    const dataStoreType = computed(() => {
+      return store.storeType;
+    })
+
     const vStoreName = ref('')
     const vStoreTax = ref('')
     const vStorePhone = ref('')
@@ -192,22 +205,22 @@ export default {
     const isChecked = ref(false)
     const isDrawerOpen = ref(false)
     const isLoading = ref(false)
+
     const openDrawer = () => {
       isDrawerOpen.value = true
     }
     const closeDrawer = () => {
       isDrawerOpen.value = false
     }
-
-    const sendData = () => {
+    const sendData = async () => {
       isLoading.value = true
       const isValid = utility.validateInput(vStoreName.value)
 
       if (!isValid) {
+        isLoading.value = false
         const errorMessage = utility.getValidate()
         console.log('Invalid input. Error message:', errorMessage)
       } else {
-
         const dataStore = {
           taxId: vStoreTax.value,
           name: vStoreName.value,
@@ -228,7 +241,6 @@ export default {
           policyConsent: isChecked.value ? 'Agree' : 'Disagree',
           imageList: [
             {
-              id: 1,
               name: imageName.value,
               path: imagePath.value,
               descript: ''
@@ -240,10 +252,25 @@ export default {
             zone: 'BE'
           }
         }
-        console.log('dataStore', dataStore)
-        //store.addCustomerNew(dataStore)
+        try {
+          const response = await store.addCustomerNew(dataStore);
+          console.log('Response from backend:', response);
+
+          //showAlert.value = true
+          isLoading.value = false
+          console.log('dataStore', dataStore)
+
+        } catch (error) {
+          console.error('Error while sending data:', error);
+          isLoading.value = false
+        }
+
+
       }
     }
+    onMounted(() => {
+      store.getStoreType()
+    });
     return {
       vStoreName,
       vStoreTax,
@@ -266,6 +293,7 @@ export default {
       isLoading,
       openDrawer,
       closeDrawer,
+      dataStoreType,
       utility,
     }
 
