@@ -60,7 +60,6 @@ export const useStoresStore = defineStore('stores', {
       async addCustomerNew(dataStore) {
         try {
         //   const token = JSON.parse(localStorage.getItem('token'));
-        console.log('ter',dataStore);
           const response = await axios.post(
             import.meta.env.VITE_API_BASE_URL +
               '/cms/store/addStore',

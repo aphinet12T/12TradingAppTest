@@ -23,39 +23,47 @@
         <div class="bg-white h-64 w-card shadow-md rounded-lg mt-1 overflow-auto">
           <div class=" flex flex-col items-center mt-5">
             <div class="mb-1">
-              <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :inputClass="'w-500 p-2.5'" :type="'text'" v-model="vStoreName" :isRequired="true">
+              <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :inputClass="'w-500 p-2.5'" :type="'text'"
+                v-model="vStoreName" :isRequired="true">
               </InputFeild>
               <div class="flex justify-end">
-                <span v-if="!vStoreName.trim()" class="text-sm font-light text-red-500">{{ utility.errorMessage }}</span>
+                <span v-if="!vStoreName.trim()" class="text-sm font-light text-red-500">{{ utility.errorMessage
+                  }}</span>
                 <!-- <span v-else class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36 ตัวอักษร</span> -->
               </div>
             </div>
             <div class="mb-1">
-              <InputFeild :id="'storeTax'" :label="'เลขที่ผู้เสียภาษี'" :inputClass="'w-500 p-2.5'" :type="'text'" v-model="vStoreTax" :maxlength="13">
+              <InputFeild :id="'storeTax'" :label="'เลขที่ผู้เสียภาษี'" :inputClass="'w-500 p-2.5'" :type="'text'"
+                v-model="vStoreTax" :maxlength="13">
               </InputFeild>
             </div>
             <div class="flex flex-row">
               <div class="mb-1">
-                <InputFeild :id="'storePhone'" :label="'โทรศัพท์'" :inputClass="'w-220 p-2.5'" :type="'number'" v-model="vStorePhone" :maxlength="10">
+                <InputFeild :id="'storePhone'" :label="'โทรศัพท์'" :inputClass="'w-220 p-2.5'" :type="'number'"
+                  v-model="vStorePhone" :maxlength="10">
                 </InputFeild>
               </div>
               <div class="mb-1 ml-5">
-                <InputFeild :id="'storeRoute'" :label="'เส้นทาง'" :inputClass="'w-220 p-2.5'" :type="'text'" v-model="vStoreRoute">
+                <InputFeild :id="'storeRoute'" :label="'เส้นทาง'" :inputClass="'w-220 p-2.5'" :type="'text'"
+                  v-model="vStoreRoute">
                 </InputFeild>
               </div>
             </div>
             <div class="flex flex-row">
               <div class="mb-1">
-                <InputFeild :id="'storeType'" :label="'ประเภทร้านค้า'" :inputClass="'w-220 p-2.5'" :type="'text'" v-model="vStoreType">
+                <InputFeild :id="'storeType'" :label="'ประเภทร้านค้า'" :inputClass="'w-220 p-2.5'" :type="'text'"
+                  v-model="vStoreType">
                 </InputFeild>
               </div>
               <div class="mb-1 ml-5">
-                <InputFeild :id="'lineId'" :label="'Line ID'" :inputClass="'w-220 p-2.5'" :type="'text'" v-model="vStoreLine">
+                <InputFeild :id="'lineId'" :label="'Line ID'" :inputClass="'w-220 p-2.5'" :type="'text'"
+                  v-model="vStoreLine">
                 </InputFeild>
               </div>
             </div>
             <div class="mb-5">
-              <InputFeild :id="'storeNote'" :label="'หมายเหตุ'" :inputClass="'w-500 p-2.5'" :type="'text'" v-model="vStoreNote">
+              <InputFeild :id="'storeNote'" :label="'หมายเหตุ'" :inputClass="'w-500 p-2.5'" :type="'text'"
+                v-model="vStoreNote">
               </InputFeild>
             </div>
           </div>
@@ -99,10 +107,17 @@
       <DrawerPolicy :showDrawer="isDrawerOpen" @close-drawer="closeDrawer" />
       <div class="relative rounded-t-xl overflow-auto p-4">
         <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
+          <span v-if="isLoading">
+            5555
+          </span>
           <button class="p-4 w-full rounded-lg flex items-center justify-center shadow-lg"
             :class="{ 'bg-green-500': isChecked, 'bg-gray-400': !isChecked }" type="button" :disabled="!isChecked"
-            @click="sendData">
-            ถัดไป
+            @click="sendData"> เพิ่ม
+            <!-- <span v-else>
+              <button type="button" disabled class="p-4 w-full rounded-lg flex items-center justify-center shadow-lg">
+                เสร็จสิ้น
+              </button>
+            </span> -->
           </button>
         </div>
       </div>
@@ -144,6 +159,13 @@ export default {
       }
     })
 
+    watch(() => uploadStore.path, (newPath) => {
+      if (newPath !== null) {
+        imagePath.value = uploadStore.path
+        console.log('New path:', newPath);
+      }
+    })
+
     const vStoreName = ref('')
     const vStoreTax = ref('')
     const vStorePhone = ref('')
@@ -157,6 +179,7 @@ export default {
     const vSubdistrict = ref('')
     const vZipcode = ref('')
     const imageName = ref('')
+    const imagePath = ref('')
 
     const updateAddress = (address) => {
       vAddress.value = address.storeAddress
@@ -168,6 +191,7 @@ export default {
 
     const isChecked = ref(false)
     const isDrawerOpen = ref(false)
+    const isLoading = ref(false)
     const openDrawer = () => {
       isDrawerOpen.value = true
     }
@@ -176,22 +200,15 @@ export default {
     }
 
     const sendData = () => {
+      isLoading.value = true
       const isValid = utility.validateInput(vStoreName.value)
 
       if (!isValid) {
-        const errorMessage = utility.getValidate();
+        const errorMessage = utility.getValidate()
         console.log('Invalid input. Error message:', errorMessage)
       } else {
-          console.log('Input is valid.');
-          console.log('vStoreName :', vStoreName.value)
-          console.log('vStoreTax :', vStoreTax.value)
-          console.log('vAddress :', vAddress.value)
-          console.log('vProvince :', vProvince.value)
-          console.log('vDistrict :', vDistrict.value)
-          console.log('vSubdistrict :', vSubdistrict.value)
-          console.log('vZipcode :', vZipcode.value)
 
-          const dataStore = {
+        const dataStore = {
           taxId: vStoreTax.value,
           name: vStoreName.value,
           tel: vStorePhone.value,
@@ -212,16 +229,10 @@ export default {
           imageList: [
             {
               id: 1,
-              name: 'left.png',
-              path: 'to/path',
+              name: imageName.value,
+              path: imagePath.value,
               descript: ''
             },
-            {
-              id: 2,
-              name: 'right.png',
-              path: 'to/path',
-              descript: ''
-            }
           ],
           note: vStoreNote.value,
           numberSeries: {
@@ -229,8 +240,8 @@ export default {
             zone: 'BE'
           }
         }
-        console.log('dataStore',dataStore)
-        store.addCustomerNew(dataStore)
+        console.log('dataStore', dataStore)
+        //store.addCustomerNew(dataStore)
       }
     }
     return {
@@ -247,10 +258,12 @@ export default {
       vSubdistrict,
       vZipcode,
       imageName,
+      imagePath,
       isChecked,
       sendData,
       updateAddress,
       isDrawerOpen,
+      isLoading,
       openDrawer,
       closeDrawer,
       utility,

@@ -1,6 +1,5 @@
-// imageUploadStore.js
-import { defineStore } from 'pinia';
-import axios from 'axios';
+import { defineStore } from 'pinia'
+import axios from 'axios'
 
 export const useUploadStore = defineStore('upload', {
   state: () => ({
