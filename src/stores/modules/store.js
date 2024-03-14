@@ -10,6 +10,10 @@ export const useStoresStore = defineStore('stores', {
       subdistrict: [],
       zipcode: [],
       storeType: [],
+      addedStoreInfo: {
+        storeId: '',
+        storeName: ''
+      },
     }),
     getter: {
       getCustomerAll: (state) => state.storeAll,
@@ -71,10 +75,15 @@ export const useStoresStore = defineStore('stores', {
             //   headers: { Authorization: `Bearer ${token}` },
             // }
           );
-          const result = response.data;
-          console.log('addStore', result);
+          const result = response.data
+          console.log('addStore', result)
+          console.log('188',result)
+          this.addedStoreInfo = {
+            storeId: result.additionalData.storeId,
+            storeName: result.additionalData.storeName
+          }
         } catch (error) {
-          console.error(error);
+          console.error(error)
         }
       },
       async getProvince() {

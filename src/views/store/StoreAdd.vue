@@ -247,21 +247,19 @@ export default {
             },
           ],
           note: vStoreNote.value,
-          numberSeries: {
-            type: 'customer',
-            zone: 'BE'
-          }
+          typeNumberSeries: 'customer',
+          zoneNumberSeries: 'BE'
         }
         try {
-          const response = await store.addCustomerNew(dataStore);
-          console.log('Response from backend:', response);
+          const response = await store.addCustomerNew(dataStore)
+          console.log('response', response)
 
           //showAlert.value = true
           isLoading.value = false
           console.log('dataStore', dataStore)
 
         } catch (error) {
-          console.error('Error while sending data:', error);
+          console.error('Error while sending data:', error)
           isLoading.value = false
         }
 

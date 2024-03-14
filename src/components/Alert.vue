@@ -1,5 +1,5 @@
 <template>
-    <div v-if="showAlert" :id="alertId" class="p-4 mb-4 fixed top-0 left-0 right-0 z-50 w-full h-44 overflow-x-hidden overflow-y-auto rounded-lg" :class="color" role="alert">
+    <div v-if="show" :id="alertId" :class="alertClasses" role="alert">
         <div class="flex items-center">
             <h3 class="text-3xl font-medium">{{ title }}</h3>
         </div>
@@ -9,57 +9,72 @@
         <div class="flex">
             <button type="button"
                 class="text-white bg-green-500 font-medium rounded-lg text-lg px-7 py-3 me-2 text-center inline-flex items-center"
-                @click="confirm">
-                ยืนยัน
+                @click="onConfirm">
+                {{ confirmText }}
             </button>
             <button type="button"
                 class="text-white bg-red-500 font-medium rounded-lg text-lg px-7 py-3 text-center"
-                @click="dismiss" aria-label="Close">
-                ยกเลิก
+                @click="onDismiss" aria-label="Close">
+                {{ dismissText }}
             </button>
         </div>
     </div>
 </template>
-  
+
 <script>
-import { reactive, ref } from 'vue';
+import { ref, computed } from 'vue';
 
 export default {
     props: {
         alertId: {
             type: String,
-            // required: true,
+            required: true,
         },
         title: {
             type: String,
+            required: true,
         },
         content: {
             type: String,
+            required: true,
         },
         color: {
             type: String,
+            default: '',
+        },
+        confirmText: {
+            type: String,
+            default: 'Confirm',
+        },
+        dismissText: {
+            type: String,
+            default: 'Cancel',
+        },
+        show: {
+            type: Boolean,
+            default: true,
         },
     },
     setup(props, { emit }) {
-
-        const showAlert = ref(true)
-
-        const product = props.product
-
-        function confirm() {
+        const onConfirm = () => {
             emit('confirm');
-        }
+        };
 
-        function dismiss() {
+        const onDismiss = () => {
             emit('dismiss');
-            showAlert.value = false
-        }
+        };
+
+        const alertClasses = computed(() => {
+            return [
+                'p-4 mb-4 fixed top-0 left-0 right-0 z-50 w-full h-44 overflow-x-hidden overflow-y-auto rounded-lg',
+                props.color,
+            ];
+        });
 
         return {
-            showAlert,
-            confirm,
-            dismiss,
-            product
+            onConfirm,
+            onDismiss,
+            alertClasses,
         };
     },
 };
