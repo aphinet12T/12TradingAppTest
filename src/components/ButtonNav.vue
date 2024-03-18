@@ -36,7 +36,7 @@ export default {
         route: "store"
       },
       {
-        label: "ขาย",
+        label: "รายการ",
         icon: "mdi:marketplace-outline",
       },
       {
@@ -79,8 +79,7 @@ export default {
       if (route) {
         router.push({ path: route })
       }
-
-    };
+    }
 
     return {
       buttons,
@@ -88,8 +87,7 @@ export default {
       textClass,
       iconClass,
       handleClick,
-    };
+    }
   },
 };
 </script>
-  

@@ -15,6 +15,20 @@
       <div class="flex justify-center">
         <Table :columns="tableColumns" :data="routeMain" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-700'"
           @row-click="handleClick">
+          <template v-slot:statusNumber="{ rowData, item }">
+              <span v-if="item.status === '0'"
+                class="bg-red-100 text-red-800 text-md font-medium px-2.5 py-0.5 rounded">
+                {{ item.statusNumber }}
+              </span>
+              <span v-if="item.status === '1'"
+                class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                {{ item.statusNumber }}
+              </span>
+              <span v-if="item.status === '2'"
+                class="bg-blue-100 text-blue-800 text-md font-medium px-2.5 py-0.5 rounded">
+                {{ item.statusNumber }}
+              </span>
+            </template>
         </Table>
       </div>
     </template>

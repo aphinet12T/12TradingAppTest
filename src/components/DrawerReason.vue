@@ -1,6 +1,5 @@
 <template>
     <div class="text-center">
-
         <button type="button" @click="toggleBottomDrawer"
             class="text-white bg-red-500 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center">
             <Icon class="icon" height="40" width="40" icon="bi:bag-x" />
@@ -20,7 +19,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                     </svg>
-                    <span class="sr-only">Close menu</span>
+                    <span class="sr-only">ปิดเมนู</span>
                 </button>
             </div>
             <div class="text-4xl text-center">
@@ -33,15 +32,24 @@
                 ชื่อร้านค้า {{ storeName }}
             </div>
             <div class="mt-5">
-                <Dropdown dropdownId="dropdownReason" :btClass="'w-full'" :dropdownItems="dropdownItem" />
+                <form class="max-w-sm mx-auto">
+                    <select v-model="selectedReason" @change="emitData"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-220 p-2.5">
+                        <option value="" disabled selected>กรุณาเลือกสาเหตุ</option>
+                        <option v-for="reason in dataReason" :key="reason.id" :value="reason.id">
+                            {{ reason.name }}
+                        </option>
+                    </select>
+                </form>
             </div>
-            <div class="mt-5">
-                <textarea id="message" rows="4"
+            <div v-if="selectedReason === '0'" class="mt-5">
+                <textarea v-model="reasonMessage" rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-gray-500 focus:border-gray-500"
-                    placeholder="ระบุสาเหตุ"></textarea>
+                    placeholder="ระบุเหตุผล">
+                </textarea>
             </div>
             <div class="mt-5">
-                <button type="button"
+                <button @click="saveReason" type="button"
                     class="w-full focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2">บันทึก</button>
             </div>
         </div>
@@ -49,9 +57,9 @@
 </template>
   
 <script>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, defineEmits } from 'vue';
 import { Icon } from '@iconify/vue';
-import Dropdown from '../components/Dropdown.vue';
+import { useOptionStore } from '../stores';
 
 export default {
     props: {
@@ -60,27 +68,20 @@ export default {
     },
     components: {
         Icon,
-        Dropdown,
     },
-    setup() {
+    setup(props, { emit }) {
+        const option = useOptionStore();
+        const dataReason = computed(() => option.reason);
+
+        const selectedReason = ref('');
         const showDrawer = ref(false);
         const showBackdrop = ref(false);
         const drawerId = 'drawer-bottom-example';
-        const drawerLabelId = 'drawer-bottom-label';
-
-        const dropdownItem = computed(() => {
-            return [
-                { label: 'Dashboard', link: '#' },
-                { label: 'Settings', link: '#' },
-                { label: 'Earnings', link: '#' },
-                { label: 'Sign out', link: '#' }
-            ];
-        });
 
         const toggleBottomDrawer = () => {
             showDrawer.value = !showDrawer.value;
             if (showDrawer.value) {
-                showBackdrop.value = true
+                showBackdrop.value = true;
             }
         };
 
@@ -89,16 +90,35 @@ export default {
             showBackdrop.value = false;
         };
 
+        const emitData = () => {
+            emit('update:data', { selectedReason: selectedReason.value });
+        };
+
+        const saveReason = () => {
+            const reasonData = {
+                selectedReason: selectedReason.value,
+                reasonMessage: selectedReason.value === '0' ? reasonMessage : ''
+            };
+            console.log(reasonData);
+        };
+
+        let reasonMessage = ''
+        
+        onMounted(() => {
+            option.getReason();
+        });
+
         return {
+            selectedReason,
             showDrawer,
             showBackdrop,
             drawerId,
-            drawerLabelId,
             toggleBottomDrawer,
             closeDrawer,
-            dropdownItem,
+            dataReason,
+            saveReason,
+            reasonMessage
         };
     },
 };
 </script>
-  

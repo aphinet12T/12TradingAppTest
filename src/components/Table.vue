@@ -37,9 +37,6 @@
                 <template v-if="col.id === ''">
                   <slot name="button" :rowData="item" />
                 </template>
-                  <!-- <template v-else>
-                    {{ item[col.id] }}
-                  </template> -->
                   <template v-else>
                   <slot :name="col.id" :rowData="item" :item="item">
                     {{ item[col.id] }}
