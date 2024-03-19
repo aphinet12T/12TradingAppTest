@@ -14,11 +14,12 @@ export function useDisplaySize() {
     }
 
     const isMobile = () => {
-        return window.innerWidth < 600 ? true : false
+        return window.innerWidth < 600
     }
 
     onMounted(() => {
         window.addEventListener('resize', browserResized)
+        sizes.isMobile = isMobile()
     })
 
     onUnmounted(() => {

@@ -21,7 +21,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import VueApexCharts from "vue3-apexcharts";
-import { useReportStore } from '../stores';
+import { useReportStore } from '../../stores';
 
 const store = useReportStore();
 const chartSales = computed(() => {

@@ -55,7 +55,7 @@
       
 <script setup>
 import { ref, computed, onMounted, watchEffect } from 'vue'
-import { useProductStore } from '../stores';
+import { useProductStore } from '../../stores';
 
 const store = useProductStore();
 const dataProduct = computed(() => {

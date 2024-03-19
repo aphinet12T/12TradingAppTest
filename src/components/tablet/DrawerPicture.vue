@@ -47,7 +47,7 @@
 <script>
 import { Icon } from '@iconify/vue';
 import { ref, watch } from 'vue'
-import { useUploadStore } from '../stores';
+import { useUploadStore } from '../../stores';
 export default {
     props: {
         storeID: String,

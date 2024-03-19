@@ -33,8 +33,8 @@
 import { computed, onMounted } from 'vue'
 import { useOrderStore, useProductStore } from '../stores'
 import { Icon } from '@iconify/vue'
-import Table from '../components/Table.vue'
-import Dropdown from '../components/Dropdown.vue'
+import Table from '../components/tablet/Table.vue'
+import Dropdown from '../components/tablet/Dropdown.vue'
 // import Dropdown2 from '../components/Dropdown.vue'
 export default {
     components: {

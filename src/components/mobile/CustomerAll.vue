@@ -4,8 +4,8 @@
 
 <script setup>
 import { computed, onMounted } from 'vue';
-import Table from '../components/Table.vue';
-import { useStoresStore } from '../stores';
+import Table from '../components/mobile/Table.vue';
+import { useStoresStore } from '../../stores';
 
 const store = useStoresStore();
 const customerAll = computed(() => {

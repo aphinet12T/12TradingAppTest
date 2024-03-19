@@ -59,7 +59,7 @@
 <script>
 import { ref, computed, onMounted, defineEmits } from 'vue';
 import { Icon } from '@iconify/vue';
-import { useOptionStore } from '../stores';
+import { useOptionStore } from '../../stores';
 
 export default {
     props: {

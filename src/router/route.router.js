@@ -25,10 +25,6 @@ const routeRoutes = [
         component: () => import('../views/route/RouteStore.vue'),
       },
       {
-        path: 'test',
-        component: () => import('../components/Alert.vue'),
-      },
-      {
         path: 'location',
         component: () => import('../views/route/RouteLocation.vue'),
       },
