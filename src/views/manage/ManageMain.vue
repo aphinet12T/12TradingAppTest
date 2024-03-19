@@ -51,7 +51,7 @@ import CustomerAll from '../../components/CustomerAll.vue';
 import CustomerNew from '../../components/CustomerNew.vue';
 import ButtonAdd from '../../components/ButtonCircle.vue';
 // import { useScreen, useGrid } from 'vue-screen'
-import useWindowDimensions from '../../composable/Resize'
+import useWindowDimensions from '../../composable/DisplaySize'
 
 export default {
   components: {

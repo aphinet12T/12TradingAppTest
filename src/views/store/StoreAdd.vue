@@ -236,7 +236,7 @@ export default {
           zone: "BE",
           area: localStorage.getItem('area'),
           latitude: location.latitude.value.toString(),
-          longitude: location.longitude.value.toString(),
+          longtitude: location.longitude.value.toString(),
           lineId: vStoreLine.value,
           policyConsent: isChecked.value ? 'Agree' : 'Disagree',
           imageList: [

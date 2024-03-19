@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <div class="bg-white sm:w-[350px] md:w-card px-1 sha shadow-slate-300 shadow-md sm:rounded-lg overflow-auto h-[350px]">
+        <div class="bg-white w-[350px] px-1 sha shadow-slate-300 shadow-md sm:rounded-lg overflow-auto h-[350px]">
             <div class="grid grid-cols-2">
                 <dl class="flex items-center">
                     <dt class="text-gray-500 text-md font-normal me-1">รายงานยอดขาย</dt>
@@ -21,7 +21,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import VueApexCharts from "vue3-apexcharts";
-import { useReportStore } from '../stores';
+import { useReportStore } from '../../stores';
 
 const store = useReportStore();
 const chartSales = computed(() => {
@@ -66,7 +66,7 @@ const updateChartData = () => {
         },
         
         xaxis: {
-          categories: chartSales.value.month,
+          categories: ['01','02','03','04','05','06','07','08','09','10','11','12'],
           position: 'top',
           axisBorder: {
             show: false
