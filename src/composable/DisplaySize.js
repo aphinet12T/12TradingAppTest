@@ -4,12 +4,14 @@ export function useDisplaySize() {
     const sizes = reactive({
         browserWidth: window.innerWidth,
         deviceWidth: screen.width,
+        deviceHeight: screen.height,
         isMobile: false
     })
 
     const browserResized = () => {
         sizes.browserWidth = window.innerWidth
         sizes.deviceWidth = screen.width
+        sizes.deviceHeight = screen.height
         sizes.isMobile = isMobile()
     }
 

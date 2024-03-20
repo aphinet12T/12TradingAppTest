@@ -3,8 +3,7 @@
         <template v-slot:header>
             <div class="flex items-center justify-between pb-32">
                 <div class="flex justify-end ml-5">
-                    <Icon class="icon" height="50" width="50" icon="fluent:drawer-add-24-regular" />
-                    <div class="sm:text-xl md:text-4xl mt-2 ml-5 font-medium">หน้าแรก</div>
+                    <img src="/public/logo-onetwo.png" class="me-3 sm:h-16 md:h-20">
                 </div>
                 <div class="flex justify-end mr-2">
                 </div>
@@ -19,25 +18,28 @@
             </div>
         </template>
         <template v-slot:body>
-            <div class="flex justify-center">
+            <div class="flex justify-center relative bottom-20">
                 <MobileChart v-if="isMobile" />
-                <TebletChart v-else />
+                <TabletChart v-else />
             </div>
-            <div class="flex justify-center mt-10">
-                <Announce />
+            <div class="flex justify-center relative bottom-10">
+                <MobileAnnounce v-if="isMobile" />
+                <TabletAnnounce v-else />
             </div>
         </template>
     </LayoutMain>
-    <ButtonNav />
+    <MobileButtonNav v-if="isMobile" />
+    <TabletButtonNav v-else />
 </template>
 
 <script setup>
-import { Icon } from '@iconify/vue'
 import { useDisplaySize } from '../composable/DisplaySize'
 import LayoutMain from './LayoutMain.vue'
-import ButtonNav from '../components/tablet/ButtonNav.vue'
-import Announce from '../components/tablet/Announce.vue'
-import TebletChart from '../components/tablet/ChartSales.vue'
+import TabletButtonNav from '../components/tablet/ButtonNav.vue'
+import MobileButtonNav from '../components/mobile/ButtonNav.vue'
+import TabletAnnounce from '../components/tablet/Announce.vue'
+import MobileAnnounce from '../components/mobile/Announce.vue'
+import TabletChart from '../components/tablet/ChartSales.vue'
 import MobileChart from '../components/mobile/ChartSales.vue'
 const { isMobile } = useDisplaySize()
 

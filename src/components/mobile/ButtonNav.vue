@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600 flex justify-between">
+    class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 flex justify-between">
     <button v-for="(button, index) in buttons" :key="index" :class="buttonClass(index)" @click="handleClick(index)">
       <Icon :icon="button.icon" :class="iconClass(index)" />
       <span :class="textClass(index)">{{ button.label }}</span>
@@ -55,9 +55,9 @@ export default {
       "flex-col",
       "items-center",
       "justify-center",
-      "px-5",
+      "px-2",
       "group",
-    ];
+    ]
 
     const iconClass = (index) => [
       "w-8",
@@ -65,13 +65,13 @@ export default {
       "mb-0",
       "text-gray-500",
       "group-hover:text-blue-600",
-    ];
+    ]
 
     const textClass = (index) => [
       "text-sm",
       "text-gray-500",
       "group-hover:text-blue-600",
-    ];
+    ]
 
     const handleClick = (index) => {
       const route = buttons.value[index].route

@@ -1,6 +1,6 @@
 <template>
-    <div class="relative">
-        <div class="bg-white sm:w-[350px] md:w-card px-1 sha shadow-slate-300 shadow-md sm:rounded-lg overflow-auto h-[350px]">
+    <div>
+        <div class="bg-white sm:w-[350px] md:w-card px-1 sha shadow-slate-300 shadow-md sm:rounded-lg h-[350px]">
             <div class="grid grid-cols-2">
                 <dl class="flex items-center">
                     <dt class="text-gray-500 text-md font-normal me-1">รายงานยอดขาย</dt>
@@ -13,7 +13,7 @@
                   </router-link>
                 </dl>
             </div>
-            <VueApexCharts type="bar" height="350" :options="chartOptions" :series="chartSeries" />
+            <VueApexCharts type="bar" height="300" :options="chartOptions" :series="chartSeries" />
         </div>
     </div>
 </template>
@@ -38,7 +38,7 @@ const updateChartData = () => {
           data: chartSales.value.dataSalePercentNumber,
         }],
         chart: {
-          height: 350,
+          height: 300,
           type: 'bar',
           toolbar: { 
                 show: false,
@@ -60,7 +60,7 @@ const updateChartData = () => {
           },
           offsetY: -20,
           style: {
-            fontSize: '12px',
+            fontSize: '15px',
             colors: ["#304758"]
           }
         },

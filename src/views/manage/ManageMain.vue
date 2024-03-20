@@ -1,5 +1,4 @@
 <template>
-  <!-- <div :style="{ height: windowHeight + 'px', width: windowWidth + 'px' }"> -->
     <LayoutMain>
       <template v-slot:header>
         <div class="flex items-center justify-between pb-32">
@@ -37,21 +36,18 @@
       </template>
     </LayoutMain>
     <ButtonNav />
-  <!-- </div> -->
 </template>
   
 <script>
-import { Icon } from '@iconify/vue';
-import { ref, onMounted, onUnmounted } from 'vue';
-import LayoutMain from '../LayoutMain.vue';
-import ButtonNav from '../../components/ButtonNav.vue';
-import SearchBar from '../../components/SearchBar.vue';
-import ButtonTab from '../../components/ButtonTab.vue';
-import CustomerAll from '../../components/CustomerAll.vue';
-import CustomerNew from '../../components/CustomerNew.vue';
-import ButtonAdd from '../../components/ButtonCircle.vue';
-// import { useScreen, useGrid } from 'vue-screen'
-import useWindowDimensions from '../../composable/DisplaySize'
+import { Icon } from '@iconify/vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import LayoutMain from '../LayoutMain.vue'
+import ButtonNav from '../../components/tablet/ButtonNav.vue'
+import SearchBar from '../../components/tablet/SearchBar.vue'
+import ButtonTab from '../../components/tablet/ButtonTab.vue'
+import CustomerAll from '../../components/tablet/CustomerAll.vue'
+import CustomerNew from '../../components/tablet/CustomerNew.vue'
+import ButtonAdd from '../../components/tablet/ButtonCircle.vue'
 
 export default {
   components: {
@@ -65,7 +61,6 @@ export default {
     ButtonAdd,
   },
   setup() {
-    // const { windowHeight, windowWidth } = useWindowDimensions();
 
     const btRefund = ref('เปลี่ยนสินค้า');
     const btGive = ref('แจกสินค้า');
@@ -80,28 +75,11 @@ export default {
       }
     }
 
-    const windowHeight = ref(window.innerHeight);
-    const windowWidth = ref(window.innerWidth);
-
-    const updateDimensions = () => {
-      windowHeight.value = window.innerHeight;
-      windowWidth.value = window.innerWidth;
-    };
-
-    onMounted(() => {
-      window.addEventListener('resize', updateDimensions);
-    });
-
-    onUnmounted(() => {
-      window.removeEventListener('resize', updateDimensions);
-    });
-
     return {
       btRefund,
       btGive,
       dataManage,
       btSelected,
-      windowHeight, windowWidth
     }
   },
 };
