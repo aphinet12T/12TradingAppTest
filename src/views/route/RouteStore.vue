@@ -8,39 +8,41 @@
                     </div>
                     <div class="mt-2 ml-2 flex items-center">
                         <Icon icon="tdesign:store" width="40" />
-                        <span class="ml-2 text-3xl">การเข้าเยี่ยม {{ routeDay }}</span>
+                        <span class="ml-2 md:text-3xl">การเข้าเยี่ยม {{ routeDay }}</span>
                     </div>
                 </div>
                 <div class="flex flex-col mt-4">
-                    <div class="ml-12 text-xl">
+                    <div class="ml-12 md:text-xl">
                         รหัส : {{ routeStore.storeId }}
                     </div>
-                    <div class="ml-12 text-xl">
+                    <div class="ml-12 md:text-xl">
                         ชื่อ : {{ routeStore.name }}
                     </div>
-                    <div class="ml-12 text-xl">
+                    <div class="ml-12 md:text-xl">
                         ที่อยู่ : {{ routeStore.address }}
                     </div>
                 </div>
                 <div class="flex justify-center mt-5">
-                    <Table :columns="tableColumns" :data="routeStoreList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[650px]'">
+                    <Table :columns="tableColumns" :data="routeStoreList"
+                        :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'"
+                        :tdClass="'px-6 py-2 sm:text-sm md:text-lg text-center'" :hTable="'sm:h-[350px] md:h-[650px]'">
                     </Table>
                 </div>
                 <div class="flex flex-row justify-center">
-                    <div class="mx-10 mt-5">
+                    <div class="mt-5 sm:mx-5 md:mx-10">
                         <DrawerReason :storeID="routeStore.storeId" :storeName="routeStore.name" />
                     </div>
-                    <div class="mx-10 mt-5">
+                    <div class="mt-5 sm:mx-5 md:mx-10">
                         <button type="button" @click="handleClick"
-                            class="text-white bg-green-500 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center shadow-slate-300 shadow-md">
-                            <Icon class="icon" height="40" width="40" icon="bi:bag-plus" />
+                            class="text-white bg-green-500 font-medium rounded-lg sm:text-xs md:text-lg px-6 py-3 inline-flex flex-col items-center justify-center shadow-slate-300 shadow-md">
+                            <Icon class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" icon="bi:bag-plus" />
                             <span class="">ขาย</span>
                         </button>
                     </div>
-                    <div class="mx-10 mt-5">
+                    <div class="mt-5 sm:mx-5 md:mx-10">
                         <DrawerPicture :btClass="'px-5 py-3'">
                             <template v-slot:icon>
-                                <Icon class="icon" :height="'40'" :width="'40'" :icon="'bi:camera'"/>
+                                <Icon class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" :icon="'bi:camera'" />
                             </template>
                         </DrawerPicture>
                     </div>
@@ -49,64 +51,44 @@
         </template>
     </LayoutSub>
 </template>
-    
-<script>
-import { Icon } from '@iconify/vue';
-import { computed, onMounted } from 'vue';
-import { useRouteStore } from '../../stores';
-import { useRouter } from 'vue-router';
-import LayoutSub from '../LayoutSub.vue';
-import ButtonBack from '../../components/IconBack.vue';
-import Table from '../../components/Table.vue';
-import DrawerReason from '../../components/DrawerReason.vue';
-import DrawerPicture from '../../components/DrawerPicture.vue';
 
-export default {
-    components: {
-        Icon,
-        LayoutSub,
-        ButtonBack,
-        Table,
-        DrawerReason,
-        DrawerPicture,
-    },
+<script setup>
+import { Icon } from '@iconify/vue'
+import { computed, onMounted } from 'vue'
+import { useRouteStore } from '../../stores'
+import { useRouter } from 'vue-router'
+import LayoutSub from '../LayoutSub.vue'
+import ButtonBack from '../../components/ButtonBack.vue'
+import Table from '../../components/Table.vue'
+import DrawerReason from '../../components/tablet/DrawerReason.vue'
+import DrawerPicture from '../../components/tablet/DrawerPicture.vue'
 
-    setup() {
-        const store = useRouteStore();
-        const routeStore = computed(() => {
-            return store.routeStore;
-        });
-        const routeStoreList = computed(() => {
-            return store.routeStoreList;
-        });
 
-        const tableColumns = computed(() => {
-            return [
-                { id: 'number', title: 'ลำดับ' },
-                { id: 'date', title: 'วันที่' },
-                { id: 'orderId', title: 'รายการ' },
-            ];
-        });
+const store = useRouteStore();
+const routeStore = computed(() => {
+    return store.routeStore;
+});
+const routeStoreList = computed(() => {
+    return store.routeStoreList;
+});
 
-        const router = useRouter();
-        const handleClick = () => {
-            router.push('/cms/order/add')
-        }
+const tableColumns = computed(() => {
+    return [
+        { id: 'number', title: 'ลำดับ' },
+        { id: 'date', title: 'วันที่' },
+        { id: 'orderId', title: 'รายการ' },
+    ];
+});
 
-        const routeDay = localStorage.getItem('routeDay')
-
-        onMounted(() => {
-            store.getRouteStore();
-        });
-
-        return {
-            routeStore,
-            routeStoreList,
-            tableColumns,
-            handleClick,
-            routeDay,
-        }
-    }
+const router = useRouter();
+const handleClick = () => {
+    router.push('/cms/order/add')
 }
+
+const routeDay = localStorage.getItem('routeDay')
+
+onMounted(() => {
+    store.getRouteStore();
+});
+
 </script>
-    

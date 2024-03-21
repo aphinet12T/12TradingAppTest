@@ -20,19 +20,21 @@
           </div>
         </div>
         <div class="flex justify-center">
-          <Table :columns="tableColumns" :data="routeDetailList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
-            :isLoading="isLoading" :hTable="'h-[690px]'" @row-click="handleClick">
+          <Table :columns="tableColumns" :data="routeDetailList"
+            :thClass="'py-3 px-10 sm:text-center sm:text-sm md:text-lg'"
+            :tdClass="'py-2 sm:text-sm md:text-lg text-center'" :isLoading="isLoading"
+            :hTable="'sm:h-[420px] md:h-[690px]'" @row-click="handleClick">
             <template v-slot:statusText="{ item }">
               <span v-if="item.status === '0'"
-                class="bg-red-100 text-red-800 text-md font-medium px-2.5 py-0.5 rounded">
+                class="bg-red-100 text-red-800 sm:text-sm md:text-md font-medium px-2.5 py-0.5 rounded">
                 {{ item.statusText }}
               </span>
               <span v-if="item.status === '1'"
-                class="bg-green-100 text-green-800 text-md font-medium px-2.5 py-0.5 rounded">
+                class="bg-green-100 text-green-800 sm:text-sm md:text-md font-medium px-2.5 py-0.5 rounded">
                 {{ item.statusText }}
               </span>
               <span v-if="item.status === '2'"
-                class="bg-blue-100 text-blue-800 text-md font-medium px-2.5 py-0.5 rounded">
+                class="bg-blue-100 text-blue-800 sm:text-sm md:text-md font-medium px-2.5 py-0.5 rounded">
                 {{ item.statusText }}
               </span>
             </template>
@@ -41,34 +43,34 @@
         <div class="flex-grow z-40">
           <div class="bg-white h-full shadow-slate-800 shadow-md">
             <div class="flex justify-between">
-              <div class="mt-5 ml-5 text-2xl">
+              <div class="mt-5 ml-5 md:text-2xl">
                 ร้านค้าเป้าหมาย
               </div>
-              <div class="mt-5 mr-5 text-2xl">
+              <div class="mt-5 mr-5 md:text-2xl">
                 {{ routeDetail.targetGroup }}
               </div>
             </div>
             <div class="flex justify-between">
-              <div class="ml-5 text-2xl">
+              <div class="ml-5 md:text-2xl">
                 ร้านค้าที่เปิดบิล
               </div>
-              <div class="mr-5 text-2xl">
+              <div class="mr-5 md:text-2xl">
                 {{ routeDetail.buy }}
               </div>
             </div>
             <div class="flex justify-between">
-              <div class="ml-5 text-2xl">
+              <div class="ml-5 md:text-2xl">
                 ร้านค้าที่เข้าเยี่ยม
               </div>
-              <div class="mr-5 text-2xl">
+              <div class="mr-5 md:text-2xl">
                 {{ routeDetail.checkin }}
               </div>
             </div>
             <div class="flex justify-between">
-              <div class="ml-5 text-2xl">
+              <div class="ml-5 md:text-2xl">
                 ร้านค้ารอเข้าเยี่ยม
               </div>
-              <div class="mr-5 text-2xl">
+              <div class="mr-5 md:text-2xl">
                 {{ routeDetail.progress }}
               </div>
             </div>
@@ -78,80 +80,68 @@
     </template>
   </LayoutSub>
 </template>
-  
-<script>
-import { Icon } from '@iconify/vue';
-import { computed, onMounted, ref, watchEffect } from 'vue';
-import { useRouter } from 'vue-router';
-import { useRouteStore } from '../../stores';
-import LayoutSub from '../LayoutSub.vue';
-import ButtonBack from '../../components/IconBack.vue';
-import Table from '../../components/Table.vue';
 
-export default {
-  components: {
-    Icon,
-    LayoutSub,
-    ButtonBack,
-    Table,
-  },
+<script setup>
+import { Icon } from '@iconify/vue'
+import { computed, onMounted, ref, watchEffect } from 'vue'
+import { useRouter } from 'vue-router'
+import { useRouteStore } from '../../stores'
+import { useDisplaySize } from '../../composable/DisplaySize'
+import LayoutSub from '../LayoutSub.vue'
+import ButtonBack from '../../components/ButtonBack.vue'
+import Table from '../../components/Table.vue'
 
+const { isMobile } = useDisplaySize()
+const store = useRouteStore();
+// const routeDetail = computed(() => {
+//   return store.routeDetail;
+// });
 
-  setup() {
+// const routeDetailList = computed(() => {
+//   return store.routeDetailList;
+// });
+const routeDetail = ref(store.routeDetail);
+const routeDetailList = ref(store.routeDetailList);
 
-    const store = useRouteStore();
-    // const routeDetail = computed(() => {
-    //   return store.routeDetail;
-    // });
+const router = useRouter();
+const handleClick = (row) => {
+  const routeStore = row.id;
+  const routeStoreName = row.name;
+  localStorage.setItem('routeStoreId', routeStore);
+  localStorage.setItem('routeStoreName', routeStoreName);
+  router.push('/cms/route/store')
+};
 
-    // const routeDetailList = computed(() => {
-    //   return store.routeDetailList;
-    // });
-    const routeDetail = ref(store.routeDetail);
-    const routeDetailList = ref(store.routeDetailList);
-
-    const router = useRouter();
-    const handleClick = (row) => {
-      const routeStore = row.id;
-      const routeStoreName = row.name;
-      localStorage.setItem('routeStoreId', routeStore);
-      localStorage.setItem('routeStoreName', routeStoreName);
-      router.push('/cms/route/store')
-    };
-
-    const tableColumns = computed(() => {
-      return [
-        { id: 'id', title: 'รหัสร้านค้า' },
-        { id: 'name', title: 'ชื่อร้านค้า' },
-        { id: 'statusText', title: 'สถานะ' },
-      ]
-    })
-
-    const isLoading = ref(true)
-    onMounted(async () => {
-      try {
-        isLoading.value = true;
-        await store.getRouteDetail();
-        isLoading.value = false;
-      } catch (error) {
-        console.error('Error loading data:', error);
-        isLoading.value = false;
-      }
-    })
-
-    watchEffect(() => {
-      routeDetail.value = store.routeDetail;
-      routeDetailList.value = store.routeDetailList;
-    });
-
-    return {
-      routeDetail,
-      routeDetailList,
-      tableColumns,
-      handleClick,
-      isLoading
-    }
+const tableColumns = computed(() => {
+  if (isMobile.value) {
+    return [
+      { id: 'name', title: 'ชื่อร้านค้า' },
+      { id: 'statusText', title: 'สถานะ' }
+    ]
+  } else {
+    return [
+      { id: 'id', title: 'รหัสร้านค้า' },
+      { id: 'name', title: 'ชื่อร้านค้า' },
+      { id: 'statusText', title: 'สถานะ' }
+    ]
   }
-}
+})
+
+const isLoading = ref(true)
+onMounted(async () => {
+  try {
+    isLoading.value = true;
+    await store.getRouteDetail();
+    isLoading.value = false;
+  } catch (error) {
+    console.error('Error loading data:', error);
+    isLoading.value = false;
+  }
+})
+
+watchEffect(() => {
+  routeDetail.value = store.routeDetail;
+  routeDetailList.value = store.routeDetailList;
+});
+
 </script>
-  

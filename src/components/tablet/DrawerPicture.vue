@@ -2,7 +2,7 @@
     <div class="text-center">
         <button type="button" :data-drawer-target="drawerId" :data-drawer-show="drawerId" @click="toggleBottomDrawer"
             :aria-controls="drawerId" data-drawer-placement="bottom" :class="btClass"
-            class="text-white bg-blue-700 font-medium rounded-lg text-md inline-flex flex-col items-center justify-center">
+            class="text-white bg-blue-700 font-medium rounded-lg sm:text-xs md:text-lg inline-flex flex-col items-center justify-center">
             <slot name="icon"></slot>
             <span>ถ่ายรูป</span>
         </button>

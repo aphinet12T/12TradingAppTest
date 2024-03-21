@@ -1,8 +1,8 @@
 <template>
     <div class="text-center">
         <button type="button" @click="toggleBottomDrawer"
-            class="text-white bg-red-500 font-medium rounded-lg text-md px-6 py-3 inline-flex flex-col items-center justify-center">
-            <Icon class="icon" height="40" width="40" icon="bi:bag-x" />
+            class="text-white bg-red-500 font-medium rounded-lg sm:text-xs md:text-lg px-6 py-3 inline-flex flex-col items-center justify-center">
+            <Icon class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" icon="bi:bag-x" />
             <span class="">ไม่ขาย</span>
         </button>
     </div>

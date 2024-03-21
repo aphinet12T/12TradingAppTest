@@ -13,18 +13,18 @@
     </template>
     <template v-slot:body>
       <div class="flex justify-center relative md:bottom-5 sm:bottom-10">
-        <Table :columns="tableColumns" :data="routeMain" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'"
-          :hTable="'h-700'" @row-click="handleClick">
+        <Table :columns="tableColumns" :data="routeMain" :thClass="'py-3 sm:text-center sm:text-sm md:px-10 md:text-lg'" :tdClass="'py-2 text-center sm:text-sm md:text-lg'"
+          :hTable="'sm:h-[420px] md:h-700'" @row-click="handleClick">
           <template v-slot:statusNumber="{ item }">
-            <span v-if="item.status === '0'" class="bg-red-100 text-red-800 text-md font-medium px-2.5 py-0.5 rounded">
+            <span v-if="item.status === '0'" class="bg-red-100 text-red-800 sm:text-sm md:text-md font-medium px-2.5 py-0.5 rounded">
               {{ item.statusNumber }}
             </span>
             <span v-if="item.status === '1'"
-              class="bg-green-100 text-green-800 text-md font-medium px-2.5 py-0.5 rounded">
+              class="bg-green-100 text-green-800 sm:text-sm md:text-md font-medium px-2.5 py-0.5 rounded">
               {{ item.statusNumber }}
             </span>
             <span v-if="item.status === '2'"
-              class="bg-blue-100 text-blue-800 text-md font-medium px-2.5 py-0.5 rounded">
+              class="bg-blue-100 text-blue-800 sm:text-sm md:text-md font-medium px-2.5 py-0.5 rounded">
               {{ item.statusNumber }}
             </span>
           </template>
@@ -45,10 +45,10 @@ import { useDisplaySize } from '../../composable/DisplaySize'
 import LayoutMain from '../LayoutMain.vue'
 import TabletButtonNav from '../../components/tablet/ButtonNav.vue'
 import MobileButtonNav from '../../components/mobile/ButtonNav.vue'
-import SearchBar from '../../components/tablet/SearchBar.vue'
+import SearchBar from '../../components/SearchBar.vue'
 // import ButtonTab from '../../components/tablet/ButtonTab.vue'
 // import ButtonAdd from '../../components/tablet/ButtonCircle.vue'
-import Table from '../../components/tablet/Table.vue'
+import Table from '../../components/Table.vue'
 
 const { isMobile } = useDisplaySize()
 const store = useRouteStore();
