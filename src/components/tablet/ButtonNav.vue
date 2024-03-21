@@ -68,7 +68,7 @@ export default {
     ];
 
     const textClass = (index) => [
-      "text-sm",
+      "text-lg",
       "text-gray-500",
       "group-hover:text-blue-600",
     ];

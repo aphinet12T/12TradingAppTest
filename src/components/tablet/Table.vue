@@ -1,8 +1,8 @@
 <template>
-  <div class="relative">
-    <div class="bg-white w-card px-2 sha shadow-slate-300 shadow-md sm:rounded-lg overflow-auto" :class="hTable">
+  <div>
+    <div class="bg-white px-2 sha shadow-slate-300 shadow-md sm:rounded-lg w-[350px] overflow-auto md:w-card" :class="hTable">
       <table class="w-full text-md text-left text-gray-500">
-        <thead class="text-lg text-gray-700 uppercase bg-gray-50 sticky top-0">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 sticky top-0">
           <tr>
             <th scope="col" :class="thClass" v-for="col in columns" :key="col.id">
               {{ col.title }}

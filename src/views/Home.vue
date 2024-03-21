@@ -10,7 +10,6 @@
             </div>
             <div class="flex items-center justify-between">
                 <div class="flex justify-start">
-
                 </div>
                 <div class="flex justify-end">
 
@@ -33,7 +32,6 @@
 </template>
 
 <script setup>
-import { useDisplaySize } from '../composable/DisplaySize'
 import LayoutMain from './LayoutMain.vue'
 import TabletButtonNav from '../components/tablet/ButtonNav.vue'
 import MobileButtonNav from '../components/mobile/ButtonNav.vue'
@@ -41,6 +39,8 @@ import TabletAnnounce from '../components/tablet/Announce.vue'
 import MobileAnnounce from '../components/mobile/Announce.vue'
 import TabletChart from '../components/tablet/ChartSales.vue'
 import MobileChart from '../components/mobile/ChartSales.vue'
+import { useDisplaySize } from '../composable/DisplaySize'
+
 const { isMobile } = useDisplaySize()
 
 </script>
