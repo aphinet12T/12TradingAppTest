@@ -26,10 +26,10 @@
                     <div>
                         รายการสินค้าที่เลือก
                     </div>
-                    <Table :columns="tableColumns" :data="orderCartList" :thClass="'px-10 py-3'" :tdClass="'px-10 py-2'" :hTable="'h-[600px]'">
+                    <Table :columns="tableColumns" :data="orderCartList" :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'" :tdClass="'px-6 py-2 sm:text-sm md:text-lg text-center'" :hTable="'sm:h-[320px] md:h-[600px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
-                                class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
+                                class="text-white bg-red-500 w-6 h-6 font-medium rounded-md sm:text-sm md:text-lg inline-flex flex-col items-center justify-center"
                                 @click="handleClick(rowData.id, rowData.unitId, rowData.name)">
                                 <Icon class="icon w-4 h-4" icon="ph:x-bold" />
                             </button>
@@ -37,7 +37,7 @@
                     </Table>
                 </div>
                 <div class="relative rounded-t-xl overflow-auto p-4">
-                    <div class="flex flex-nowrap gap-4 font-mono text-white text-2xl rounded-lg">
+                    <div class="flex flex-nowrap gap-4 font-mono text-white md:text-2xl rounded-lg">
                         <button class="p-4 w-full rounded-lg flex items-center justify-center bg-blue-800 shadow-lg"
                         @click="handleAdd"
                         >
@@ -53,18 +53,18 @@
                 <div class="flex-grow z-40">
                     <div class="bg-white h-full rounded-md shadow ">
                         <div class="flex flex-row justify-between">
-                            <div class="text-2xl ml-7">
+                            <div class="md:text-2xl ml-7">
                                 จำนวน
                             </div>
-                            <div class="text-2xl mr-7">
+                            <div class="md:text-2xl mr-7">
                                 {{ orderCart.totalQuantity }}
                             </div>
                         </div>
                         <div class="flex flex-row justify-between">
-                            <div class="text-2xl ml-7">
+                            <div class="md:text-2xl ml-7">
                                 มูลค่ารวม
                             </div>
-                            <div class="text-2xl mr-7">
+                            <div class="md:text-2xl mr-7">
                                 {{ orderCart.totalAmount }}
                             </div>
                         </div>
@@ -81,9 +81,9 @@ import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
 import { useOrderStore } from '../../stores'
 import LayoutSub from '../LayoutSub.vue'
-import ButtonBack from '../../components/IconBack.vue'
+import ButtonBack from '../../components/ButtonBack.vue'
 import Table from '../../components/Table.vue'
-import Alert from '../../components/Alert.vue'
+import Alert from '../../components/tablet/Alert.vue'
 
 export default {
     components: {
@@ -118,7 +118,7 @@ export default {
 
         const tableColumns = computed(() => {
             return [
-                { id: 'name', title: 'ชื่อสินค้า' },
+                { id: 'name', title: 'สินค้า' },
                 { id: 'qtyText', title: 'จำนวน' },
                 { id: 'summaryPrice', title: 'รวม' },
                 { id: '', title: '*' },

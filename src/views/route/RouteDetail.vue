@@ -92,7 +92,7 @@ import ButtonBack from '../../components/ButtonBack.vue'
 import Table from '../../components/Table.vue'
 
 const { isMobile } = useDisplaySize()
-const store = useRouteStore();
+const store = useRouteStore()
 // const routeDetail = computed(() => {
 //   return store.routeDetail;
 // });
