@@ -39,17 +39,17 @@ export const useProductStore = defineStore('products', {
                 console.error(error)
             }
         },
-        async getSaleProduct() {
+        async getSaleProduct(group,brand,size,flavour) {
             try {
                 //   const token = JSON.parse(localStorage.getItem('token'));
                 const response = await axios.post(
                     import.meta.env.VITE_API_BASE_URL +
                     '/cms/saleProduct/getProduct',
                     {
-                        group: '',
-                        brand: '',
-                        size: '',
-                        flavour: ''
+                        group: group,
+                        brand: brand,
+                        size: size,
+                        flavour: flavour
                     }
                     // {
                     //   headers: { Authorization: `Bearer ${token}` },

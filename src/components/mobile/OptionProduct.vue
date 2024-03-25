@@ -89,8 +89,7 @@ const selectedFlavour = ref('')
 //     if (selectedGroup.value) {
 //         store.getDataOpion(selectedGroup.value)
 //     }
-// });
-
+// })
 const emit = defineEmits(['update:data'])
 const emitData = () => {
   const optionProduct = {
@@ -98,7 +97,7 @@ const emitData = () => {
     selectedBrand: selectedBrand.value,
     selectedSize: selectedSize.value,
     selectedFlavour: selectedFlavour.value,
-  };
+  }
 
   emit('update:data', optionProduct)
 }

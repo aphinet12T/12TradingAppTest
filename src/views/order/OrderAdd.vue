@@ -22,6 +22,7 @@
                 <div>
                     <MobileOptionProduct v-if="isMobile" @update:data="updateOption" />
                     <TabletOptionProduct v-else @update:data="updateOption" />
+                        
                 </div>
                 <div class="flex justify-center mt-5">
                     <Table :columns="tableColumns" :data="dataProducts" :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'" :tdClass="'px-6 py-2 sm:text-sm md:text-lg text-start'"
@@ -94,10 +95,11 @@ const updateOption = (optionProduct) => {
     vSize.value = optionProduct.selectedSize
     vFlavour.value = optionProduct.selectedFlavour
 
-    console.log('group', vGpoup.value);
+    // console.log('group', vGpoup.value)
+    product.getSaleProduct(optionProduct.selectedGroup, optionProduct.selectedBrand, optionProduct.selectedSize, optionProduct.selectedFlavour)
 }
 
-const router = useRouter();
+const router = useRouter()
 const handleClick = (id) => {
     store.setProduct(id);
     router.push('/cms/order/product')
@@ -105,7 +107,7 @@ const handleClick = (id) => {
 }
 
 onMounted(() => {
-    product.getSaleProduct();
+    product.getSaleProduct()
 })
 
 </script>
