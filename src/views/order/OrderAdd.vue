@@ -38,7 +38,7 @@
                 </div>
                 <div class="flex justify-end mt-3 mr-5">
                     <router-link to="/cms/order/cart">
-                        <ButtonCart :icon="'bytesize:cart'" />
+                        <ButtonCart :icon="'bytesize:cart'"  :cart="dataCartAmount"/>
                     </router-link>
                 </div>
             </div>
@@ -57,7 +57,7 @@ import ButtonBack from '../../components/ButtonBack.vue'
 import TabletOptionProduct from '../../components/tablet/OptionProduct.vue'
 import MobileOptionProduct from '../../components/mobile/OptionProduct.vue'
 import Table from '../../components/Table.vue'
-import ButtonCart from '../../components/tablet/ButtonCircle.vue'
+import ButtonCart from '../../components/ButtonCircle.vue'
 
 const { isMobile } = useDisplaySize()
 const store = useOrderStore()
@@ -65,7 +65,9 @@ const product = useProductStore()
 const dataProducts = computed(() => {
     return product.productList
 })
-
+const dataCartAmount = computed(() => {
+    return store.orderCartAmount
+})
 const storeId = localStorage.getItem('routeStoreId')
 const storeName = localStorage.getItem('routeStoreName')
 
@@ -107,7 +109,8 @@ const handleClick = (id) => {
 }
 
 onMounted(() => {
-    product.getSaleProduct()
+    product.getSaleProduct();
+    store.getOrderCart();
 })
 
 </script>

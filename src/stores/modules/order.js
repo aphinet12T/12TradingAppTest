@@ -8,6 +8,7 @@ export const useOrderStore = defineStore('orders', {
     productUnit: [],
     orderCart: [],
     orderCartList: [],
+    orderCartAmount: 0,
     orderCheckout: [],
     orderCheckoutList: [],
     productUnitDetail: {
@@ -33,11 +34,11 @@ export const useOrderStore = defineStore('orders', {
       flavour: [],
     },
     option: [],
-    // cartCheckout: {
-    //   area: '',
-    //   storeId: '',
-    //   saleCode: '',
-    // },
+    cartCheckout: {
+      area: localStorage.getItem('saleCode'),
+      storeId: localStorage.getItem('routeStoreId'),
+      saleCode: localStorage.getItem('saleCode'),
+    },
     addOrder: {
       area: '',
       storeId: '',
@@ -163,11 +164,12 @@ export const useOrderStore = defineStore('orders', {
           //   headers: { Authorization: `Bearer ${token}` },
           // }
         );
-        const result = response.data;
-        const resultList = response.data.list;
-        this.orderCart = result;
-        this.orderCartList = resultList;
-        console.log('orderCart', this.orderCart);
+        const result = response.data
+        const resultList = response.data.list
+        this.orderCart = result
+        this.orderCartList = resultList
+        this.orderCartAmount = resultList.length
+        console.log('orderCart', this.orderCartAmount)
       } catch (error) {
         console.error(error);
       }
@@ -180,8 +182,11 @@ export const useOrderStore = defineStore('orders', {
         const sale = localStorage.getItem('saleCode');
         const response = await axios.post(
           import.meta.env.VITE_API_BASE_URL + '/cms/saleProduct/getPreOrder',
-
-          // this.cartCheckout
+          {
+            area: area,
+            storeId: storeId,
+            saleCode: sale,
+          }
           // {
           //   headers: { Authorization: `Bearer ${token}` },
           // }

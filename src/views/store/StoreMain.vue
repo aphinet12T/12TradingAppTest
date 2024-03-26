@@ -38,56 +38,34 @@
   <ButtonNav />
 </template>
 
-<script>
+<script setup>
 import { Icon } from '@iconify/vue';
 import { ref, computed } from 'vue';
 import LayoutMain from '../LayoutMain.vue';
-import ButtonNav from '../../components/ButtonNav.vue';
+import ButtonNav from '../../components/tablet/ButtonNav.vue';
 import SearchBar from '../../components/SearchBar.vue';
-import ButtonTab from '../../components/ButtonTab.vue';
-import CustomerAll from '../../components/CustomerAll.vue';
-import CustomerNew from '../../components/CustomerNew.vue';
+import ButtonTab from '../../components/tablet/ButtonTab.vue';
+import CustomerAll from '../../components/tablet/CustomerAll.vue';
+import CustomerNew from '../../components/tablet/CustomerNew.vue';
 import ButtonAdd from '../../components/ButtonCircle.vue';
 
-export default {
-  components: {
-    Icon,
-    LayoutMain,
-    ButtonNav,
-    SearchBar,
-    ButtonTab,
-    CustomerAll,
-    CustomerNew,
-    ButtonAdd,
-  },
-  setup() {
+const btStoreAll = ref('ร้านค้าทั้งหมด');
+const btStoreNew = ref('ร้านค้าใหม่');
+const btSelected = ref('all');
 
-    const btStoreAll = ref('ร้านค้าทั้งหมด');
-    const btStoreNew = ref('ร้านค้าใหม่');
-    const btSelected = ref('all');
+const btStore = computed(() => {
+  return [
+    { id: 'all', title: 'ร้านค้าทั้งหมด' },
+    { id: 'new', title: 'ร้านค้าใหม่' },
+  ];
+});
+const handleClick = (type) => {
+  if (type === 'all') {
+    btSelected.value = 'all'
 
-    const btStore = computed(() => {
-      return [
-        { id: 'all', title: 'ร้านค้าทั้งหมด' },
-        { id: 'new', title: 'ร้านค้าใหม่' },
-      ];
-    });
-    const handleClick = (type) => {
-      if (type === 'all') {
-        btSelected.value = 'all'
+  } else if (type === 'new') {
+    btSelected.value = 'new'
+  }
+}
 
-      } else if (type === 'new') {
-        btSelected.value = 'new'
-      }
-    }
-
-    return {
-      btStore,
-      btStoreAll,
-      btStoreNew,
-      handleClick,
-      btSelected,
-    }
-  },
-};
 </script>

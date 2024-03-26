@@ -83,7 +83,7 @@ import { useOrderStore } from '../../stores'
 import LayoutSub from '../LayoutSub.vue'
 import ButtonBack from '../../components/ButtonBack.vue'
 import Table from '../../components/Table.vue'
-import Alert from '../../components/tablet/Alert.vue'
+import Alert from '../../components/Alert.vue'
 
 export default {
     components: {
