@@ -11,7 +11,7 @@
                     </div>
                     <div class="mt-2 ml-2 flex items-center">
                         <Icon icon="uil:cart" width="40" />
-                        <span class="ml-2 text-3xl">ตะกร้าสินค้า</span>
+                        <span class="ml-2 md:text-3xl">ตะกร้าสินค้า</span>
                     </div>
                 </div>
                 <div class="flex flex-col mt-4">
@@ -26,7 +26,7 @@
                     <div>
                         รายการสินค้าที่เลือก
                     </div>
-                    <Table :columns="tableColumns" :data="orderCartList" :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'" :tdClass="'px-6 py-2 sm:text-sm md:text-lg text-center'" :hTable="'sm:h-[320px] md:h-[600px]'">
+                    <Table :columns="tableColumns" :data="orderCartList" :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'" :tdClass="'px-6 py-2 sm:text-sm md:text-lg text-center'" :hTable="'sm:h-[450px] md:h-[600px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-red-500 w-6 h-6 font-medium rounded-md sm:text-sm md:text-lg inline-flex flex-col items-center justify-center"

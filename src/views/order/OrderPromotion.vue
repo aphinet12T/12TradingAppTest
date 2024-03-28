@@ -17,7 +17,7 @@
                     </div>
                     <Table :columns="tableReward" :data="dataReward.listFree"
                         :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'"
-                        :tdClass="'px-10 py-2 sm:text-sm md:text-lg text-start'" :hTable="'sm:h-[200px] md:h-[350px]'">
+                        :tdClass="'px-10 py-2 sm:text-sm md:text-lg text-start'" :hTable="'sm:h-[275px] md:h-[350px]'">
                         <!-- <template v-slot:body="{ row }">
                             <div v-for="(product, index) in row.listProduct" :key="index">
                                 {{ product.productName }}
@@ -38,7 +38,7 @@
                     </div>
                     <Table :columns="tableFree" :data="listDiscount"
                         :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'"
-                        :tdClass="'px-10 py-2 sm:text-sm md:text-lg text-start'" :hTable="'sm:h-[200px] md:h-[350px]'">
+                        :tdClass="'px-10 py-2 sm:text-sm md:text-lg text-start'" :hTable="'sm:h-[275px] md:h-[350px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"

@@ -66,7 +66,7 @@
 <script setup>
 import { ref, computed, onMounted, watchEffect } from 'vue'
 import { useStoresStore } from '../../stores';
-import InputFeild from '../components/tablet/InputFeild.vue'
+import InputFeild from '../../components/tablet/InputFeild.vue'
 
 const storeAddress = ref('')
 const selectedProvince = ref('')

@@ -14,7 +14,7 @@
     <template v-slot:body>
       <div class="flex justify-center relative md:bottom-5 sm:bottom-10">
         <Table :columns="tableColumns" :data="routeMain" :thClass="'py-3 sm:text-center sm:text-sm md:px-10 md:text-lg'" :tdClass="'py-2 text-center sm:text-sm md:text-lg'"
-          :hTable="'sm:h-[420px] md:h-700'" @row-click="handleClick">
+          :hTable="'sm:h-[525px] md:h-700'" @row-click="handleClick">
           <template v-slot:statusNumber="{ item }">
             <span v-if="item.status === '0'" class="bg-red-100 text-red-800 sm:text-sm md:text-md font-medium px-2.5 py-0.5 rounded">
               {{ item.statusNumber }}

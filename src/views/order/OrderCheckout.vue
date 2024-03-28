@@ -35,7 +35,7 @@
                 </div>
                 <div class="flex flex-col items-center mt-5">
                     <Table :columns="tableColumns" :data="checkoutList" :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'" :tdClass="'px-10 py-2 sm:text-sm md:text-lg text-start'"
-                        :hTable="'sm:h-[200px] md:h-[440px]'">
+                        :hTable="'sm:h-[250px] md:h-[440px]'">
                     </Table>
                 </div>
                 <div class="flex-grow z-40">

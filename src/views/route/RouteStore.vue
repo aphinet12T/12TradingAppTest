@@ -25,7 +25,7 @@
                 <div class="flex justify-center mt-5">
                     <Table :columns="tableColumns" :data="routeStoreList"
                         :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'"
-                        :tdClass="'px-6 py-2 sm:text-sm md:text-lg text-center'" :hTable="'sm:h-[350px] md:h-[650px]'">
+                        :tdClass="'px-6 py-2 sm:text-sm md:text-lg text-center'" :hTable="'sm:h-[450px] md:h-[650px]'">
                     </Table>
                 </div>
                 <div class="flex flex-row justify-center">

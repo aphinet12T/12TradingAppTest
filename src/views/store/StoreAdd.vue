@@ -28,7 +28,7 @@
               </InputFeild>
               <div class="flex justify-end">
                 <span v-if="!vStoreName.trim()" class="text-sm font-light text-red-500">{{ utility.errorMessage
-                }}</span>
+                  }}</span>
                 <!-- <span v-else class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36 ตัวอักษร</span> -->
               </div>
             </div>
@@ -134,167 +134,128 @@
   </LayoutSub>
 </template>
 
-<script>
+<script setup>
 import { Icon } from '@iconify/vue'
 import { ref, computed, onMounted, watch } from 'vue'
 import { useUploadStore, useUtilityStore, useGeolocation, useStoresStore } from '../../stores';
 import LayoutSub from '../LayoutSub.vue'
-import InputFeild from '../../components/InputFeild.vue'
-import ButtonBack from '../../components/IconBack.vue'
-import Address from '../../components/OptionAddress.vue'
-import DrawerPolicy from '../../components/DrawerPolicy.vue'
-import DrawerPicture from '../../components/DrawerPicture.vue'
+import InputFeild from '../../components/tablet/InputFeild.vue'
+import ButtonBack from '../../components/ButtonBack.vue'
+import Address from '../../components/tablet/OptionAddress.vue'
+import DrawerPolicy from '../../components/tablet/DrawerPolicy.vue'
+import DrawerPicture from '../../components/tablet/DrawerPicture.vue'
 
-export default {
-  components: {
-    Icon,
-    LayoutSub,
-    ButtonBack,
-    InputFeild,
-    DrawerPolicy,
-    DrawerPicture,
-    Address
-  },
+const uploadStore = useUploadStore()
+const utility = useUtilityStore()
+const location = useGeolocation()
+const store = useStoresStore()
 
-  setup() {
-    const uploadStore = useUploadStore()
-    const utility = useUtilityStore()
-    const location = useGeolocation()
-    const store = useStoresStore()
+watch(() => uploadStore.imageName, (newVal) => {
+  if (newVal !== null) {
+    imageName.value = uploadStore.imageName
+  }
+})
 
-    watch(() => uploadStore.imageName, (newVal) => {
-      if (newVal !== null) {
-        imageName.value = uploadStore.imageName
-      }
-    })
+watch(() => uploadStore.path, (newPath) => {
+  if (newPath !== null) {
+    imagePath.value = uploadStore.path
+    console.log('New path:', newPath);
+  }
+})
 
-    watch(() => uploadStore.path, (newPath) => {
-      if (newPath !== null) {
-        imagePath.value = uploadStore.path
-        console.log('New path:', newPath);
-      }
-    })
+const dataStoreType = computed(() => {
+  return store.storeType;
+})
 
-    const dataStoreType = computed(() => {
-      return store.storeType;
-    })
+const vStoreName = ref('')
+const vStoreTax = ref('')
+const vStorePhone = ref('')
+const vStoreRoute = ref('')
+const vStoreType = ref('')
+const vStoreLine = ref('')
+const vStoreNote = ref('')
+const vAddress = ref('')
+const vProvince = ref('')
+const vDistrict = ref('')
+const vSubdistrict = ref('')
+const vZipcode = ref('')
+const imageName = ref('')
+const imagePath = ref('')
 
-    const vStoreName = ref('')
-    const vStoreTax = ref('')
-    const vStorePhone = ref('')
-    const vStoreRoute = ref('')
-    const vStoreType = ref('')
-    const vStoreLine = ref('')
-    const vStoreNote = ref('')
-    const vAddress = ref('')
-    const vProvince = ref('')
-    const vDistrict = ref('')
-    const vSubdistrict = ref('')
-    const vZipcode = ref('')
-    const imageName = ref('')
-    const imagePath = ref('')
+const updateAddress = (address) => {
+  vAddress.value = address.storeAddress
+  vProvince.value = address.selectedProvince
+  vDistrict.value = address.selectedDistrict
+  vSubdistrict.value = address.selectedSubdistrict
+  vZipcode.value = address.selectedZipcode
+}
 
-    const updateAddress = (address) => {
-      vAddress.value = address.storeAddress
-      vProvince.value = address.selectedProvince
-      vDistrict.value = address.selectedDistrict
-      vSubdistrict.value = address.selectedSubdistrict
-      vZipcode.value = address.selectedZipcode
+const isChecked = ref(false)
+const isDrawerOpen = ref(false)
+const isLoading = ref(false)
+
+const openDrawer = () => {
+  isDrawerOpen.value = true
+}
+const closeDrawer = () => {
+  isDrawerOpen.value = false
+}
+const sendData = async () => {
+  isLoading.value = true
+  const isValid = utility.validateInput(vStoreName.value)
+
+  if (!isValid) {
+    isLoading.value = false
+    const errorMessage = utility.getValidate()
+    console.log('Invalid input. Error message:', errorMessage)
+  } else {
+    const dataStore = {
+      taxId: vStoreTax.value,
+      name: vStoreName.value,
+      tel: vStorePhone.value,
+      route: vStoreRoute.value,
+      type: vStoreType.value,
+      address: vAddress.value,
+      distric: vDistrict.value,
+      subDistric: vSubdistrict.value,
+      province: vProvince.value,
+      provinceCode: '10',
+      postCode: vZipcode.value.toString(),
+      zone: "BE",
+      area: localStorage.getItem('area'),
+      latitude: location.latitude.value.toString(),
+      longtitude: location.longitude.value.toString(),
+      lineId: vStoreLine.value,
+      policyConsent: isChecked.value ? 'Agree' : 'Disagree',
+      imageList: [
+        {
+          name: imageName.value,
+          path: imagePath.value,
+          descript: ''
+        },
+      ],
+      note: vStoreNote.value,
+      typeNumberSeries: 'customer',
+      zoneNumberSeries: 'BE'
+    }
+    try {
+      const response = await store.addCustomerNew(dataStore)
+      console.log('response', response)
+
+      //showAlert.value = true
+      isLoading.value = false
+      console.log('dataStore', dataStore)
+
+    } catch (error) {
+      console.error('Error while sending data:', error)
+      isLoading.value = false
     }
 
-    const isChecked = ref(false)
-    const isDrawerOpen = ref(false)
-    const isLoading = ref(false)
-
-    const openDrawer = () => {
-      isDrawerOpen.value = true
-    }
-    const closeDrawer = () => {
-      isDrawerOpen.value = false
-    }
-    const sendData = async () => {
-      isLoading.value = true
-      const isValid = utility.validateInput(vStoreName.value)
-
-      if (!isValid) {
-        isLoading.value = false
-        const errorMessage = utility.getValidate()
-        console.log('Invalid input. Error message:', errorMessage)
-      } else {
-        const dataStore = {
-          taxId: vStoreTax.value,
-          name: vStoreName.value,
-          tel: vStorePhone.value,
-          route: vStoreRoute.value,
-          type: vStoreType.value,
-          address: vAddress.value,
-          distric: vDistrict.value,
-          subDistric: vSubdistrict.value,
-          province: vProvince.value,
-          provinceCode: '10',
-          postCode: vZipcode.value.toString(),
-          zone: "BE",
-          area: localStorage.getItem('area'),
-          latitude: location.latitude.value.toString(),
-          longtitude: location.longitude.value.toString(),
-          lineId: vStoreLine.value,
-          policyConsent: isChecked.value ? 'Agree' : 'Disagree',
-          imageList: [
-            {
-              name: imageName.value,
-              path: imagePath.value,
-              descript: ''
-            },
-          ],
-          note: vStoreNote.value,
-          typeNumberSeries: 'customer',
-          zoneNumberSeries: 'BE'
-        }
-        try {
-          const response = await store.addCustomerNew(dataStore)
-          console.log('response', response)
-
-          //showAlert.value = true
-          isLoading.value = false
-          console.log('dataStore', dataStore)
-
-        } catch (error) {
-          console.error('Error while sending data:', error)
-          isLoading.value = false
-        }
-
-
-      }
-    }
-    onMounted(() => {
-      store.getStoreType()
-    });
-    return {
-      vStoreName,
-      vStoreTax,
-      vStorePhone,
-      vStoreRoute,
-      vStoreType,
-      vStoreLine,
-      vStoreNote,
-      vAddress,
-      vProvince,
-      vDistrict,
-      vSubdistrict,
-      vZipcode,
-      imageName,
-      imagePath,
-      isChecked,
-      sendData,
-      updateAddress,
-      isDrawerOpen,
-      isLoading,
-      openDrawer,
-      closeDrawer,
-      dataStoreType,
-      utility,
-    }
 
   }
 }
+onMounted(() => {
+  store.getStoreType()
+});
+
 </script>

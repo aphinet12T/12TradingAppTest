@@ -3,15 +3,15 @@
     <template v-slot:header>
       <div class="flex items-center justify-between">
         <div class="flex justify-end ml-2">
-          <Icon class="icon" height="60" width="60" icon="ic:baseline-store" />
-          <div class=" text-4xl mt-2">ร้านค้า</div>
+          <Icon class="icon sm:h-10 sm:w-10 md:h-10 md:w-10" icon="ic:baseline-store" />
+          <div class="md:text-4xl mt-2">ร้านค้า</div>
         </div>
         <div class="flex justify-end mr-2">
           <SearchBar />
         </div>
       </div>
       <div class="relative rounded-t-xl overflow-auto p-8">
-        <div class="flex flex-nowrap gap-4 font-mono text-black text-2xl rounded-lg">
+        <div class="flex flex-nowrap gap-4 font-mono text-black md:text-2xl rounded-lg">
           <button class="p-4 w-full rounded-lg flex items-center justify-center bg-white shadow-lg"
             v-for="item in btStore" :key="item.id" @click="handleClick(item.id)">
             {{ item.title }}
@@ -35,23 +35,27 @@
       </div>
     </template>
   </LayoutMain>
-  <ButtonNav />
+  <MobileButtonNav v-if="isMobile" />
+  <TabletButtonNav v-else />
 </template>
 
 <script setup>
-import { Icon } from '@iconify/vue';
-import { ref, computed } from 'vue';
-import LayoutMain from '../LayoutMain.vue';
-import ButtonNav from '../../components/tablet/ButtonNav.vue';
-import SearchBar from '../../components/SearchBar.vue';
-import ButtonTab from '../../components/tablet/ButtonTab.vue';
-import CustomerAll from '../../components/tablet/CustomerAll.vue';
-import CustomerNew from '../../components/tablet/CustomerNew.vue';
-import ButtonAdd from '../../components/ButtonCircle.vue';
+import { Icon } from '@iconify/vue'
+import { ref, computed } from 'vue'
+import { useDisplaySize } from '../../composable/DisplaySize'
+import LayoutMain from '../LayoutMain.vue'
+import SearchBar from '../../components/SearchBar.vue'
+import ButtonTab from '../../components/tablet/ButtonTab.vue'
+import CustomerAll from '../../components/tablet/CustomerAll.vue'
+import CustomerNew from '../../components/tablet/CustomerNew.vue'
+import ButtonAdd from '../../components/ButtonCircle.vue'
+import TabletButtonNav from '../../components/tablet/ButtonNav.vue'
+import MobileButtonNav from '../../components/mobile/ButtonNav.vue'
 
-const btStoreAll = ref('ร้านค้าทั้งหมด');
-const btStoreNew = ref('ร้านค้าใหม่');
-const btSelected = ref('all');
+const { isMobile } = useDisplaySize()
+const btStoreAll = ref('ร้านค้าทั้งหมด')
+const btStoreNew = ref('ร้านค้าใหม่')
+const btSelected = ref('all')
 
 const btStore = computed(() => {
   return [
