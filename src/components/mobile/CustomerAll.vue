@@ -14,7 +14,7 @@ const customerAll = computed(() => {
 
 const tableColumns = computed(() => {
     return [
-        { id: 'storeId', title: 'รหัสร้าน' },
+        // { id: 'storeId', title: 'รหัสร้าน' },
         { id: 'name', title: 'ชื่อร้าน' },
         { id: 'route', title: 'เส้นทาง' },
         { id: 'distric', title: 'ที่อยู่' },

@@ -53,8 +53,8 @@ import TabletButtonNav from '../../components/tablet/ButtonNav.vue'
 import MobileButtonNav from '../../components/mobile/ButtonNav.vue'
 
 const { isMobile } = useDisplaySize()
-const btStoreAll = ref('ร้านค้าทั้งหมด')
-const btStoreNew = ref('ร้านค้าใหม่')
+// const btStoreAll = ref('ร้านค้าทั้งหมด')
+// const btStoreNew = ref('ร้านค้าใหม่')
 const btSelected = ref('all')
 
 const btStore = computed(() => {

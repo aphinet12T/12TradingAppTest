@@ -3,7 +3,7 @@
     <template v-slot:header>
       <div class="flex items-center justify-between pb-32">
         <div class="flex justify-end ml-2">
-          <Icon class="icon" height="40" width="40" icon="gis:map-route" />
+          <Icon class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" icon="gis:map-route" />
           <div class="mt-1 ml-2 sm:text-lg md:text-4xl">เส้นทาง</div>
         </div>
         <div class="flex justify-end mr-2">

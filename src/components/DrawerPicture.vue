@@ -2,7 +2,7 @@
     <div class="text-center">
         <button type="button" :data-drawer-target="drawerId" :data-drawer-show="drawerId" @click="toggleBottomDrawer"
             :aria-controls="drawerId" data-drawer-placement="bottom" :class="btClass"
-            class="text-white bg-blue-700 font-medium rounded-lg text-md inline-flex flex-col items-center justify-center">
+            class="text-white bg-blue-700 font-medium rounded-lg sm:text-xs md:text-lg inline-flex flex-col items-center justify-center">
             <slot name="icon"></slot>
             <span>ถ่ายรูป</span>
         </button>
@@ -19,7 +19,7 @@
                     <Icon class="w-5 h-5" icon="ph:x-bold" />
                 </button>
             </div>
-            <div class="text-4xl text-center">
+            <div class="sm:text-lg md:text-4xl text-center">
                 ถ่ายรูปภาพร้านค้า
             </div>
             <div class="mt-5">
@@ -38,7 +38,7 @@
                 <input type="file" @change="handleImage"
                     class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none mb-3">
                 <button type="button" @click="uploadImage"
-                    class="w-full focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xl px-5 py-2.5 me-2 mb-2">บันทึก</button>
+                    class="w-full focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg md:text-xl px-5 py-2.5 me-2 mb-2">บันทึก</button>
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
 <script>
 import { Icon } from '@iconify/vue';
 import { ref, watch } from 'vue'
-import { useUploadStore } from '../../stores';
+import { useUploadStore } from '../stores';
 export default {
     props: {
         storeID: String,

@@ -1,87 +1,81 @@
 <template>
-    <LayoutMain>
-      <template v-slot:header>
-        <div class="flex items-center justify-between pb-32">
-          <div class="flex justify-end ml-5">
-            <Icon class="icon" height="50" width="50" icon="fluent:drawer-add-24-regular" />
-            <div class=" text-4xl mt-2 ml-5 font-medium">จัดการ</div>
-          </div>
-          <div class="flex justify-end mr-2">
-            <SearchBar />
-          </div>
+  <LayoutMain>
+    <template v-slot:header>
+      <div class="flex items-center justify-between pb-5">
+        <div class="flex justify-end ml-5">
+          <Icon class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" icon="fluent:drawer-add-24-regular" />
+          <div class="md:text-4xl mt-2 ml-2 font-medium">จัดการ</div>
         </div>
-        <div class="flex items-center justify-between">
-          <div class="flex justify-start">
-            <ButtonTab :buttonText="btRefund" class="absolute top-28 left-5" @click="dataManage('refund')"></ButtonTab>
-          </div>
-          <div class="flex justify-end">
-            <ButtonTab :buttonText="btGive" class="absolute top-28 left-80" @click="dataManage('give')"></ButtonTab>
-          </div>
+        <div class="flex justify-end mr-2">
+          <SearchBar />
         </div>
-      </template>
-      <template v-slot:body>
-        <div class="flex justify-center">
-          <div v-if="btSelected === 'refund'">
-            <CustomerAll />
-            <router-link to="/cms/manage/refund">
-              <div class="flex justify-end mt-3">
-                <ButtonAdd :icon="'ph:plus-light'" />
-              </div>
-            </router-link>
-          </div>
-          <div v-else-if="btSelected === 'give'">
-            <CustomerNew />
-          </div>
+      </div>
+      <!-- <div class="flex items-center justify-between">
+        <div class="flex justify-start">
+          <ButtonTab :buttonText="btRefund" class="absolute top-28 left-5" @click="dataManage('refund')"></ButtonTab>
         </div>
-      </template>
-    </LayoutMain>
-    <ButtonNav />
+        <div class="flex justify-end">
+          <ButtonTab :buttonText="btGive" class="absolute top-28 left-80" @click="dataManage('give')"></ButtonTab>
+        </div>
+      </div> -->
+      <div class="relative rounded-t-xl overflow-auto p-8">
+        <div class="flex flex-nowrap gap-4 font-mono text-black md:text-2xl rounded-lg">
+          <button class="p-4 w-full rounded-lg flex items-center justify-center bg-white shadow-lg"
+            v-for="item in btType" :key="item.id" @click="handleClick(item.id)">
+            {{ item.title }}
+          </button>
+        </div>
+      </div>
+    </template>
+    <template v-slot:body>
+      <div class="flex justify-center">
+        <div v-if="btSelected === 'refund'">
+          <CustomerAll />
+          <router-link to="/cms/manage/refund">
+            <div class="flex justify-end mt-3">
+              <ButtonAdd :icon="'ph:plus-light'" />
+            </div>
+          </router-link>
+        </div>
+        <div v-else-if="btSelected === 'give'">
+          <CustomerNew />
+        </div>
+      </div>
+    </template>
+  </LayoutMain>
+  <MobileButtonNav v-if="isMobile" />
+  <TabletButtonNav v-else />
 </template>
-  
-<script>
+
+<script setup>
 import { Icon } from '@iconify/vue'
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import { useDisplaySize } from '../../composable/DisplaySize'
 import LayoutMain from '../LayoutMain.vue'
-import ButtonNav from '../../components/tablet/ButtonNav.vue'
-import SearchBar from '../../components/tablet/SearchBar.vue'
-import ButtonTab from '../../components/tablet/ButtonTab.vue'
+import SearchBar from '../../components/SearchBar.vue'
 import CustomerAll from '../../components/tablet/CustomerAll.vue'
 import CustomerNew from '../../components/tablet/CustomerNew.vue'
-import ButtonAdd from '../../components/tablet/ButtonCircle.vue'
+import ButtonAdd from '../../components/ButtonCircle.vue'
+import TabletButtonNav from '../../components/tablet/ButtonNav.vue'
+import MobileButtonNav from '../../components/mobile/ButtonNav.vue'
 
-export default {
-  components: {
-    Icon,
-    LayoutMain,
-    ButtonNav,
-    SearchBar,
-    ButtonTab,
-    CustomerAll,
-    CustomerNew,
-    ButtonAdd,
-  },
-  setup() {
+const { isMobile } = useDisplaySize()
+const btSelected = ref('refund');
 
-    const btRefund = ref('เปลี่ยนสินค้า');
-    const btGive = ref('แจกสินค้า');
-    const btSelected = ref('refund');
+const btType = computed(() => {
+  return [
+    { id: 'refund', title: 'เปลี่ยนสินค้า' },
+    { id: 'give', title: 'แจกสินค้า' },
+  ];
+});
 
-    const dataManage = (type) => {
-      if (type === 'refund') {
-        btSelected.value = 'refund'
+const handleClick = (type) => {
+  if (type === 'refund') {
+    btSelected.value = 'refund'
 
-      } else if (type === 'give') {
-        btSelected.value = 'give'
-      }
-    }
+  } else if (type === 'give') {
+    btSelected.value = 'give'
+  }
+}
 
-    return {
-      btRefund,
-      btGive,
-      dataManage,
-      btSelected,
-    }
-  },
-};
 </script>
-  

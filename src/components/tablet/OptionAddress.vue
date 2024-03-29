@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center">
-        <div class="bg-white h-64 w-card shadow-md rounded-lg mt-2 overflow-auto">
+        <div class="bg-white sm:w-[350px] h-64 w-card shadow-md rounded-lg mt-2 overflow-auto">
             <div class=" flex flex-col items-center mt-3">
                 <div class="mb-1">
                     <InputFeild :id="'storeAddress'" :label="'ที่อยู่'" :inputClass="'w-500 p-2.5'" :type="'text'" v-model="storeAddress">
