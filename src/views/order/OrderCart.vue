@@ -105,9 +105,6 @@ export default {
         const orderCartList = computed(() => {
             return store.orderCartList;
         });
-        onMounted(() => {
-            store.getOrderCart();
-        });
 
         // const dataCart = computed(() => {
         //     return store.orderCartList.map(item => ({
@@ -150,9 +147,9 @@ export default {
             const unitId = selectedUnitId.value;
 
             store.deleteItemCart(id, unitId);
-            store.getOrderCart();
             dismissAlert();
-        };
+            store.getOrderCart();
+        }
 
         const dismissAlert = () => {
             showAlert.value = false;
@@ -167,6 +164,10 @@ export default {
         };
 
         const productId = localStorage.getItem('orderProductId')
+
+        onMounted(() => {
+            store.getOrderCart();
+        });
 
         return {
             storeId,
