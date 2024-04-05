@@ -2,9 +2,9 @@
     <LayoutSub>
         <template v-slot>
             <div class="flex flex-col h-full">
-                <Alert v-if="showAlert" :title="'ลบข้อมูล'+selectedName" :content="'ยืนยันการลบข้อมูล'" @confirm="deleteItem" @dismiss="dismissAlert" 
-                :color="'text-gray-600 border border-red-300 bg-red-100'" :product="orderCartList.name"
-                />
+                <Alert v-if="showAlert" :title="'ลบข้อมูล' + selectedName" :content="'ยืนยันการลบข้อมูล'"
+                    @confirm="deleteItem" @dismiss="dismissAlert"
+                    :color="'text-gray-600 border border-red-300 bg-red-100'" :product="orderCartList.name" />
                 <div class="flex flex-row items-center">
                     <div class="mt-2">
                         <ButtonBack />
@@ -26,7 +26,9 @@
                     <div>
                         รายการสินค้าที่เลือก
                     </div>
-                    <Table :columns="tableColumns" :data="orderCartList" :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'" :tdClass="'px-6 py-2 sm:text-sm md:text-lg text-center'" :hTable="'sm:h-[450px] md:h-[600px]'">
+                    <!-- <Table :columns="tableColumns" :data="orderCartList"
+                        :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'"
+                        :tdClass="'px-6 py-2 sm:text-sm md:text-lg text-center'" :hTable="'sm:h-[450px] md:h-[600px]'">
                         <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-red-500 w-6 h-6 font-medium rounded-md sm:text-sm md:text-lg inline-flex flex-col items-center justify-center"
@@ -34,18 +36,38 @@
                                 <Icon class="icon w-4 h-4" icon="ph:x-bold" />
                             </button>
                         </template>
-                    </Table>
+                    </Table> -->
+                    <div
+                        class="bg-white px-2 sha shadow-slate-300 shadow-md rounded-lg overflow-auto md:w-card sm:w-[360px] sm:h-[450px] md:h-[600px]">
+                        <div class="flex flex-col p-4" v-for="cart in orderCartList" :key="cart.id">
+                            <div class="flex justify-between">
+                                <h2 class="mb-2 sm:text-lg font-semibold tracking-tight">
+                                {{ cart.name }}
+                                </h2>
+                                <button type="button"
+                                class="text-white bg-red-500 w-6 h-6 font-medium rounded-md sm:text-sm md:text-lg inline-flex flex-col items-center justify-center">
+                                <Icon class="icon w-4 h-4" icon="ph:x-bold" />
+                            </button>
+                            </div>
+                            <div class="flex justify-between">
+                                <p class="mb-3 justify-end font-normal text-gray-700">
+                                   ฿{{ cart.summaryPrice }}
+                                </p>
+                                <p class="mb-3 justify-end font-normal text-gray-700">
+                                    {{ cart.qtyText }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="relative rounded-t-xl overflow-auto p-4">
                     <div class="flex flex-nowrap gap-4 font-mono text-white md:text-2xl rounded-lg">
                         <button class="p-4 w-full rounded-lg flex items-center justify-center bg-blue-800 shadow-lg"
-                        @click="handleAdd"
-                        >
+                            @click="handleAdd">
                             เลือกสินค้าเพิ่ม
                         </button>
                         <button class="p-4 w-full rounded-lg flex items-center justify-center bg-green-500 shadow-lg"
-                        @click="handleCreate"
-                        >
+                            @click="handleCreate">
                             สร้างรายการ
                         </button>
                     </div>
@@ -142,13 +164,13 @@ export default {
             // store.deleteItemCart(id, unitId);
         };
 
-        const deleteItem = () => {
+        const deleteItem = async () => {
             const id = selectedId.value;
             const unitId = selectedUnitId.value;
 
-            store.deleteItemCart(id, unitId);
+            await store.deleteItemCart(id, unitId);
             dismissAlert();
-            store.getOrderCart();
+            await store.getOrderCart();
         }
 
         const dismissAlert = () => {
