@@ -41,7 +41,7 @@
                         class="bg-white px-2 sha shadow-slate-300 shadow-md rounded-lg overflow-auto md:w-card sm:w-[360px] sm:h-[450px] md:h-[600px]">
                         <div class="flex flex-col p-4" v-for="cart in orderCartList" :key="cart.id">
                             <div class="flex justify-between">
-                                <h2 class="mb-2 sm:text-lg font-semibold tracking-tight">
+                                <h2 class="mb-2 sm:text-lg font-semibold tracking-tight overflow-hidden whitespace-nowrap truncate">
                                 {{ cart.name }}
                                 </h2>
                                 <button type="button"

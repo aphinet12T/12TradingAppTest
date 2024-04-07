@@ -75,13 +75,13 @@ const tableColumns = computed(() => {
     if (isMobile.value) {
         return [
             { id: 'name', title: 'สินค้า' },
-            { id: '', title: '*' },
+            { id: '', title: '' },
         ]
     } else {
         return [
             { id: 'id', title: 'รหัส' },
             { id: 'name', title: 'สินค้า' },
-            { id: '', title: '*' },
+            { id: '', title: '' },
         ]
     }
 })
