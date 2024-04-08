@@ -5,6 +5,7 @@ import RouteRouter from './route.router'
 import OrderRouter from './order.router'
 import ManageRouter from './manage.router'
 import ReportRouter from './report.router'
+import CnRouter from './cn.router'
 
 const routes = [
   { path: '/cms/login', component: () => import('../views/authentication/Login.vue') },
@@ -24,6 +25,7 @@ const routes = [
   ...OrderRouter,
   ...ManageRouter,
   ...ReportRouter,
+  ...CnRouter,
 ];
 
 const router = createRouter({

@@ -29,17 +29,24 @@
                     </Table>
                 </div>
                 <div class="flex flex-row justify-center">
-                    <div class="mt-5 sm:mx-5 md:mx-10">
+                    <div class="mt-5 sm:mx-2 md:mx-10">
                         <DrawerReason :storeID="routeStore.storeId" :storeName="routeStore.name" />
                     </div>
-                    <div class="mt-5 sm:mx-5 md:mx-10">
+                    <div class="mt-5 sm:mx-2 md:mx-10">
                         <button type="button" @click="handleClick"
                             class="text-white bg-green-500 font-medium rounded-lg sm:text-xs md:text-lg px-6 py-3 inline-flex flex-col items-center justify-center shadow-slate-300 shadow-md">
                             <Icon class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" icon="bi:bag-plus" />
                             <span class="">ขาย</span>
                         </button>
                     </div>
-                    <div class="mt-5 sm:mx-5 md:mx-10">
+                    <div class="mt-5 sm:mx-2 md:mx-10">
+                        <button type="button" @click="handleClickCn"
+                            class="text-white bg-yellow-400 font-medium rounded-lg sm:text-xs md:text-lg px-6 py-3 inline-flex flex-col items-center justify-center shadow-slate-300 shadow-md">
+                            <Icon class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" icon="bi:bag-dash" />
+                            <span class="">คืน</span>
+                        </button>
+                    </div>
+                    <div class="mt-5 sm:mx-2 md:mx-10">
                         <DrawerPicture :btClass="'px-5 py-3'">
                             <template v-slot:icon>
                                 <Icon class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" :icon="'bi:camera'" />
@@ -85,6 +92,9 @@ const handleClick = () => {
     router.push('/cms/order/add')
 }
 
+const handleClickCn = () => {
+    router.push('/cms/cn/add')
+}
 const routeDay = localStorage.getItem('routeDay')
 
 onMounted(() => {
