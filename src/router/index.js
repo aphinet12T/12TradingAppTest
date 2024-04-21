@@ -19,7 +19,7 @@ const routes = [
       },
     ],
   },
-  { path: '/cms/test', component: () => import('../components/Test.vue') },
+  { path: '/cms/test', component: () => import('../components/mobile/FormStore.vue') },
   ...StoreRouter,
   ...RouteRouter,
   ...OrderRouter,
