@@ -37,7 +37,7 @@ const currentStep = ref(0)
 const steps = [
   { id: 1, label: 'ร้านค้า' },
   { id: 2, label: 'ที่อยู่' },
-  { id: 3, label: 'ยินยัน' },
+  { id: 3, label: 'ยืนยัน' },
 ]
 
 const goToStep = (index) => {

@@ -10,13 +10,11 @@ export const useUtilityStore = defineStore('utility', {
     storeType: '',
     storeLine: '',
     storeNote: '',
-    address: {
-      storeAddress: '',
-      selectedProvince: '',
-      selectedDistrict: '',
-      selectedSubdistrict: '',
-      selectedZipcode: '',
-    },
+    storeAddress: '',
+    storeProvince: '',
+    storeDistrict: '',
+    storeSubdistrict: '',
+    storeZipcode: '',
   }),
   actions: {
     validateInput(value) {
@@ -30,12 +28,12 @@ export const useUtilityStore = defineStore('utility', {
     clearValidate() {
       this.errorMessage = ''
     },
-    updateStoreData(data) {
-      Object.assign(this, data)
+    updateStoreData(store) {
+      Object.assign(this, store)
     },
     updateAddress(address) {
-      this.address = address
-      console.log('1234',address);
+      Object.assign(this, address)
+      console.log('5555', address)
     },
   },
 });

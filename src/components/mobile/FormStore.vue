@@ -18,6 +18,9 @@
         <div v-if="currentStep === 1">
           <FormStoreAddress />
         </div>
+        <div v-if="currentStep === 2">
+          <FormStoreConfirm />
+        </div>
       </template>
     </Stepper>
   </template>
@@ -31,5 +34,6 @@
   import Stepper from './Stepper.vue'
   import FormStoreInfor from './FormStoreInfor.vue'
   import FormStoreAddress from './FormStoreAddress.vue'
+  import FormStoreConfirm from './FormStoreConfirm.vue'
   </script>
   
