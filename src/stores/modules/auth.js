@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia';
-import axios from 'axios';
-// import bcrypt from 'bcryptjs';
+import { defineStore } from 'pinia'
+import axios from 'axios'
+// import bcrypt from 'bcryptjs'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -16,7 +16,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(userLogin, passwordLogin) {
       try {
-        // const hashedPassword = bcrypt.hashSync(passwordLogin, 10);
+        // const hashedPassword = bcrypt.hashSync(passwordLogin, 10)
         const response = await axios.post(
           import.meta.env.VITE_API_BASE_URL + 
           '/cms/authen/login',

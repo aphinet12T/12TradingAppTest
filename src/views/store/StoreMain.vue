@@ -24,7 +24,8 @@
         <div v-if="btSelected === 'all'">
           <CustomerAll />
           <div class="flex justify-end mt-3">
-            <router-link to="/cms/store/add">
+            <!-- <router-link to="/cms/store/add"> -->
+            <router-link to="/cms/test">
               <ButtonAdd :icon="'ph:plus-light'" />
             </router-link>
           </div>
