@@ -16,8 +16,8 @@ export const useStoresStore = defineStore('stores', {
       },
     }),
     getter: {
-      getCustomerAll: (state) => state.storeAll,
-      getCustomerNew: (state) => state.storeNew,
+      // getCustomerAll: (state) => state.storeAll,
+      // getCustomerNew: (state) => state.storeNew,
     },
     actions: {
       async getCustomerAll() {

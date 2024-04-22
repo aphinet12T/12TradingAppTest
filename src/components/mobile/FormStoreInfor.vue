@@ -3,7 +3,7 @@
         <h2>ข้อมูลร้านค้า</h2>
     </div>
     <div class="flex justify-center">
-        <div class="bg-white h-[600px] sm:w-[350px] md:w-card shadow-md rounded-lg mt-1 overflow-auto">
+        <div class="bg-white h-[600px] w-[350px] shadow-md rounded-lg mt-1 overflow-auto">
             <div class=" flex flex-col items-center mt-5">
                 <div class="mb-1">
                     <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :inputClass="'w-[300px] p-2.5'" :type="'text'"
@@ -57,22 +57,36 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import InputFeild from '../../components/tablet/InputFeild.vue'
 import { useUtilityStore, useStoresStore } from '../../stores'
 
 const store = useStoresStore()
+const utility = useUtilityStore()
+
 const dataStoreType = computed(() => {
     return store.storeType;
 })
 
-const vStoreName = ref('')
-const vStoreTax = ref('')
-const vStorePhone = ref('')
-const vStoreRoute = ref('')
-const vStoreType = ref('')
-const vStoreLine = ref('')
-const vStoreNote = ref('')
+const vStoreName = ref(utility.storeName)
+const vStoreTax = ref(utility.storeTax)
+const vStorePhone = ref(utility.storePhone)
+const vStoreRoute = ref(utility.storeRoute)
+const vStoreType = ref(utility.storeType)
+const vStoreLine = ref(utility.storeLine)
+const vStoreNote = ref(utility.storeNote)
+
+watch([vStoreName, vStoreTax, vStorePhone, vStoreRoute, vStoreType, vStoreLine, vStoreNote], () => {
+    utility.updateStoreData({
+        storeName: vStoreName.value,
+        storeTax: vStoreTax.value,
+        storePhone: vStorePhone.value,
+        storeRoute: vStoreRoute.value,
+        storeType: vStoreType.value,
+        storeLine: vStoreLine.value,
+        storeNote: vStoreNote.value,
+    })
+})
 
 onMounted(() => {
     store.getStoreType()
