@@ -44,10 +44,10 @@
                                 <h2 class="mb-2 sm:text-lg font-semibold tracking-tight overflow-hidden whitespace-nowrap truncate">
                                 {{ cart.name }}
                                 </h2>
-                                <button type="button"
-                                class="text-white bg-red-500 w-6 h-6 font-medium rounded-md sm:text-sm md:text-lg inline-flex flex-col items-center justify-center">
-                                <Icon class="icon w-4 h-4" icon="ph:x-bold" />
-                            </button>
+                                <button type="button" @click="handleClick(cart.id, cart.unitId, cart.name)"
+                                    class="text-white bg-red-500 w-6 h-6 font-medium rounded-md sm:text-sm md:text-lg inline-flex flex-col items-center justify-center">
+                                    <Icon class="icon w-4 h-4" icon="ph:x-bold" />
+                                </button>
                             </div>
                             <div class="flex justify-between">
                                 <p class="mb-3 justify-end font-normal text-gray-700">

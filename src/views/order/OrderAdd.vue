@@ -16,7 +16,7 @@
                         รหัส : {{ storeId }}
                     </div>
                     <div class="ml-12 text-xl">
-                        ชื่อ : {{ storeName }}
+                        ร้าน : {{ storeName }}
                     </div>
                 </div>
                 <div>

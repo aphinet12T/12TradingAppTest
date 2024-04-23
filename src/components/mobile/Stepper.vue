@@ -12,7 +12,7 @@
       <li v-if="index < steps.length - 1"
         class="flex w-[75px] items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:inline-block sm:after:inline-block after:mx-6 xl:after:mx-10">
       </li>
-      </li>
+    </li>
     </ol>
     <slot :currentStep="currentStep"></slot>
     <div class="flex justify-between w-full mt-4">
