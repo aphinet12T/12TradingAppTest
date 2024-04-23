@@ -38,6 +38,7 @@ export default {
       {
         label: "รายการ",
         icon: "mdi:marketplace-outline",
+        route: "order"
       },
       {
         label: "จัดการ",

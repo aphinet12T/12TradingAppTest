@@ -7,7 +7,7 @@ const reportRoutes = [
     children: [
       {
         path: 'add',
-        component: () => import('../views/cn/CnAdd.vue'),
+        component: () => import('../views/order/cn/CnAdd.vue'),
       },
       {
         path: 'month',

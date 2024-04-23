@@ -70,10 +70,10 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Icon } from '@iconify/vue'
-import { useOrderStore } from '../../stores'
-import LayoutSub from '../LayoutSub.vue'
-import ButtonBack from '../../components/ButtonBack.vue'
-import InputCounter from '../../components/tablet/InputCounter.vue'
+import { useOrderStore } from '../../../stores'
+import LayoutSub from '../../LayoutSub.vue'
+import ButtonBack from '../../../components/ButtonBack.vue'
+import InputCounter from '../../../components/tablet/InputCounter.vue'
 
 
 const router = useRouter();
