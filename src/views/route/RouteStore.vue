@@ -25,7 +25,7 @@
                 <div class="flex justify-center mt-5">
                     <Table :columns="tableColumns" :data="routeStoreList"
                         :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'"
-                        :tdClass="'px-6 py-2 sm:text-sm md:text-lg text-center'" :hTable="'sm:h-[450px] md:h-[650px]'">
+                        :tdClass="'px-6 py-2 sm:text-sm md:text-lg text-center'" :hTable="'sm:h-[450px] md:h-[650px]'" @row-click="handleClick1">
                     </Table>
                 </div>
                 <div class="flex flex-row justify-center">
@@ -62,7 +62,7 @@
 <script setup>
 import { Icon } from '@iconify/vue'
 import { computed, onMounted } from 'vue'
-import { useRouteStore } from '../../stores'
+import { useRouteStore, useOrderStore } from '../../stores'
 import { useRouter } from 'vue-router'
 import LayoutSub from '../LayoutSub.vue'
 import ButtonBack from '../../components/ButtonBack.vue'
@@ -71,7 +71,8 @@ import DrawerReason from '../../components/tablet/DrawerReason.vue'
 import DrawerPicture from '../../components/DrawerPicture.vue'
 
 
-const store = useRouteStore();
+const store = useRouteStore()
+const order = useOrderStore()
 const routeStore = computed(() => {
     return store.routeStore;
 });
@@ -95,6 +96,13 @@ const handleClick = () => {
 const handleClickCn = () => {
     router.push('/cms/cn/add')
 }
+
+const handleClick1 = (row) => {
+    order.getOrderDetail(row.orderId)
+    router.push('/cms/order/detail')
+    console.log('order', row.orderId)
+}
+
 const routeDay = localStorage.getItem('routeDay')
 
 onMounted(() => {

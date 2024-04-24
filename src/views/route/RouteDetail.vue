@@ -100,17 +100,17 @@ const store = useRouteStore()
 // const routeDetailList = computed(() => {
 //   return store.routeDetailList;
 // });
-const routeDetail = ref(store.routeDetail);
-const routeDetailList = ref(store.routeDetailList);
+const routeDetail = ref(store.routeDetail)
+const routeDetailList = ref(store.routeDetailList)
 
-const router = useRouter();
+const router = useRouter()
 const handleClick = (row) => {
-  const routeStore = row.id;
-  const routeStoreName = row.name;
-  localStorage.setItem('routeStoreId', routeStore);
-  localStorage.setItem('routeStoreName', routeStoreName);
+  const routeStore = row.id
+  const routeStoreName = row.name
+  localStorage.setItem('routeStoreId', routeStore)
+  localStorage.setItem('routeStoreName', routeStoreName)
   router.push('/cms/route/store')
-};
+}
 
 const tableColumns = computed(() => {
   if (isMobile.value) {
@@ -130,18 +130,18 @@ const tableColumns = computed(() => {
 const isLoading = ref(true)
 onMounted(async () => {
   try {
-    isLoading.value = true;
-    await store.getRouteDetail();
-    isLoading.value = false;
+    isLoading.value = true
+    await store.getRouteDetail()
+    isLoading.value = false
   } catch (error) {
-    console.error('Error loading data:', error);
-    isLoading.value = false;
+    console.error('Error loading data:', error)
+    isLoading.value = false
   }
 })
 
 watchEffect(() => {
-  routeDetail.value = store.routeDetail;
-  routeDetailList.value = store.routeDetailList;
+  routeDetail.value = store.routeDetail
+  routeDetailList.value = store.routeDetailList
 });
 
 </script>

@@ -232,7 +232,7 @@ export const useOrderStore = defineStore('orders', {
         const response = await axios.post(
           import.meta.env.VITE_API_BASE_URL + '/cms/order/getDetail',
           {
-            orderNo: '7'
+            orderNo: orderNo
           }
           // {
           //   headers: { Authorization: `Bearer ${token}` },

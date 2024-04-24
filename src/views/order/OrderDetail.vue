@@ -32,7 +32,7 @@
                 </div>
                 <div class="flex flex-col items-center mt-5">
                     <Table :columns="tableColumns" :data="detailList" :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'" :tdClass="'px-10 py-2 sm:text-sm md:text-lg text-start'"
-                        :hTable="'sm:h-[250px] md:h-[440px]'">
+                        :hTable="'sm:h-[250px] md:h-[440px]'" @row-click="handleClick">
                     </Table>
                 </div>
                 <div class="flex-grow z-40">
@@ -109,8 +109,7 @@ const tableColumns = computed(() => {
         { id: 'pricePerQty', title: 'ราคา' },
         { id: 'itemDiscount', title: 'ส่วนลด' },
         { id: 'summaryPrice', title: 'รวม' },
-    ];
-});
-
+    ]
+})
 
 </script>
