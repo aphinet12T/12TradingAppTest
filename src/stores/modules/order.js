@@ -11,6 +11,8 @@ export const useOrderStore = defineStore('orders', {
     orderCartAmount: 0,
     orderCheckout: [],
     orderCheckoutList: [],
+    orderDetail: [],
+    orderDetailList: [],
     productUnitDetail: {
       id: '',
       unitId: '',
@@ -220,6 +222,27 @@ export const useOrderStore = defineStore('orders', {
         const result = response.data;
         this.orderCart = result;
         console.log('delete', this.orderCart);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getOrderDetail(orderNo) {
+      try {
+        //   const token = JSON.parse(localStorage.getItem('token'));
+        const response = await axios.post(
+          import.meta.env.VITE_API_BASE_URL + '/cms/order/getDetail',
+          {
+            orderNo: '7'
+          }
+          // {
+          //   headers: { Authorization: `Bearer ${token}` },
+          // }
+        );
+        const result = response.data;
+        const resultList = response.data.list;
+        this.orderDetail = result;
+        this.orderDetailList = resultList;
+        console.log('orderDetail', this.orderDetailList);
       } catch (error) {
         console.error(error);
       }
