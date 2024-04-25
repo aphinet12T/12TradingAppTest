@@ -34,9 +34,23 @@
                     </div>
                 </div>
                 <div class="flex flex-col items-center mt-5">
-                    <Table :columns="tableColumns" :data="checkoutList" :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'" :tdClass="'px-10 py-2 sm:text-sm md:text-lg text-start'"
-                        :hTable="'sm:h-[250px] md:h-[440px]'">
-                    </Table>
+                    <div class="bg-white px-2 sha shadow-slate-300 shadow-md rounded-lg overflow-auto md:w-card sm:w-[360px] sm:h-[300px] md:h-[600px]">
+                        <div class="flex flex-col p-4" v-for="checkout in checkoutList" :key="checkout.id">
+                            <div class="flex justify-between">
+                                <h2 class="mb-2 sm:text-lg font-semibold tracking-tight overflow-hidden whitespace-nowrap truncate">
+                                {{ checkout.name }}
+                                </h2>
+                            </div>
+                            <div class="flex justify-between">
+                                <p class="mb-3 justify-end font-normal text-gray-700">
+                                   ฿{{ checkout.totalAmount }}
+                                </p>
+                                <p class="mb-3 justify-end font-normal text-gray-700">
+                                    {{ checkout.qtyText }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="flex-grow z-40">
                     <div class="bg-white h-full rounded-md shadow ">
