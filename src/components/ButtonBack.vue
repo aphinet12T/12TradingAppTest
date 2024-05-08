@@ -5,8 +5,8 @@
 </template>
 
 <script setup>
-import { Icon } from '@iconify/vue';
-import { useRouter } from 'vue-router';
+import { Icon } from '@iconify/vue'
+import { useRouter } from 'vue-router'
 
 const router = useRouter();
 const back = () => {
