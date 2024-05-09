@@ -6,9 +6,9 @@
           <Icon class="icon sm:h-10 sm:w-10 md:h-10 md:w-10" icon="ic:baseline-store" />
           <div class="md:text-4xl mt-2">ร้านค้า</div>
         </div>
-        <div class="flex justify-end mr-2">
-          <SearchBar />
-        </div>
+      </div>
+      <div class="flex justify-center">
+        <SearchBar />
       </div>
       <div class="relative rounded-t-xl overflow-auto p-8">
         <div class="flex flex-nowrap gap-4 font-mono text-black md:text-2xl rounded-lg">

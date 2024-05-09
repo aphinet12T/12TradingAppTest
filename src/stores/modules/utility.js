@@ -15,6 +15,8 @@ export const useUtilityStore = defineStore('utility', {
     storeDistrict: '',
     storeSubdistrict: '',
     storeZipcode: '',
+    searchText: '',
+    searchData: [],
   }),
   actions: {
     validateInput(value) {
@@ -34,6 +36,26 @@ export const useUtilityStore = defineStore('utility', {
     updateAddress(address) {
       Object.assign(this, address)
       console.log('5555', address)
+    },
+    setSearchText(text) {
+      this.searchText = text
+    },
+    setSearchData(data) {
+      this.searchData = data
+    },
+  },
+  getters: {
+    filteredData(state) {
+      const search = state.searchText.toLowerCase();
+      if (!search) {
+        return state.searchData
+      }
+      return state.searchData.filter(item =>
+        Object.values(item)
+          .join(' ')
+          .toLowerCase()
+          .includes(search)
+      );
     },
   },
 });

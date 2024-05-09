@@ -11,16 +11,19 @@
             <span class="ml-2 md:text-3xl">การเข้าเยี่ยม</span>
           </div>
         </div>
+        <div class="flex justify-center mt-2">
+          <SearchBar />
+        </div>
         <div class="flex flex-row justify-between">
-          <div class="mt-4 ml-12 text-xl">
-            Day 07
+          <div class="mt-4 ml-12 md:text-xl">
+            {{ routeDetail.day }}
           </div>
-          <div class="mt-4 mr-12 text-xl">
-            Route
+          <div class="mt-4 mr-12 md:text-xl">
+            {{ routeDetail.route }}
           </div>
         </div>
         <div class="flex justify-center">
-          <Table :columns="tableColumns" :data="routeDetailList"
+          <Table :columns="tableColumns" :data="filteredData"
             :thClass="'py-3 px-10 sm:text-center sm:text-sm md:text-lg'"
             :tdClass="'py-2 sm:text-sm md:text-lg text-center'" :isLoading="isLoading"
             :hTable="'sm:h-[550px] md:h-[690px]'" @row-click="handleClick">
@@ -85,21 +88,17 @@
 import { Icon } from '@iconify/vue'
 import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
-import { useRouteStore } from '../../stores'
+import { useRouteStore, useUtilityStore } from '../../stores'
 import { useDisplaySize } from '../../composable/DisplaySize'
 import LayoutSub from '../LayoutSub.vue'
 import ButtonBack from '../../components/ButtonBack.vue'
 import Table from '../../components/Table.vue'
+import SearchBar from '../../components/SearchBar.vue'
 
 const { isMobile } = useDisplaySize()
+const search = useUtilityStore()
 const store = useRouteStore()
-// const routeDetail = computed(() => {
-//   return store.routeDetail;
-// });
 
-// const routeDetailList = computed(() => {
-//   return store.routeDetailList;
-// });
 const routeDetail = ref(store.routeDetail)
 const routeDetailList = ref(store.routeDetailList)
 
@@ -112,6 +111,7 @@ const handleClick = (row) => {
   router.push('/cms/route/store')
 }
 
+const filteredData = computed(() => search.filteredData)
 const tableColumns = computed(() => {
   if (isMobile.value) {
     return [
@@ -142,6 +142,10 @@ onMounted(async () => {
 watchEffect(() => {
   routeDetail.value = store.routeDetail
   routeDetailList.value = store.routeDetailList
+})
+
+onMounted(() => {
+    search.setSearchData(routeDetailList)
 });
 
 </script>

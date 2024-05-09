@@ -1,17 +1,19 @@
 <template>
-    <Table :columns="tableColumns" :data="customerAll" :thClass="'px-8 py-3'" :tdClass="'px-9 py-2'" :hTable="'sm:h-[430px] md:h-[650px]'"></Table>
+    <Table :columns="tableColumns" :data="filteredData" :thClass="'px-8 py-3'" :tdClass="'px-9 py-2'" :hTable="'sm:h-[430px] md:h-[650px]'"></Table>
 </template>
 
 <script setup>
 import { computed, onMounted } from 'vue'
 import Table from '../../components/Table.vue'
-import { useStoresStore } from '../../stores'
+import { useStoresStore, useUtilityStore } from '../../stores'
 
-const store = useStoresStore();
+const store = useStoresStore()
+const search = useUtilityStore()
 const customerAll = computed(() => {
-    return store.storeAll;
+    return store.storeAll
 });
 
+const filteredData = computed(() => search.filteredData)
 const tableColumns = computed(() => {
     return [
         { id: 'storeId', title: 'รหัสร้าน' },
@@ -22,7 +24,8 @@ const tableColumns = computed(() => {
 });
 
 onMounted(() => {
-    store.getCustomerAll();
+    store.getCustomerAll()
+    search.setSearchData(customerAll)
 });
 
 </script>

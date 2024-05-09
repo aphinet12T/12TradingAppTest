@@ -1,22 +1,24 @@
 <template>
   <LayoutMain>
     <template v-slot:header>
-      <div class="flex items-center justify-between pb-32">
-        <div class="flex justify-end ml-2">
+      <div class="flex flex-col pb-32">
+        <div class="flex justify-start ml-2">
           <Icon class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" icon="gis:map-route" />
           <div class="mt-1 ml-2 sm:text-lg md:text-4xl">เส้นทาง</div>
         </div>
-        <div class="flex justify-end mr-2">
+        <!-- <div class="flex justify-center mt-2">
           <SearchBar />
-        </div>
+        </div> -->
       </div>
     </template>
     <template v-slot:body>
       <div class="flex justify-center relative md:bottom-5 sm:bottom-10">
-        <Table :columns="tableColumns" :data="routeMain" :thClass="'py-3 sm:text-center sm:text-sm md:px-10 md:text-lg'" :tdClass="'py-2 text-center sm:text-sm md:text-lg'"
-          :hTable="'sm:h-[525px] md:h-700'" @row-click="handleClick">
+        <Table :columns="tableColumns" :data="routeMain" :thClass="'py-3 sm:text-center sm:text-sm md:px-10 md:text-lg'"
+          :tdClass="'py-2 text-center sm:text-sm md:text-lg'" :hTable="'sm:h-[525px] md:h-700'"
+          @row-click="handleClick">
           <template v-slot:statusNumber="{ item }">
-            <span v-if="item.status === '0'" class="bg-red-100 text-red-800 sm:text-sm md:text-md font-medium px-2.5 py-0.5 rounded">
+            <span v-if="item.status === '0'"
+              class="bg-red-100 text-red-800 sm:text-sm md:text-md font-medium px-2.5 py-0.5 rounded">
               {{ item.statusNumber }}
             </span>
             <span v-if="item.status === '1'"
@@ -65,14 +67,15 @@ const routeMain = computed(() => {
 
 const router = useRouter();
 const handleClick = (row) => {
-  const routeId = row.id;
-  const routeDay = row.day;
-  const routeNo = row.route;
-  localStorage.setItem('routeId', routeId);
-  localStorage.setItem('routeDay', routeDay);
-  localStorage.setItem('routeNo', routeNo);
+  const routeId = row.id
+  const routeDay = row.day
+  const routeNo = row.route
+  localStorage.setItem('routeId', routeId)
+  localStorage.setItem('routeDay', routeDay)
+  localStorage.setItem('routeNo', routeNo)
   router.push('/cms/route/detail')
 };
+
 
 const tableColumns = computed(() => {
   return [
