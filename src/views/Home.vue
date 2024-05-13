@@ -1,7 +1,7 @@
 <template>
     <LayoutMain>
         <template v-slot:header>
-            <div class="flex items-center justify-between pb-32">
+            <div class="flex items-center justify-between pb-[138px]">
                 <div class="flex justify-end ml-5">
                     <img src="/public/logo-onetwo.png" class="me-3 sm:h-16 md:h-20">
                 </div>

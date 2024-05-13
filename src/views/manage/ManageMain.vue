@@ -1,14 +1,14 @@
 <template>
   <LayoutMain>
     <template v-slot:header>
-      <div class="flex items-center justify-between pb-5">
-        <div class="flex justify-end ml-5">
+      <div class="p-4 flex items-center justify-between">
+        <div class="flex justify-end ml-2">
           <Icon class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" icon="fluent:drawer-add-24-regular" />
-          <div class="md:text-4xl mt-2 ml-2 font-medium">จัดการ</div>
+          <div class="mt-1 ml-2 sm:text-lg md:text-4xl">จัดการ</div>
         </div>
-        <div class="flex justify-end mr-2">
-          <SearchBar />
-        </div>
+      </div>
+      <div class="flex justify-center">
+        <SearchBar />
       </div>
       <!-- <div class="flex items-center justify-between">
         <div class="flex justify-start">
@@ -18,7 +18,7 @@
           <ButtonTab :buttonText="btGive" class="absolute top-28 left-80" @click="dataManage('give')"></ButtonTab>
         </div>
       </div> -->
-      <div class="relative rounded-t-xl overflow-auto p-8">
+      <div class="relative rounded-t-xl overflow-auto p-5">
         <div class="flex flex-nowrap gap-4 font-mono text-black md:text-2xl rounded-lg">
           <button class="p-4 w-full rounded-lg flex items-center justify-center bg-white shadow-lg"
             v-for="item in btType" :key="item.id" @click="handleClick(item.id)">

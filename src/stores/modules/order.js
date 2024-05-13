@@ -11,6 +11,7 @@ export const useOrderStore = defineStore('orders', {
     orderCartAmount: 0,
     orderCheckout: [],
     orderCheckoutList: [],
+    orderCheckoutFree: [],
     orderDetail: [],
     orderDetailList: [],
     productUnitDetail: {
@@ -193,11 +194,13 @@ export const useOrderStore = defineStore('orders', {
           //   headers: { Authorization: `Bearer ${token}` },
           // }
         );
-        const result = response.data;
-        const resultList = response.data.list;
-        this.orderCheckout = result;
-        this.orderCheckoutList = resultList;
-        console.log('orderCheckout', this.orderCheckout);
+        const result = response.data
+        const resultList = response.data.list
+        const resultFree = response.data.listFree
+        this.orderCheckout = result
+        this.orderCheckoutList = resultList
+        this.orderCheckoutFree = resultFree
+        console.log('orderCheckout', this.orderCheckout)
       } catch (error) {
         console.error(error);
       }

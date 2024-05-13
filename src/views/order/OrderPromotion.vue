@@ -15,22 +15,28 @@
                     <div>
                         ของแถม
                     </div>
-                    <Table :columns="tableReward" :data="dataReward.listFree"
-                        :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'"
-                        :tdClass="'px-10 py-2 sm:text-sm md:text-lg text-start'" :hTable="'sm:h-[275px] md:h-[350px]'">
-                        <!-- <template v-slot:body="{ row }">
-                            <div v-for="(product, index) in row.listProduct" :key="index">
-                                {{ product.productName }}
-                            </div>
-                        </template> -->
-                        <template v-slot:button="{ rowData }">
-                            <button type="button"
-                                class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
-                                @click="handleClick(rowData.id, rowData.unitId)">
+                    <div
+                    class="bg-white px-2 sha shadow-slate-300 shadow-md rounded-lg overflow-auto md:w-card sm:w-[360px] sm:h-[275px] md:h-[600px]">
+                    <div class="flex flex-col p-4" v-for="free in listFree" :key="free.proId">
+                        <div class="flex justify-between">
+                            <h2 class="mb-2 sm:text-lg font-semibold tracking-tight overflow-hidden whitespace-nowrap truncate">
+                            {{ free.proId }}
+                            </h2>
+                            <button type="button" @click="handleClick()"
+                                class="text-white bg-red-500 w-6 h-6 font-medium rounded-md sm:text-sm md:text-lg inline-flex flex-col items-center justify-center">
                                 <Icon class="icon w-4 h-4" icon="ph:x-bold" />
                             </button>
-                        </template>
-                    </Table>
+                        </div>
+                        <div class="flex justify-between">
+                            <p class="mb-3 justify-end font-normal text-gray-700">
+                               {{ free.summaryQty }}
+                            </p>
+                            <p class="mb-3 justify-end font-normal text-gray-700">
+                                {{ free.listProduct[0].productName }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
                 </div>
                 <div class="flex flex-col items-center mt-5">
                     <div>

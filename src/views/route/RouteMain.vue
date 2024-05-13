@@ -1,20 +1,17 @@
 <template>
   <LayoutMain>
     <template v-slot:header>
-      <div class="flex flex-col pb-32">
+      <div class="p-4 flex items-center justify-between pb-[154px]">
         <div class="flex justify-start ml-2">
           <Icon class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" icon="gis:map-route" />
           <div class="mt-1 ml-2 sm:text-lg md:text-4xl">เส้นทาง</div>
         </div>
-        <!-- <div class="flex justify-center mt-2">
-          <SearchBar />
-        </div> -->
       </div>
     </template>
     <template v-slot:body>
-      <div class="flex justify-center relative md:bottom-5 sm:bottom-10">
+      <div class="flex justify-center relative md:bottom-5 sm:bottom-[100px]">
         <Table :columns="tableColumns" :data="routeMain" :thClass="'py-3 sm:text-center sm:text-sm md:px-10 md:text-lg'"
-          :tdClass="'py-2 text-center sm:text-sm md:text-lg'" :hTable="'sm:h-[525px] md:h-700'"
+          :tdClass="'py-2 text-center sm:text-sm md:text-lg'" :hTable="'sm:h-[625px] md:h-700'"
           @row-click="handleClick">
           <template v-slot:statusNumber="{ item }">
             <span v-if="item.status === '0'"
