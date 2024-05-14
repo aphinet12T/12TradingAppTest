@@ -3,7 +3,7 @@
         <h2>ที่อยู่</h2>
     </div>
     <div class="flex justify-center">
-        <div class="bg-white h-[600px] w-[350px] shadow-md rounded-lg mt-2 overflow-auto">
+        <div class="bg-white h-[550px] w-[350px] shadow-md rounded-lg mt-2 overflow-auto">
             <div class=" flex flex-col items-center mt-3">
                 <div class="mb-1">
                     <InputFeild :id="'storeAddress'" :label="'ที่อยู่'" :inputClass="'w-[300px] p-2.5'" :type="'text'"

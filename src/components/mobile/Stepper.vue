@@ -12,18 +12,22 @@
       <li v-if="index < steps.length - 1"
         class="flex w-[75px] items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:inline-block sm:after:inline-block after:mx-6 xl:after:mx-10">
       </li>
-    </li>
+      </li>
     </ol>
     <slot :currentStep="currentStep"></slot>
-    <div class="flex justify-between w-full mt-4">
-      <button @click="prevStep" :disabled="currentStep === 0" type="button"
-        class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ml-5 focus:outline-none">
-        ย้อน
-      </button>
-      <button @click="nextStep" :disabled="currentStep === steps.length - 1" type="button"
-        class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 mr-5 focus:outline-none">
-        ถัดไป
-      </button>
+    <div class="relative rounded-t-xl overflow-auto">
+      <div class="flex flex-nowrap gap-4 font-mono text-white md:text-2xl rounded-lg">
+        <div class="flex justify-between mt-4">
+          <button @click="prevStep" :disabled="currentStep === 0" type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-16 py-2.5 me-2 mb-2 ml-5 p-4">
+            ย้อน
+          </button>
+          <button @click="nextStep" :disabled="currentStep === steps.length - 1" type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-16 py-2.5 me-2 mb-2 mr-5 p-4 w-full">
+            ถัดไป
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
 
     <div class="flex justify-center p-4">
-        <div class="bg-white shadow-lg rounded-lg w-[350px] h-[600px] overflow-y-auto p-6">
+        <div class="bg-white shadow-lg rounded-lg w-[350px] h-[550px] overflow-y-auto p-6">
             <div class="flex text-xl mb-4 items-center">
                 <Icon icon="mdi:store" class="mr-2" />
                 ร้านค้า

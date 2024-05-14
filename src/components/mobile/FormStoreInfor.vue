@@ -3,7 +3,7 @@
         <h2>ข้อมูลร้านค้า</h2>
     </div>
     <div class="flex justify-center">
-        <div class="bg-white h-[600px] w-[350px] shadow-md rounded-lg mt-1 overflow-auto">
+        <div class="bg-white h-[550px] w-[350px] shadow-md rounded-lg mt-1 overflow-auto">
             <div class=" flex flex-col items-center mt-5">
                 <div class="mb-1">
                     <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :inputClass="'w-[300px] p-2.5'" :type="'text'"

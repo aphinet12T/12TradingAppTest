@@ -20,10 +20,10 @@
         </div>
       </div>
       <div class="flex justify-center">
-        <div class="bg-white h-64 sm:w-[350px] md:w-card shadow-md rounded-lg mt-1 overflow-auto">
+        <div class="bg-white h-64 sm:w-[400px] md:w-card shadow-md rounded-lg mt-1 overflow-auto">
           <div class=" flex flex-col items-center mt-5">
             <div class="mb-1">
-              <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :inputClass="'md:w-500 p-2.5'" :type="'text'"
+              <InputFeild :id="'storeName'" :label="'ชื่อร้านค้า'" :inputClass="'sm:w-[350px] md:w-500 p-2.5'" :type="'text'"
                 v-model="vStoreName" :isRequired="true">
               </InputFeild>
               <div class="flex justify-end">
@@ -33,18 +33,18 @@
               </div>
             </div>
             <div class="mb-1">
-              <InputFeild :id="'storeTax'" :label="'เลขที่ผู้เสียภาษี'" :inputClass="'md:w-500 p-2.5'" :type="'text'"
+              <InputFeild :id="'storeTax'" :label="'เลขที่ผู้เสียภาษี'" :inputClass="'sm:w-[350px] md:w-500 p-2.5'" :type="'text'"
                 v-model="vStoreTax" :maxlength="13">
               </InputFeild>
             </div>
             <div class="flex flex-row">
               <div class="mb-1">
-                <InputFeild :id="'storePhone'" :label="'โทรศัพท์'" :inputClass="'md:w-220 p-2.5'" :type="'number'"
+                <InputFeild :id="'storePhone'" :label="'โทรศัพท์'" :inputClass="'sm:w-[165px] md:w-220 p-2.5'" :type="'number'"
                   v-model="vStorePhone" :maxlength="10">
                 </InputFeild>
               </div>
               <div class="mb-1 ml-5">
-                <InputFeild :id="'storeRoute'" :label="'เส้นทาง'" :inputClass="'md:w-220 p-2.5'" :type="'text'"
+                <InputFeild :id="'storeRoute'" :label="'เส้นทาง'" :inputClass="'sm:w-[165px] md:w-220 p-2.5'" :type="'text'"
                   v-model="vStoreRoute">
                 </InputFeild>
               </div>
@@ -57,7 +57,7 @@
                 <form class="max-w-sm mx-auto">
                   <label for="storeType" class="block mb-2 text-sm font-medium text-gray-900">ประเภทร้านค้า</label>
                   <select v-model="vStoreType" id="storeType"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-220 p-2.5">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block sm:w-[165px] md:w-220 p-2.5">
                     <option disabled value="">เลือกประเภทร้านค้า</option>
                     <option v-for="type in dataStoreType" :key="type.id" :value="type.id">
                       {{ type.name }}
@@ -66,13 +66,13 @@
                 </form>
               </div>
               <div class="mb-1 ml-5">
-                <InputFeild :id="'lineId'" :label="'Line ID'" :inputClass="'md:w-220 p-2.5'" :type="'text'"
+                <InputFeild :id="'lineId'" :label="'Line ID'" :inputClass="'sm:w-[165px] md:w-220 p-2.5'" :type="'text'"
                   v-model="vStoreLine">
                 </InputFeild>
               </div>
             </div>
             <div class="mb-5">
-              <InputFeild :id="'storeNote'" :label="'หมายเหตุ'" :inputClass="'md:w-500 p-2.5'" :type="'text'"
+              <InputFeild :id="'storeNote'" :label="'หมายเหตุ'" :inputClass="'sm:w-[350px] md:w-500 p-2.5'" :type="'text'"
                 v-model="vStoreNote">
               </InputFeild>
             </div>
