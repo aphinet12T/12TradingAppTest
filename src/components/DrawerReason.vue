@@ -14,7 +14,7 @@
             <div>
                 <button @click="closeDrawer" type="button" :data-drawer-hide="drawerId" :aria-controls="drawerId"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center">
-                    <Icon icon="material-symbols:close" class="icon sm:h-8 sm:w-8 md:h-10 md:w-10"/>
+                    <Icon icon="material-symbols:close" class="icon sm:h-8 sm:w-8 md:h-10 md:w-10" />
                     <span class="sr-only">ปิดเมนู</span>
                 </button>
             </div>
@@ -32,7 +32,7 @@
                     <select v-model="selectedReason" @change="emitData"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         <option value="" disabled selected>กรุณาเลือกสาเหตุ</option>
-                        <option v-for="reason in dataReason" :key="reason.id" :value="reason.id">
+                        <option v-for="reason in dataReason" :key="reason.id" :value="reason.name">
                             {{ reason.name }}
                         </option>
                     </select>
@@ -51,67 +51,60 @@
         </div>
     </div>
 </template>
-  
-<script>
-import { ref, computed, onMounted, defineEmits } from 'vue';
+
+<script setup>
+import { ref, computed, onMounted } from 'vue';
 import { Icon } from '@iconify/vue';
-import { useOptionStore } from '../../stores';
+import { useOptionStore } from '../stores';
 
-export default {
-    props: {
-        storeID: String,
-        storeName: String,
-    },
-    components: {
-        Icon,
-    },
-    setup(props, { emit }) {
-        const option = useOptionStore();
-        const dataReason = computed(() => option.reason);
+const props = defineProps({
+    storeID: String,
+    storeName: String,
+})
 
-        const selectedReason = ref('');
-        const showDrawer = ref(false);
-        const showBackdrop = ref(false);
-        const drawerId = 'drawer-bottom-example';
+const option = useOptionStore()
+const dataReason = computed(() => option.reason)
 
-        const toggleBottomDrawer = () => {
-            showDrawer.value = !showDrawer.value;
-            if (showDrawer.value) {
-                showBackdrop.value = true;
-            }
-        }
-        const closeDrawer = () => {
-            showDrawer.value = false;
-            showBackdrop.value = false;
-        }
-        const emitData = () => {
-            emit('update:data', { selectedReason: selectedReason.value });
-        }
-        const saveReason = () => {
-            const reasonData = {
-                selectedReason: selectedReason.value,
-                reasonMessage: selectedReason.value === '0' ? reasonMessage : ''
-            }
-            console.log(reasonData);
-        }
+const selectedReason = ref('')
+const showDrawer = ref(false)
+const showBackdrop = ref(false)
+const drawerId = 'drawer-bottom-example'
 
-        let reasonMessage = ''
-        
-        onMounted(() => {
-            option.getReason();
-        });
-
-        return {
-            selectedReason,
-            showDrawer,
-            showBackdrop,
-            drawerId,
-            toggleBottomDrawer,
-            closeDrawer,
-            dataReason,
-            saveReason,
-            reasonMessage
-        }
-    },
+const toggleBottomDrawer = () => {
+    showDrawer.value = !showDrawer.value
+    if (showDrawer.value) {
+        showBackdrop.value = true
+    }
 }
+const closeDrawer = () => {
+    showDrawer.value = false
+    showBackdrop.value = false
+}
+
+const emit = defineEmits(['update:data']);
+const emitData = () => {
+    emit('update:data', { selectedReason: selectedReason.value })
+}
+
+const data = {
+    case: "noSale",
+    idRoute: localStorage.getItem('routeId'),
+    area: localStorage.getItem('area'),
+    storeId: localStorage.getItem('routeStoreId')
+}
+const saveReason = () => {
+    const reasonData = {
+        selectedReason: selectedReason.value,
+        reasonMessage: selectedReason.value === '0' ? reasonMessage : ''
+    }
+    console.log('123',reasonData)
+    console.log('456',data)
+}
+
+let reasonMessage = ''
+
+onMounted(() => {
+    option.getReason()
+});
+
 </script>

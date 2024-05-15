@@ -1,5 +1,6 @@
 <template>
-    <Table :columns="tableColumns" :data="filteredData" :thClass="'px-8 py-3'" :tdClass="'px-5 py-2'" :hTable="'h-[550px]'"></Table>
+    <Table :columns="tableColumns" :data="filteredData" :thClass="'px-8 py-3'" :tdClass="'px-5 py-2'"
+        :sTable="'height: 63vh;'"></Table>
 </template>
 
 <script setup>
@@ -20,15 +21,15 @@ const tableColumns = computed(() => {
     if (isMobile.value) {
         return [
             { id: 'name', title: 'ชื่อร้าน' },
-        { id: 'route', title: 'เส้นทาง' },
-        { id: 'approved', title: 'สถานะ' },
+            { id: 'route', title: 'เส้นทาง' },
+            { id: 'approved', title: 'สถานะ' },
         ]
     } else {
         return [
             { id: 'storeId', title: 'รหัสร้าน' },
-        { id: 'name', title: 'ชื่อร้าน' },
-        { id: 'route', title: 'เส้นทาง' },
-        { id: 'approved', title: 'สถานะ' },
+            { id: 'name', title: 'ชื่อร้าน' },
+            { id: 'route', title: 'เส้นทาง' },
+            { id: 'approved', title: 'สถานะ' },
         ]
     }
 })

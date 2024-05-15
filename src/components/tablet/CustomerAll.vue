@@ -1,6 +1,5 @@
 <template>
-    <Table :columns="tableColumns" :data="filteredData" :thClass="'px-8 py-3'" :tdClass="'px-9 py-2'"
-        :hTable="'sm:h-[430px] md:h-[650px]'"></Table>
+    <Table :columns="tableColumns" :data="filteredData" :thClass="'px-8 py-3'" :tdClass="'px-9 py-2'" :sTable="'height: 55vh;'"></Table>
 </template>
 
 <script setup>

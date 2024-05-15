@@ -11,7 +11,7 @@
     <template v-slot:body>
       <div class="flex justify-center relative md:bottom-5 sm:bottom-[100px]">
         <Table :columns="tableColumns" :data="routeMain" :thClass="'py-3 sm:text-center sm:text-sm md:px-10 md:text-lg'"
-          :tdClass="'py-2 text-center sm:text-sm md:text-lg'" :hTable="'sm:h-[625px] md:h-700'"
+          :tdClass="'py-2 text-center sm:text-sm md:text-lg'" :sTable="'height: 70vh;'"
           @row-click="handleClick">
           <template v-slot:statusNumber="{ item }">
             <span v-if="item.status === '0'"

@@ -67,7 +67,7 @@ import { useRouter } from 'vue-router'
 import LayoutSub from '../LayoutSub.vue'
 import ButtonBack from '../../components/ButtonBack.vue'
 import Table from '../../components/Table.vue'
-import DrawerReason from '../../components/tablet/DrawerReason.vue'
+import DrawerReason from '../../components/DrawerReason.vue'
 import DrawerPicture from '../../components/DrawerPicture.vue'
 
 
