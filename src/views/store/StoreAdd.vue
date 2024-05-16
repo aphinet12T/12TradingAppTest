@@ -27,8 +27,7 @@
                 v-model="vStoreName" :isRequired="true">
               </InputFeild>
               <div class="flex justify-end">
-                <span v-if="!vStoreName.trim()" class="text-sm font-light text-red-500">{{ utility.errorMessage
-                  }}</span>
+                <span v-if="!vStoreName.trim()" class="text-sm font-light text-red-500">{{ utility.errorMessage }}</span>
                 <!-- <span v-else class="block text-sm font-light text-gray-900 dark:text-white">ไม่เกิน 36 ตัวอักษร</span> -->
               </div>
             </div>
@@ -137,7 +136,7 @@
 <script setup>
 import { Icon } from '@iconify/vue'
 import { ref, computed, onMounted, watch } from 'vue'
-import { useUploadStore, useUtilityStore, useGeolocation, useStoresStore } from '../../stores';
+import { useUploadStore, useUtilityStore, useGeolocation, useStoresStore } from '../../stores'
 import LayoutSub from '../LayoutSub.vue'
 import InputFeild from '../../components/tablet/InputFeild.vue'
 import ButtonBack from '../../components/ButtonBack.vue'

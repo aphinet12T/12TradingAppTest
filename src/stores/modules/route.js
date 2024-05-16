@@ -98,7 +98,7 @@ export const useRouteStore = defineStore('routes', {
             // }
           );
           const result = response.data
-          console.log("storeList", this.result)
+          console.log("visited", result)
         } catch (error) {
           console.error(error);
         }

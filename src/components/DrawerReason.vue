@@ -38,24 +38,38 @@
                     </select>
                 </form>
             </div>
-            <div v-if="selectedReason === '0'" class="mt-5">
+            <div v-if="selectedReason === 'อื่นๆ'" class="mt-5">
                 <textarea v-model="reasonMessage" rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-gray-500 focus:border-gray-500"
                     placeholder="ระบุเหตุผล">
                 </textarea>
             </div>
             <div class="mt-5">
-                <button @click="saveReason" type="button"
-                    class="w-full focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg md:text-xl px-5 py-2.5 me-2 mb-2">บันทึก</button>
+                <div v-if="selectedReason === ''">
+                    <button type="button" disabled
+                        class="w-full focus:outline-none text-white bg-gray-500 font-medium rounded-lg md:text-xl px-5 py-2.5 me-2 mb-2">บันทึก</button>
+                </div>
+                <div v-else>
+                    <button @click="saveReason" type="button"
+                        class="w-full focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg md:text-xl px-5 py-2.5 me-2 mb-2">
+                        <span v-if="isLoading" class="inline-flex items-center">
+                            กำลังบันทึก
+                            <Icon icon="svg-spinners:3-dots-scale" />
+                        </span>
+                        <span v-else>
+                            บันทึก
+                        </span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { Icon } from '@iconify/vue';
-import { useOptionStore } from '../stores';
+import { ref, computed, onMounted } from 'vue'
+import { Icon } from '@iconify/vue'
+import { useOptionStore, useRouteStore, useGeolocation } from '../stores'
 
 const props = defineProps({
     storeID: String,
@@ -63,9 +77,13 @@ const props = defineProps({
 })
 
 const option = useOptionStore()
+const route = useRouteStore()
+const location = useGeolocation()
 const dataReason = computed(() => option.reason)
 
 const selectedReason = ref('')
+const reasonMessage = ref('')
+const isLoading = ref(false)
 const showDrawer = ref(false)
 const showBackdrop = ref(false)
 const drawerId = 'drawer-bottom-example'
@@ -80,28 +98,36 @@ const closeDrawer = () => {
     showDrawer.value = false
     showBackdrop.value = false
 }
-
 const emit = defineEmits(['update:data']);
 const emitData = () => {
-    emit('update:data', { selectedReason: selectedReason.value })
+    emit('update:data', { selectedReason: selectedReason.value, reasonMessage: reasonMessage.value })
 }
 
-const data = {
-    case: "noSale",
-    idRoute: localStorage.getItem('routeId'),
-    area: localStorage.getItem('area'),
-    storeId: localStorage.getItem('routeStoreId')
-}
-const saveReason = () => {
-    const reasonData = {
-        selectedReason: selectedReason.value,
-        reasonMessage: selectedReason.value === '0' ? reasonMessage : ''
+const saveReason = async () => {
+    isLoading.value = true
+    const reason = selectedReason.value === 'อื่นๆ' ? reasonMessage.value : selectedReason.value
+    const data = {
+        case: "noSales",
+        idRoute: localStorage.getItem('routeId'),
+        area: localStorage.getItem('area'),
+        storeId: localStorage.getItem('routeStoreId'),
+        // latitude: location.latitude.value.toString(),
+        // longtitude: location.longitude.value.toString(),
+        latitude:"1",
+        longtitude:"5",
+        note: reason,
     }
-    console.log('123',reasonData)
-    console.log('456',data)
+    try {
+        const response = await route.addVisitStore(data)
+        //showAlert.value = true
+        isLoading.value = false
+        console.log('response', response)
+        console.log('checkin', data)
+    } catch (error) {
+        console.error('Error while sending data:', error)
+        isLoading.value = false
+    }
 }
-
-let reasonMessage = ''
 
 onMounted(() => {
     option.getReason()

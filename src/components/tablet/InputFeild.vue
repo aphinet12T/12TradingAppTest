@@ -6,9 +6,9 @@
       </label>
     </div>
   </div>
-
-  <input :id="id" :type="type" :class="inputClass" :maxlength="maxlength" :required="isRequired" :value="modelValue" @input="handleInput"
-    :disabled="isDisabled" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
+  <input :id="id" :type="type" :class="inputClass" :maxlength="maxlength" :required="isRequired" :value="modelValue" :placeholder="placeholder"
+    @input="handleInput" :disabled="isDisabled"
+    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
 </template>
 
 <script setup>
@@ -21,6 +21,7 @@ const props = defineProps({
   isRequired: Boolean,
   modelValue: String,
   isDisabled: Boolean,
+  placeholder: String,
 });
 const emit = defineEmits(['update:modelValue'])
 const handleInput = (event) => {
