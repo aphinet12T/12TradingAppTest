@@ -45,7 +45,7 @@
                 </textarea>
             </div>
             <div class="mt-5">
-                <div v-if="selectedReason === ''">
+                <div v-if="!selectedReason || (selectedReason === 'อื่นๆ' && !reasonMessage)">
                     <button type="button" disabled
                         class="w-full focus:outline-none text-white bg-gray-500 font-medium rounded-lg md:text-xl px-5 py-2.5 me-2 mb-2">บันทึก</button>
                 </div>
@@ -111,10 +111,8 @@ const saveReason = async () => {
         idRoute: localStorage.getItem('routeId'),
         area: localStorage.getItem('area'),
         storeId: localStorage.getItem('routeStoreId'),
-        // latitude: location.latitude.value.toString(),
-        // longtitude: location.longitude.value.toString(),
-        latitude:"1",
-        longtitude:"5",
+        latitude: location.latitude.value.toString(),
+        longtitude: location.longitude.value.toString(),
         note: reason,
     }
     try {

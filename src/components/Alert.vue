@@ -12,8 +12,7 @@
                 @click="onConfirm">
                 {{ confirmText }}
             </button>
-            <button type="button"
-                class="text-white bg-red-500 font-medium rounded-lg md:text-xl px-7 py-3 text-center"
+            <button type="button" class="text-white bg-red-500 font-medium rounded-lg md:text-xl px-7 py-3 text-center"
                 @click="onDismiss" aria-label="Close">
                 {{ dismissText }}
             </button>
@@ -21,61 +20,30 @@
     </div>
 </template>
 
-<script>
-import { ref, computed } from 'vue';
+<script setup>
+import { ref, computed } from 'vue'
 
-export default {
-    props: {
-        alertId: {
-            type: String,
-            required: true,
-        },
-        title: {
-            type: String,
-            required: true,
-        },
-        content: {
-            type: String,
-            required: true,
-        },
-        color: {
-            type: String,
-            default: '',
-        },
-        confirmText: {
-            type: String,
-            default: 'Confirm',
-        },
-        dismissText: {
-            type: String,
-            default: 'Cancel',
-        },
-        show: {
-            type: Boolean,
-            default: true,
-        },
-    },
-    setup(props, { emit }) {
-        const onConfirm = () => {
-            emit('confirm');
-        };
+const props = defineProps({
+    alertId: String,
+    title: String,
+    color: String,
+    confirmText: String, default: 'Confirm',
+    dismissText: String, default: 'Cancel',
+    show: Boolean, default: true
+})
 
-        const onDismiss = () => {
-            emit('dismiss');
-        };
-
-        const alertClasses = computed(() => {
-            return [
-                'p-4 mb-4 fixed top-0 left-0 right-0 z-50 w-full h-44 overflow-x-hidden overflow-y-auto rounded-lg',
-                props.color,
-            ];
-        });
-
-        return {
-            onConfirm,
-            onDismiss,
-            alertClasses,
-        };
-    },
+const onConfirm = () => {
+    emit('confirm');
 };
+
+const onDismiss = () => {
+    emit('dismiss');
+};
+
+const alertClasses = computed(() => {
+    return [
+        'p-4 mb-4 fixed top-0 left-0 right-0 z-50 w-full h-44 overflow-x-hidden overflow-y-auto rounded-lg',
+        props.color,
+    ];
+});
 </script>
