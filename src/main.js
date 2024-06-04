@@ -14,5 +14,4 @@ app.use(createPinia())
 app.use(VueApexCharts);
 app.use(VueScreen, 'tailwind')
 
-
 app.mount('#app')
