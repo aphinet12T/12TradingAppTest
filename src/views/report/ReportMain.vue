@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="relative rounded-t-xl overflow-auto p-8">
-                <div class="flex flex-nowrap gap-4 font-mono text-black text-2xl rounded-lg">
+                <div class="flex flex-nowrap gap-4 font-mono text-black md:text-2xl rounded-lg">
                     <button class="p-4 w-full rounded-lg flex items-center justify-center bg-white shadow-lg"
                         v-for="item in btReport" :key="item.id" @click="handleClick(item.id)">
                         {{ item.title }}
@@ -37,7 +37,7 @@
 import { Icon } from '@iconify/vue';
 import { ref, onMounted, computed } from 'vue';
 import LayoutSub from '../LayoutSub.vue';
-import ButtonBack from '../../components/IconBack.vue'
+import ButtonBack from '../../components/ButtonBack.vue'
 import ReportMonth from '../report/ReportMonth.vue'
 
 export default {

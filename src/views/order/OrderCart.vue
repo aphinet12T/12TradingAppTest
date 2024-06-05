@@ -198,7 +198,7 @@ export default {
             orderCart,
             orderCartList,
             tableColumns,
-            handleClick,
+            // handleClick,
             // dataCart,
             showAlert,
             alertTitle,

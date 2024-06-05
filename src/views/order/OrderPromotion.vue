@@ -45,13 +45,13 @@
                     <Table :columns="tableFree" :data="listDiscount"
                         :thClass="'px-10 py-3 text-center sm:text-sm md:text-lg'"
                         :tdClass="'px-10 py-2 sm:text-sm md:text-lg text-start'" :hTable="'sm:h-[275px] md:h-[350px]'">
-                        <template v-slot:button="{ rowData }">
+                        <!-- <template v-slot:button="{ rowData }">
                             <button type="button"
                                 class="text-white bg-red-500 w-6 h-6 font-medium rounded-md text-md inline-flex flex-col items-center justify-center"
                                 @click="handleClick(rowData.id, rowData.unitId)">
                                 <Icon class="icon w-4 h-4" icon="ph:x-bold" />
                             </button>
-                        </template>
+                        </template> -->
                     </Table>
                 </div>
                 <div class="relative rounded-t-xl overflow-auto p-4">
@@ -137,7 +137,7 @@ const tableFree = computed(() => {
         { id: 'proId', title: 'สินค้า' },
         { id: 'qty', title: 'จำนวน' },
         { id: 'summaryPrice', title: 'รวม' },
-        { id: '', title: '*' },
+        // { id: '', title: '*' },
     ];
 });
 
