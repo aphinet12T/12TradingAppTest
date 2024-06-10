@@ -3,37 +3,57 @@ import axios from 'axios';
 
 export const useReceiptStore = defineStore('receipt', {
   state: () => ({
-    items: [
-      { name: 'สินค้า A', price: 100 },
-      { name: 'สินค้า B', price: 200 },
-    ],
-    total: 0,
-    date: new Date().toLocaleDateString('th-TH'),
+    printingStatus: '',
+    device: null,
+    server: null,
   }),
   actions: {
-    calculateTotal() {
-      this.total = this.items.reduce((sum, item) => sum + item.price, 0);
-    },
-    async printReceipt() {
-      this.calculateTotal();
+    async printReceipt(data) {
       try {
          await axios.post(
             import.meta.env.VITE_API_BASE_URL +
-              '/cms/print/orderPrint',
+              '/cms/print/printTest',
               {
-                items: this.items,
-                total: this.total,
-                date: this.date,
+                data
               }
             // {
             //   headers: { Authorization: `Bearer ${token}` },
             // }
           );
-        alert('ใบเสร็จถูกพิมพ์แล้ว');
+        // alert('ใบเสร็จถูกพิมพ์แล้ว');
       } catch (error) {
-        console.error('Error printing receipt:', error);
-        alert('เกิดข้อผิดพลาดในการพิมพ์ใบเสร็จ');
+        this.printingStatus = 'Error: ' + error.message;
       }
     },
-  },
+    async connectToPrinter() {
+      try {
+        this.device = await navigator.bluetooth.requestDevice({
+          filters: [{ namePrefix: 'SPP-R410' }],
+          optionalServices: ['battery_service']
+        });
+        this.server = await this.device.gatt.connect();
+        console.log('Connected to printer');
+      } catch (error) {
+        console.error('Connection failed:', error);
+        throw error; 
+      }
+    },
+    async printMessage(message) {
+      if (!this.server) {
+        const error = new Error('Printer not connected');
+        console.error(error.message);
+        throw error; 
+      }
+      try {
+        const service = await this.server.getPrimaryService('battery_service');
+        const characteristic = await service.getCharacteristic('battery_level');
+        const encoder = new TextEncoder();
+        await characteristic.writeValue(encoder.encode(message));
+        console.log('Message sent to printer');
+      } catch (error) {
+        console.error('Print failed:', error);
+        throw error; 
+      }
+    }
+  }
 });
