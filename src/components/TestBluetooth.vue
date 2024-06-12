@@ -15,8 +15,9 @@ const deviceName = ref('')
 const connectBluetooth = async () => {
     try {
         this.device = await navigator.bluetooth.requestDevice({
-          filters: [{ name: 'SPP-R410' }],
-          optionalServices: ['battery_service']
+        //   filters: [{ namePrefix: 'SPP-R410' }],
+          acceptAllDevices: true,
+          optionalServices: ['device_information']
         });
         if (device) {
             deviceName.value = device.name || 'อุปกรณ์ที่ไม่รู้จัก';

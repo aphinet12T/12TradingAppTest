@@ -28,7 +28,8 @@ export const useReceiptStore = defineStore('receipt', {
     async connectToPrinter() {
       try {
         this.device = await navigator.bluetooth.requestDevice({
-          filters: [{ namePrefix: 'SPP-R410' }],
+          // filters: [{ name: 'SPP-R410' }],
+          acceptAllDevices: true,
           optionalServices: ['battery_service']
         });
         this.server = await this.device.gatt.connect();
